@@ -51,7 +51,7 @@ export default function Navbar() {
 							))
 						}
 
-						<div className="user-action-icon flex flex-col">
+						<div className="user-action-icon flex flex-col text-primary-color">
 							<FontAwesomeIcon icon={faUserCircle} size="3x" />
 							<span>Register</span>
 						</div>

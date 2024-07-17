@@ -8,7 +8,8 @@ export default {
     extend: {
       colors: {
         "text-color-1": "var(--text-color-1)",
-        "secondary-color": "var(--secondary-color)"
+        "secondary-color": "var(--secondary-color)",
+        "primary-color": "var(--primary-color)"
       },
       spacing: {
         //
