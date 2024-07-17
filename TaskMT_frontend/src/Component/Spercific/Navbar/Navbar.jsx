@@ -32,7 +32,7 @@ export default function Navbar() {
 			<nav
 				className="w-full px-6 py-5  gap-8 flex items-center justify-between text-text-color-1 bg-secondary-color"
 			>
-				<img src={logo} alt="TaskMT logo" className="bg-color"/>
+				<img src={logo} alt="TaskMT logo" className="bg-color w-80 h-80"/>
 				<div>
 					<ul className="flex justify-between items-center gap-4">
 						{
