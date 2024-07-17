@@ -1,0 +1,133 @@
+body {
+  background: rgb(3, 2, 83);
+  background: linear-gradient(
+    0deg,
+    rgba(3, 2, 83, 1) 37%,
+    rgba(14, 3, 46, 1) 100%
+  );
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.text {
+  display: flex;
+  text-align: left;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5rem;
+  font-size: 20px;
+}
+
+.mainContainer {
+  height: 85vh;
+  width: 88vw;
+  background-color: #160244;
+  gap: 18rem;
+}
+
+::placeholder {
+  color: black;
+  font-size: 15px;
+}
+
+.link {
+  background-color: rgba(33, 6, 68, 0.623);
+  width: 18vw;
+  height: 6vh;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.loginField {
+  height: 90vh;
+  width: 90vw;
+  flex-direction: column;
+  margin: 4%;
+  box-shadow: rgb(0, 0, 0) 0px 30px 90px;
+}
+
+.btn {
+  background-color: rgb(19, 2, 49);
+  color: rgb(253, 252, 253);
+  width: 10vw;
+  height: 5vh;
+  border-radius: 5px;
+  padding: 5px;
+  border: none;
+}
+
+.inputContainer {
+  height: 70vh;
+  gap: 1rem;
+  background-color: #5220c741;
+  width: 30vw;
+}
+
+h1,
+h3 {
+  color: #fff;
+}
+
+@media only screen and (max-width: 768px) {
+  .loginField {
+    display: block;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    margin-left: 1%;
+    width: 98vw;
+    height: 99vh;
+  }
+
+  .mainContainer {
+    display: block;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-left: 0;
+    width: 95vw;
+    height: 95vh;
+    padding: 0;
+  }
+
+  .inputContainer {
+    height: 90vh;
+    width: 90vw;
+  }
+
+  .text {
+    display: none;
+    font-size: 15px;
+  }
+
+  .input {
+    width: 75vw;
+  }
+
+  .label {
+    width: 75vw;
+  }
+
+  .btn {
+    width: 27vw;
+    font-size: 15px;
+  }
+
+  .link {
+    width: 55vw;
+    font-size: 18px;
+  }
+}
