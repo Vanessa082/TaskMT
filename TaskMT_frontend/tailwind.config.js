@@ -7,7 +7,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        "text-color-1": "var(--text-color-1)"
+        "text-color-1": "var(--text-color-1)",
+        "secondary-color": "var(--secondary-color)"
+      },
+      spacing: {
+        //
       }
     },
   },
