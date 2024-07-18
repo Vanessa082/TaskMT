@@ -1,17 +1,22 @@
 import Navbar from "../../Component/Spercific/Navbar/Navbar";
-import landing from "../../../public/assets/landing.svg"
+import Herosection from "./heroSection";
+import Subscribe from "./subscribe";
+import Tblog from "./tblog";
+import Testimonial from "./testimonial";
 
 export default function LandingPage() {
     return (
         <>
-        <Navbar />
-        <main>
-            <div>
-                <p>Welcome to TaskMT</p>
-                <p>Unlock Your Full Portential</p>
-            </div>
-                <img src={landing} alt={Landing_icon} />
-        </main>
+            <Navbar />
+
+            <main className="w-full flex flex-col font-sans">
+               <Herosection/>
+               <Tblog/>
+               <Subscribe />
+               <Testimonial />
+            </main>
+
+            <footer className=""></footer>
         </>
     )
 }
