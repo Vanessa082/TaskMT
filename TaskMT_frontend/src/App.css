@@ -37,8 +37,10 @@ input {
   background-color: transparent;
   width: 35vw;
   border-color: #fff;
+  color: #fff;
   height: 6vh;
   padding: 5px;
+  font-size: 18px;
   border-radius: 5px;
   outline: none;
 }

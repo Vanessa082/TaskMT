@@ -1,7 +1,7 @@
 import './App.css'
 
 import LandingPage from './Pages/landing-page/Landing-page'
-import Register from './Components/Register/Register.jsx'
+import Register from './Pages/Register/Register'
 
 function App() {
 

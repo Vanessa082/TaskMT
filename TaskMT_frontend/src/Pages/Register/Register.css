@@ -1,0 +1,145 @@
+body {
+  background-color: #26313c;
+  /* background: rgb(64,109,115); */
+  /* background: linear-gradient(0deg, rgba(64,109,115,1) 22%, rgba(114,225,236,1) 100%);  background-position: center; */
+  /* background-repeat: no-repeat;
+  background-size: cover; */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.allDB {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(225, 240, 241);
+  height: 88vh;
+  margin: 5% 5%;
+  width: 90vw;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 90px;
+}
+.register {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #8edbee00;
+  height: 70vh;
+  gap: 1rem;
+  width: 40vw;
+  border-radius: 10px;
+  color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 90px;
+}
+
+label {
+  width: 35vw;
+  font-size: 20px;
+  color: #fff;
+}
+
+.inputIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+::placeholder {
+  color: #fff;
+  font-size: 15px;
+}
+
+.containers {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #16202a;
+  height: 80vh;
+  gap: 1rem;
+  margin-top: 25px;
+  width: 86vw;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 90px;
+}
+
+.text {
+  display: flex;
+  text-align: left;
+  justify-content: space-between;
+  flex-direction: column;
+  color: #fff;
+  gap: 5rem;
+}
+
+.btn {
+  background-color: #080808;
+}
+
+.btns {
+  width: 20vw;
+  background-color: black;
+  color: #fff;
+}
+
+/* Mobile View CSS */
+
+@media only screen and (max-width: 600px) {
+  .allDB {
+    height: 97vh;
+    width: 95vw;
+  }
+
+  .register {
+    height: 98vh;
+    width: 90vw;
+  }
+
+  label {
+    width: 80vw;
+    font-size: 20px;
+    color: #fff;
+  }
+
+  .input-container {
+  }
+
+  ::placeholder {
+    color: #fff;
+    font-size: 15px;
+  }
+
+  .containers {
+    height: 80vh;
+    width: 90vw;
+  }
+
+  .text {
+    display: none;
+  }
+
+  .btn {
+    width: 80%;
+    font-size: 18px;
+  }
+
+  input {
+    width: 70vw;
+  }
+
+  .containers {
+    height: 90vh;
+    font-size: 20px;
+  }
+
+  .btns {
+    width: 80%;
+    background-color: black;
+    color: #fff;
+  }
+}

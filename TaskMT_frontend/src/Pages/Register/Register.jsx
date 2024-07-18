@@ -1,16 +1,15 @@
 import React, { useState } from "react";
+// import { useHistory } from 'react-router-dom';
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
-// import { useHistory } from 'react-router-dom';
-// import { Link } from 'react-router-dom';
 import "./Register.css";
 
 const Register = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  //   const history = useHistory(); // Get the history object from react-router-dom
+  // const history = useHistory();
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -36,6 +35,7 @@ const Register = () => {
       <div className="allDB flex">
         <div className="containers flex">
           <div className="text">
+
             <h1>Task Manager</h1>
 
             <h3>
@@ -91,6 +91,9 @@ const Register = () => {
             <button type="submit" className="btn flex" onClick={handleRegister}>
               Register
             </button>
+            <h4>Have An Account</h4>
+            <button className="btns">Login</button>
+
             {/* <Link to = '/login'>Login</Link> */}
           </div>
         </div>
