@@ -1,13 +1,11 @@
-import { useState } from 'react'
 import './App.css'
-import Navbar from './Component/Spercific/Navbar/Navbar'
+import LandingPage from './Pages/landing-page/Landing-page'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      <Navbar/>
+      <LandingPage/>
     </>
   )
 }
