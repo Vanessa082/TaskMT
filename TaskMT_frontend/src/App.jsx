@@ -1,4 +1,3 @@
-import './App.css'
 
 import LandingPage from './Pages/landing-page/Landing-page'
 import Register from './Pages/Register/Register'
@@ -9,7 +8,7 @@ function App() {
     <>
       <LandingPage />
 
-      <Register />
+      {/* <Register /> */}
     </>
   )
 }

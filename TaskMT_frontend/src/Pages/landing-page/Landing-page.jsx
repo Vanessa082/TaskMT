@@ -9,16 +9,13 @@ export default function LandingPage() {
     return (
         <>
             <Navbar />
-
-            <main className="w-full flex flex-col font-sans">
-               <Herosection/>
-               <Tblog/>
-               <Subscribe />
-               <Testimonial />
-               <Footer />
+            <main className="w-full flex flex-col font-sans bg-text-color-1">
+                <Herosection />
+                <Tblog />
+                <Subscribe />
+                <Testimonial />
             </main>
-
-            <footer className=""></footer>
+            <Footer />
         </>
     )
 }
