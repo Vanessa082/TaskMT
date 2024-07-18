@@ -1,3 +1,4 @@
+import Footer from "../../Component/Common/footer";
 import Navbar from "../../Component/Spercific/Navbar/Navbar";
 import Herosection from "./heroSection";
 import Subscribe from "./subscribe";
@@ -14,6 +15,7 @@ export default function LandingPage() {
                <Tblog/>
                <Subscribe />
                <Testimonial />
+               <Footer />
             </main>
 
             <footer className=""></footer>

@@ -4,31 +4,31 @@ import img3 from "../../../public/assets/img3.jpg"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLinkedin, faFacebook, faTwitter, faGithub, faDev, faReddit } from '@fortawesome/free-brands-svg-icons';
 
-export default function Testimonial() {
-    const TestimonialItems = [
-        {
-            image: img1,
-            quote: {
-                text: "This is an amazing System!",
-                author: "Wah Vanessa",
-            },
+const TestimonialItems = [
+    {
+        image: img1,
+        quote: {
+            text: "This is an amazing System!",
+            author: "Wah Vanessa",
         },
-        {
-            image: img2,
-            quote: {
-                text: "I would highly recommend this.",
-                author: "Ayuk Gires",
-            },
+    },
+    {
+        image: img2,
+        quote: {
+            text: "I would highly recommend this.",
+            author: "Ayuk Gires",
         },
-        {
-            image: img3,
-            quote: {
-                text: "A must-have for everyone.",
-                author: "Alice Johnson",
-            },
+    },
+    {
+        image: img3,
+        quote: {
+            text: "A must-have for everyone.",
+            author: "Alice Johnson",
         },
-    ];
+    },
+];
 
+export default function Testimonial() {
     return (
         <div className="flex flex-col items-center py-10">
             <h2 className="text-text-color-2 text-4xl font-sans text-center font-bold pb-4">What People Say about TaskMT</h2>
@@ -47,13 +47,13 @@ export default function Testimonial() {
 
             <div className="flex flex-col items-center">
                 <h2 className="text-text-color-2 text-4xl font-sans text-center font-bold pb-4">Spread The Word</h2>
-                <div className="flex">
-                    <FontAwesomeIcon icon={faTwitter} size="2x" className="bg-icon-twitter"/>
-                    <FontAwesomeIcon icon={faLinkedin} size="2x" className="bg-icon-linkedin"/>
-                    <FontAwesomeIcon icon={faTwitter} size="2x" className="b"/>
-                    <FontAwesomeIcon icon={faGithub} size="2x" />
-                    <FontAwesomeIcon icon={faDev} size="2x" />
-                    <FontAwesomeIcon icon={faReddit} size="2x" />
+                <div className="flex item-center justify-between gap-4">
+                    <FontAwesomeIcon icon={faTwitter} size="2x" className="text-cyan-300" />
+                    <FontAwesomeIcon icon={faGithub} size="2x" className="text-gray-700" />
+                    <FontAwesomeIcon icon={faLinkedin} size="2x" className="text-blue-400" />
+                    <FontAwesomeIcon icon={faFacebook} size="2x" className="text-blue-500" />
+                    <FontAwesomeIcon icon={faDev} size="2x" className="text-gray-950" />
+                    <FontAwesomeIcon icon={faReddit} size="2x" className="text-red-500"/>
                 </div>
             </div>
         </div>

@@ -16,7 +16,7 @@
   --icon-linkedin: #0077B5;
   --icon-github: #333;
   --icon-dev: #0A0A0A; 
-  --icon-reddit: #FF4500; 
+  --icon-reddit: rgb(255, 69, 0); 
 }
 
 
@@ -33,7 +33,6 @@ h1 {
   font-size: 3.2em;
   line-height: 1.1;
 }
-
 button {
   border-radius: 8px;
   border: 1px solid transparent;
