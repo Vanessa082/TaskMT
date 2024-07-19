@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import logo from "../../../assets/logo.svg";
+import { Link } from "react-router-dom";
 
 const NavItems = [
   {
@@ -41,10 +42,13 @@ export default function Navbar() {
                 </a>
               </li>
             ))}
-            <div className="user-action-icon flex flex-col text-text-color-1">
+
+            <Link to='registration'>
+            <div className="user-action-icon flex flex-col text-text-color-1 cursor-pointer">
               <FontAwesomeIcon icon={faUserCircle} size="3x" />
               <span>Register</span>
             </div>
+            </Link>
           </ul>
         </div>
       </nav>
