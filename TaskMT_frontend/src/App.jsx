@@ -12,7 +12,7 @@ function App() {
       <Navbar />
 
       <Routes>
-        <Route index element={<LandingPage />} />
+        <Route index path='/' element={<LandingPage />} />
         <Route path='/registration' element={<Register />} />
       </Routes>
 

@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const NavItems = [
   {
     text: "Home",
-    href: "#",
+    href: "/",
   },
   {
     text: "Tblog",
@@ -32,7 +32,9 @@ export default function Navbar() {
       <nav
         className="w-full px-6 py-5 gap-8 flex items-center justify-between text-text-color-1 bg-custom-gradient transition-all duration-300 ease-custom-cubic"
       >
-        <img src={logo} alt="TaskMT logo" className="bg-color" />
+        <Link to='/'>
+          <img src={logo} alt="TaskMT logo" className="bg-color" />
+        </Link>
         <div>
           <ul className="flex justify-between items-center gap-4">
             {NavItems.map(({ text, href }) => (
@@ -44,10 +46,10 @@ export default function Navbar() {
             ))}
 
             <Link to='registration'>
-            <div className="user-action-icon flex flex-col text-text-color-1 cursor-pointer">
-              <FontAwesomeIcon icon={faUserCircle} size="3x" />
-              <span>Register</span>
-            </div>
+              <div className="user-action-icon flex flex-col text-text-color-1 cursor-pointer">
+                <FontAwesomeIcon icon={faUserCircle} size="3x" />
+                <span>Register</span>
+              </div>
             </Link>
           </ul>
         </div>
