@@ -89,3 +89,8 @@ function onListening() {
     : 'port ' + addr.port;
   serverDebug('Listening on ' + bind);
 }
+
+/* 
+  password: abcd1234
+  wifiname: 4g continuum tech lte ...
+*/

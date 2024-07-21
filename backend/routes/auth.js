@@ -2,7 +2,9 @@ import pool from '../config/dbconfig';
 import express from 'express';
 import registrationValidatetor from '../uitils/registrationValidator';
 import bcript, { hash } from 'bcrypt';
+import jwt from 'jsonwebtoken';
 import loginValidator from '../uitils/loginValidator';
+
 
 const router = express.Router();
 
@@ -72,23 +74,18 @@ router.post('/login', loginValidator, function (req, res, next) {
         }
 
         res.status(400).json({ error: 'Incorrect Email' });
-      }).catch(error => {
-        console.error('Error checking user:', error);
-        return res.status(500).json({ error: 'Internal server error' });
-      });
-
-    const passwordCheckQuery = `select * from accounts where password = $2`
-    pool.query(passwordCheckQuery, [password])
-      .then(result => {
-        if (result?.rows?.length > 0) {
-          return res.status(201).json({ message: 'Login succesfully' });
+      })
+      res.status(200).json({
+        message: 'Login successful',
+      })
+    // compare password with that in the database
+    const user = result.rows[0]
+    return bcript.compare(password, user.password)
+      .then(isMatch => {
+        if (!isMatch) {
+          return res.status().json({ error: 'Incorrect password' });
         }
-
-        res.status(400).json({ message: 'Incorrect Password' });
-      }).catch(error => {
-        console.error('Error checking user:', error);
-        return res.status(500).json({ error: 'Internal server error' });
-      });
+      })
   } catch (error) {
     console.error('Error in try-catch block:', error);
     return res.status(500).json({ error: 'Internal server error' });
