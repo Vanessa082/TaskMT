@@ -1,95 +1,77 @@
-import pool from '../config/dbconfig';
+import pool from '../config/dbconfig.js';
 import express from 'express';
-import registrationValidatetor from '../uitils/registrationValidator';
+import registrationValidatetor from '../uitils/registrationValidator.js';
 import bcript, { hash } from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import loginValidator from '../uitils/loginValidator';
+import loginValidator from '../uitils/loginValidator.js';
 
 
 const router = express.Router();
 
 // register new user
 
-router.post('/register', registrationValidatetor, function (req, res, next) {
-
+router.post('/register', registrationValidatetor, async function (req, res, next) {
   try {
     const { username, email, password } = req.body;
 
     // checking if user already exist
 
     const userCheckQuery = `select * from accounts where email = $1`
-    pool.query(userCheckQuery, [email])
-      .then(result => {
-        if (result?.rows?.length > 0) {
-          return res.status(400).json({ error: 'user already exist please login' })
-        }
+    const existingUsers = await pool.query(userCheckQuery, [email]);
 
-        res.status(201).json({ message: 'registered successfully' })
-      })
-      .catch(error => {
-        console.error('Error checking user:', error);
-        return res.status(500).json({ error: 'Internal server error' });
-      });
+    if (existingUsers?.rows?.length > 0) {
+      return res.status(401).json({ error: 'user already exist please login' });
+    }
 
     // hashing password
 
     const saltRound = 10;
-    bcript.genSalt(saltRound, function (err, salt) {
-      if (err) {
-        console.error('Error generating salt:', err)
-        return res.status(500).json({ error: 'Internal server error' })
-      }
-      bcript.hash(password, salt, function (err, hash) {
-        if (err) throw err;
-      })
-    })
+    const hash = await bcript.hash(password, saltRound);
 
     // storing user details
     const addUserQuery = `insert into accounts (username, email, password, created_at) values($1, $2, $3, now())`;
-    pool.query(addUserQuery, [username, email, hash])
-      .then(() => {
-        res.status(201).json({ message: 'User registered succesfully' });
-      }).catch(error => {
-        console.error('Error registering user', error);
-        return res.status(500).json({ error: 'Internal server error' });
-      })
+
+    await pool.query(addUserQuery, [username, email, hash]);
+
+    return res.status(201).json({ message: 'User registered succesfully' });
   } catch (error) {
-    console.error('Error in try-catch block:', error);
+    console.error('Error in try-catch block:', error?.message || error
+    );
     return res.status(500).json({ error: 'Internal server error' });
   }
 })
 
 // login user
 
-router.post('/login', loginValidator, function (req, res, next) {
-  try {
-    const { email, password } = req.body;
+// router.post('/login', loginValidator, function (req, res, next) {
+//   try {
+//     const { email, password } = req.body;
 
-    // check if email exist
-    const emailCheckQuery = `select * from accounts where email = $1`
-    pool.query(emailCheckQuery, [email])
-      .then(result => {
-        if (result?.rows?.length > 0) {
-          return res.status(201).json({ message: 'Login succesfully' })
-        }
+//     // check if email exist
+//     const emailCheckQuery = `select * from accounts where email = $1`
+//     pool.query(emailCheckQuery, [email])
+//       .then(result => {
+//         if (result?.rows?.length > 0) {
+//           return res.status(201).json({ message: 'Login succesfully' })
+//         }
 
-        res.status(400).json({ error: 'Incorrect Email' });
-      })
-      res.status(200).json({
-        message: 'Login successful',
-      })
-    // compare password with that in the database
-    const user = result.rows[0]
-    return bcript.compare(password, user.password)
-      .then(isMatch => {
-        if (!isMatch) {
-          return res.status().json({ error: 'Incorrect password' });
-        }
-      })
-  } catch (error) {
-    console.error('Error in try-catch block:', error);
-    return res.status(500).json({ error: 'Internal server error' });
-  }
-})
+//         res.status(400).json({ error: 'Incorrect Email' });
+//       })
+//       res.status(200).json({
+//         message: 'Login successful',
+//       })
+//     // compare password with that in the database
+//     const user = result.rows[0]
+//     return bcript.compare(password, user.password)
+//       .then(isMatch => {
+//         if (!isMatch) {
+//           return res.status().json({ error: 'Incorrect password' });
+//         }
+//       })
+//   } catch (error) {
+//     console.error('Error in try-catch block:', error);
+//     return res.status(500).json({ error: 'Internal server error' });
+//   }
+// })
 
-module.exports = router;
+export default router;
