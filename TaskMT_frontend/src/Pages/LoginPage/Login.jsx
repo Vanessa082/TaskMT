@@ -21,53 +21,47 @@ const Login = () => {
     };
 
     return (
-        <div className='bg-white flex items-center justify-center rounded-lg shadow-md loginField '>
-            <div className="bg-purple flex items-center justify-center rounded-lg shadow-md  mainContainer">
-                <div className="text">
-                    <h1>Task Manager</h1>
+        <div className="bg-#f1eeea flex items-center justify-center mainContainer">
+            <div className="bg-white flex items-center justify-center gap-3.5 rounded-lg shadow-md flex-col w-96 h-3/4 inputContainer">
+                <h1 className='text-3xl font-bold w-80 '>Login</h1>
+                <label htmlFor="username" className='w-80 label' >Username</label>
+                <div className="icons"
+                >
+                    <input
+                        type="text" className=" w-80 h-8 p-4 rounded-md border border-gray-300 outline-none input"
 
-                    <h3>Introducing our new task manager tool! <br />Stay organized, track your tasks, <br />and boost productivity with our <br />user-friendly platform. <br />Try it out now and experience seamless <br />task management like never before.</h3>
+
+                        id="username"
+                        placeholder="Enter username"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                    />
+                    <FontAwesomeIcon icon={faUser} className="icon" />
                 </div>
-                <div className=" flex items-center justify-center rounded-lg shadow-md flex-col inputContainer">
-                    <h1 className='text-3xl font-bold '>Login</h1>
-                    <label htmlFor="username" className='label' >Username</label>
-                    <div className="icons"
-                    >
-                        <input
-                            type="text" className=" w-35 h-3 p-4 rounded-md border border-gray-300 outline-none input"
-
-
-                            id="username"
-                            placeholder="Enter username"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                        />
-                        <FontAwesomeIcon icon={faUser} className="icon" />
-                    </div>
 
 
 
 
-                    <label htmlFor="password" className='label'>Password</label>
-                    <div className="icons">
-                        <input
-                            type="password" className=" w-35 h-3 p-4 rounded-md border border-gray-300 outline-none input"
-                            id="password"
-                            placeholder="Enter password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                        <FontAwesomeIcon icon={faLock} className="icon" />
-                    </div>
-
-                    <button type="submit" className="btn" onClick={handleLogin}>
-                        Login
-                    </button>
-                    <h3>Dont have account</h3>
-                    <button to='/register' className='link'>Create account</button>
+                <label htmlFor="password" className='w-80 label'>Password</label>
+                <div className="icons">
+                    <input
+                        type="password" className=" w-80  h-3 p-4 rounded-md border border-gray-300 outline-none input"
+                        id="password"
+                        placeholder="Enter password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <FontAwesomeIcon icon={faLock} className="icon" />
                 </div>
+
+                <button type="submit" className="bg-black w-80 h-8 rounded-md text-white btn" onClick={handleLogin}>
+                    Login
+                </button>
+                <h3 className='w-80'>Dont have account</h3>
+                <button to='/register' className='bg-black text-white rounded-md w-80 h-8 link'>Create account</button>
             </div>
-        </div>);
+        </div>
+    );
 };
 
 export default Login;
