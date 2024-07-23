@@ -10,7 +10,7 @@ export default function Footer() {
                 Web App
             </button>
             <div className="flex justify-between gap-6">
-            <div class=" ">
+            <div>
                 <h4>Explore TaskMT</h4>
                 <ul>
                     <li><a href="#">Universal Access</a></li>
