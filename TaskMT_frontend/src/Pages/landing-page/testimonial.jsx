@@ -35,7 +35,7 @@ export default function Testimonial() {
 
             <div className="flex flex-col  items-center gap-4 py-10  px-8 w-7/12">
                 {TestimonialItems.map(({ image, quote }, index) => (
-                    <div key={index} className="flex border border-black/15 mb-5 items-center rounded-lg transition-all duration-300 shadow-[2px_2px_3px_rgba(0,0,0,0.4)] p-10 w-full gap-10">
+                    <div key={index} className="flex border border-black/15 mb-5 items-center rounded-lg transition-all duration-300 shadow-[2px_2px_3px_rgba(0,0,0,0.4)] p-10 w-full gap-10 hover:animate-bounce">
                         <img src={image} alt={`testimonial ${index + 1}`} className="size-16 object-cover rounded-full" />
                         <blockquote>
                             <p>{quote.text}</p>

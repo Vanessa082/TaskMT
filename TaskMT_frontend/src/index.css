@@ -10,13 +10,13 @@
 
   --text-color-1: #fff;
   --text-color-2: #333;
-  --primary-color: #092C5A;
-  --secondary-color: #83b5de; 
-  --icon-twitter: #1DA1F2; 
-  --icon-linkedin: #0077B5;
+  --primary-color: #092c5a;
+  --secondary-color: #83b5de;
+  --icon-twitter: #1da1f2;
+  --icon-linkedin: #0077b5;
   --icon-github: #333;
-  --icon-dev: #0A0A0A; 
-  --icon-reddit: rgb(255, 69, 0); 
+  --icon-dev: #0a0a0a;
+  --icon-reddit: rgb(255, 69, 0);
 }
 
 a {
@@ -31,6 +31,7 @@ h1 {
   font-size: 3.2em;
   line-height: 1.1;
 }
+
 button {
   border-radius: 8px;
   border: 1px solid transparent;
