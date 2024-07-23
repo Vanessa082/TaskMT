@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
-import logo from "../../../assets/logo.svg";
+import logo from  "../../assets/logo.svg";
 import { Link } from "react-router-dom";
 
 const NavItems = [

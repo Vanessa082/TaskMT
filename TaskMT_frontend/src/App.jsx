@@ -4,8 +4,9 @@ import LandingPage from "./Pages/landing-page/Landing-page";
 import Login from "./Pages/LoginPage/Login";
 import Register from "./Pages/Register/Register";
 import Footer from "./Component/Common/footer";
-import Navbar from "./Component/Spercific/Navbar/Navbar";
+import Navbar from "./Component/Common/Navbar";
 import Dashboard from "./Pages/dashboard/dashboard";
+
 
 function App() {
   return (

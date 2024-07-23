@@ -2,7 +2,7 @@ import { API_BASE_URL } from "../../constants/constants";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Register() {
   const [username, setUsername] = useState("");
@@ -31,7 +31,7 @@ export default function Register() {
           password,
         }),
       });
-      const data = await response.json()
+      const data = await response.json();
       if (response.ok) {
         navigate("/dashboard");
       } else {
@@ -115,9 +115,11 @@ export default function Register() {
           </button>
         </form>
         <h4 className="text-primary mt-6">Have An Account?</h4>
-        <button className="w-full bg-secondary text-white py-2 rounded-md hover:bg-secondary-dark transition-colors mt-2">
-          Login
-        </button>
+        <Link to="/login">
+          <button className="w-full bg-secondary text-white py-2 rounded-md hover:bg-secondary-dark transition-colors mt-2">
+            Login
+          </button>
+        </Link>
       </div>
     </div>
   );
