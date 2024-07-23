@@ -8,16 +8,19 @@ import Navbar from "./Component/Common/Navbar";
 import Dashboard from "./Pages/dashboard/dashboard";
 
 
+
 function App() {
   return (
     <>
       <Navbar />
 
       <Routes>
+
         <Route index path="/" element={<LandingPage />} />
         <Route path="/registration" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard/>} />
         <Route path="/login" element={<Login />} />
+
       </Routes>
 
       <Footer />
