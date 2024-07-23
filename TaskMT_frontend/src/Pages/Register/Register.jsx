@@ -2,11 +2,13 @@ import { API_BASE_URL } from "../../constants/constants";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleInputChanged = (e) => {
     const { id, value } = e.target;
@@ -16,7 +18,7 @@ export default function Register() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
       const response = await fetch(`${API_BASE_URL}/auth/register`, {
         method: "POST",
@@ -30,9 +32,13 @@ export default function Register() {
         }),
       });
       const data = await response.json()
-      console.log(data)
+      if (response.ok) {
+        navigate("/dashboard");
+      } else {
+        console.error("Registration", data.message);
+      }
     } catch (error) {
-      console.error('Error:', error)
+      console.error("Error:", error);
     }
   };
 

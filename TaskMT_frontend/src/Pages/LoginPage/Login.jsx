@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
-import axios from 'axios';
-import './Login.css'
 // import { useHistory } from 'react-router-dom';
 
 const Login = () => {
@@ -38,9 +36,6 @@ const Login = () => {
                     />
                     <FontAwesomeIcon icon={faUser} className="icon" />
                 </div>
-
-
-
 
                 <label htmlFor="password" className='w-80 label'>Password</label>
                 <div className="icons">
