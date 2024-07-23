@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
-// import "./Register.css";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -31,6 +30,7 @@ const Register = () => {
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100 p-4">
+
     <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
       <h1 className="text-2xl font-bold text-primary mb-6">Register</h1>
       <form onSubmit={handleRegister}>
