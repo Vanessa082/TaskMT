@@ -1,18 +1,22 @@
-import { Route, Routes } from "react-router-dom";
+import {Router, Route, Routes } from "react-router-dom";
 
-import LandingPage from "./Pages/landing-page/Landing-page";
-import Login from "./Pages/LoginPage/Login";
-import Register from "./Pages/Register/Register";
-import Footer from "./Component/Common/footer";
-import Navbar from "./Component/Common/Navbar";
+// import LandingPage from "./Pages/landing-page/Landing-page";
+// import Login from "./Pages/LoginPage/Login";
+// import Register from "./Pages/Register/Register";
+// import Footer from "./Component/Common/footer";
+// import Navbar from "./Component/Common/Navbar";
+
 import Dashboard from "./Pages/dashboard/dashboard";
+import Task from "./Pages/Task/Task";
 
 
 
 function App() {
   return (
     <>
-      <Navbar />
+
+<Dashboard/>
+      {/* <Navbar />
 
       <Routes>
 
@@ -23,7 +27,7 @@ function App() {
 
       </Routes>
 
-      <Footer />
+      <Footer /> */}
     </>
   );
 }
