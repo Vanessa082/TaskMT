@@ -4,14 +4,13 @@ import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppContext } from "../../providers/app-context";
-import { fetchCurrentUser } from "../../providers/api";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { setCurrentUser } = useAppContext();
-  const navigate = useNavigate()
-  
+  const navigate = useNavigate();
+
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
 
@@ -29,17 +28,14 @@ export default function Login() {
         }),
       });
 
-      console.log(response);
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
       const data = await response.json();
-      const { token } = data;
-      localStorage.setItem("token", token);
-      console.log("Login successful");
 
-      const currentUser = await fetchCurrentUser();
-      setCurrentUser(currentUser);
+      localStorage.setItem("token", data.token);
+
+      setCurrentUser(data.user);
       navigate("/dashboard");
     } catch (error) {
       console.error("Error logging in:", error);
