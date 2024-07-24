@@ -1,62 +1,120 @@
-import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
-// import { useHistory } from 'react-router-dom';
+import { API_BASE_URL } from "../../constants/constants";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
-const Login = () => {
-    //   const history = useHistory();
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+export default function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-    const handleLogin = () => {
-        axios.post('http://localhost:5000/login', { username, password })
-            .then(response => {
-                console.log(response.data);
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    };
+  const handleEmailChange = (e) => setEmail(e.target.value);
+  const handlePasswordChange = (e) => setPassword(e.target.value);
 
-    return (
-        <div className="bg-#f1eeea flex items-center justify-center mainContainer">
-            <div className="bg-white flex items-center justify-center gap-3.5 rounded-lg shadow-md flex-col w-96 h-3/4 inputContainer">
-                <h1 className='text-3xl font-bold w-80 '>Login</h1>
-                <label htmlFor="username" className='w-80 label' >Username</label>
-                <div className="icons"
-                >
-                    <input
-                        type="text" className=" w-80 h-8 p-4 rounded-md border border-gray-300 outline-none input"
+    // const fetchCurrentUser = async () => {
+    //   const token = localStorage.getItem('token');
+    //   try {
+    //     const response = await fetch(`${API_BASE_URL}/auth/current-user`,{
+    //       headers : {
+    //         Authorization : `Bearer ${token}`
+    //       }
+    //     });
+  
+    //     if (!response.ok) {
+    //       throw new Error('Network response was not ok');
+    //     }
+    //     const data = await response.json();
+    //     console.log('Protected data:', data);
+    //   } catch (error) {
+    //     console.error('Error fetching protected data:', error);
+    //   }
+    // };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(`${API_BASE_URL}/auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
+      const { token } = data;
+      localStorage.setItem("token", token);
+      console.log("Login successful");
+    } catch (error) {
+      console.error("Error logging in:", error);
+    }
+  };
 
-                        id="username"
-                        placeholder="Enter username"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                    />
-                    <FontAwesomeIcon icon={faUser} className="icon" />
-                </div>
-
-                <label htmlFor="password" className='w-80 label'>Password</label>
-                <div className="icons">
-                    <input
-                        type="password" className=" w-80  h-3 p-4 rounded-md border border-gray-300 outline-none input"
-                        id="password"
-                        placeholder="Enter password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                    <FontAwesomeIcon icon={faLock} className="icon" />
-                </div>
-
-                <button type="submit" className="bg-black w-80 h-8 rounded-md text-white btn" onClick={handleLogin}>
-                    Login
-                </button>
-                <h3 className='w-80'>Dont have account</h3>
-                <button to='/register' className='bg-black text-white rounded-md w-80 h-8 link'>Create account</button>
+  return (
+    <div className="flex justify-center items-center min-h-screen bg-gray-100 p-4">
+      <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
+        <h1 className="text-2xl font-bold text-primary mb-6">Login</h1>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <label htmlFor="email" className="block text-secondary mb-2">
+              Email
+            </label>
+            <div className="relative">
+              <input
+                type="email"
+                id="email"
+                placeholder="Enter email"
+                value={email}
+                onChange={handleEmailChange}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:border-secondary focus:ring-secondary"
+              />
+              <FontAwesomeIcon
+                icon={faEnvelope}
+                className="absolute right-3 top-3 text-primary"
+              />
             </div>
-        </div>
-    );
-};
+          </div>
 
-export default Login;
+          <div className="mb-4">
+            <label htmlFor="password" className="block text-secondary mb-2">
+              Password
+            </label>
+            <div className="relative">
+              <input
+                type="password"
+                id="password"
+                placeholder="Enter password"
+                value={password}
+                onChange={handlePasswordChange}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:border-secondary focus:ring-secondary"
+              />
+              <FontAwesomeIcon
+                icon={faLock}
+                className="absolute right-3 top-3 text-primary"
+              />
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            className="w-full bg-primary text-white py-2 rounded-md hover:bg-primary-dark transition-colors"
+          >
+            Login
+          </button>
+        </form>
+        <h4 className="text-primary mt-6">Do Not Have An Account?</h4>
+        <Link to="/login">
+          <button className="w-full bg-secondary text-white py-2 rounded-md hover:bg-secondary-dark transition-colors mt-2">
+            Register
+          </button>
+        </Link>
+      </div>
+    </div>
+  );
+}

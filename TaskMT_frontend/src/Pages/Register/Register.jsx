@@ -1,72 +1,66 @@
 import { API_BASE_URL } from "../../constants/constants";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
+import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function Register() {
-  const [username, setUsername] = useState("");
+export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleInputChanged = (e) => {
-    const { id, value } = e.target;
-    if (id === "username") setUsername(value);
-    if (id === "email") setEmail(value);
-    if (id === "password") setPassword(value);
-  };
+  const handleEmailChange = (e) => setEmail(e.target.value);
+  const handlePasswordChange = (e) => setPassword(e.target.value);
+
+    // const fetchCurrentUser = async () => {
+    //   const token = localStorage.getItem('token');
+    //   try {
+    //     const response = await fetch(`${API_BASE_URL}/auth/current-user`,{
+    //       headers : {
+    //         Authorization : `Bearer ${token}`
+    //       }
+    //     });
+  
+    //     if (!response.ok) {
+    //       throw new Error('Network response was not ok');
+    //     }
+    //     const data = await response.json();
+    //     console.log('Protected data:', data);
+    //   } catch (error) {
+    //     console.error('Error fetching protected data:', error);
+    //   }
+    // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${API_BASE_URL}/auth/register`, {
+      const response = await fetch(`${API_BASE_URL}/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          username,
           email,
           password,
         }),
       });
-      const data = await response.json();
-      if (response.ok) {
-        navigate("/dashboard");
-      } else {
-        console.error("Registration", data.message);
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
       }
+      const data = await response.json();
+      const { token } = data;
+      localStorage.setItem("token", token);
+      console.log("Login successful");
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Error logging in:", error);
     }
   };
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100 p-4">
       <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
-        <h1 className="text-2xl font-bold text-primary mb-6">Register</h1>
+        <h1 className="text-2xl font-bold text-primary mb-6">Login</h1>
         <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label htmlFor="username" className="block text-secondary mb-2">
-              Username
-            </label>
-            <div className="relative">
-              <input
-                type="text"
-                id="username"
-                placeholder="Enter username"
-                value={username}
-                onChange={handleInputChanged}
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:border-secondary focus:ring-secondary"
-              />
-              <FontAwesomeIcon
-                icon={faUser}
-                className="absolute right-3 top-3 text-primary"
-              />
-            </div>
-          </div>
-
           <div className="mb-4">
             <label htmlFor="email" className="block text-secondary mb-2">
               Email
@@ -77,7 +71,7 @@ export default function Register() {
                 id="email"
                 placeholder="Enter email"
                 value={email}
-                onChange={handleInputChanged}
+                onChange={handleEmailChange}
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:border-secondary focus:ring-secondary"
               />
               <FontAwesomeIcon
@@ -97,7 +91,7 @@ export default function Register() {
                 id="password"
                 placeholder="Enter password"
                 value={password}
-                onChange={handleInputChanged}
+                onChange={handlePasswordChange}
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:border-secondary focus:ring-secondary"
               />
               <FontAwesomeIcon
@@ -111,13 +105,13 @@ export default function Register() {
             type="submit"
             className="w-full bg-primary text-white py-2 rounded-md hover:bg-primary-dark transition-colors"
           >
-            Register
+            Login
           </button>
         </form>
-        <h4 className="text-primary mt-6">Have An Account?</h4>
+        <h4 className="text-primary mt-6">Do Not Have An Account?</h4>
         <Link to="/login">
           <button className="w-full bg-secondary text-white py-2 rounded-md hover:bg-secondary-dark transition-colors mt-2">
-            Login
+            Register
           </button>
         </Link>
       </div>
