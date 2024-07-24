@@ -12,24 +12,24 @@ export default function Login() {
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
 
-    const fetchCurrentUser = async () => {
-      const token = localStorage.getItem('token');
-      try {
-        const response = await fetch(`${API_BASE_URL}/auth/currentusr`,{
-          headers : {
-            Authorization : `Bearer ${token}`
-          }
-        });
+    // const fetchCurrentUser = async () => {
+    //   const token = localStorage.getItem('token');
+    //   try {
+    //     const response = await fetch(`${API_BASE_URL}/auth/current-user`,{
+    //       headers : {
+    //         Authorization : `Bearer ${token}`
+    //       }
+    //     });
   
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        console.log('Protected data:', data);
-      } catch (error) {
-        console.error('Error fetching protected data:', error);
-      }
-    };
+    //     if (!response.ok) {
+    //       throw new Error('Network response was not ok');
+    //     }
+    //     const data = await response.json();
+    //     console.log('Protected data:', data);
+    //   } catch (error) {
+    //     console.error('Error fetching protected data:', error);
+    //   }
+    // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
