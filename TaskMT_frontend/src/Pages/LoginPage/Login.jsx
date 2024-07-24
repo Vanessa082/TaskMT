@@ -3,33 +3,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useAppContext } from "../../providers/app-context";
+import { fetchCurrentUser } from "../../providers/api";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
-
+  const { setCurrentUser } = useAppContext();
+  const navigate = useNavigate()
+  
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
-
-    // const fetchCurrentUser = async () => {
-    //   const token = localStorage.getItem('token');
-    //   try {
-    //     const response = await fetch(`${API_BASE_URL}/auth/current-user`,{
-    //       headers : {
-    //         Authorization : `Bearer ${token}`
-    //       }
-    //     });
-  
-    //     if (!response.ok) {
-    //       throw new Error('Network response was not ok');
-    //     }
-    //     const data = await response.json();
-    //     console.log('Protected data:', data);
-    //   } catch (error) {
-    //     console.error('Error fetching protected data:', error);
-    //   }
-    // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -44,6 +28,8 @@ export default function Login() {
           password,
         }),
       });
+
+      console.log(response);
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
@@ -51,6 +37,10 @@ export default function Login() {
       const { token } = data;
       localStorage.setItem("token", token);
       console.log("Login successful");
+
+      const currentUser = await fetchCurrentUser();
+      setCurrentUser(currentUser);
+      navigate("/dashboard");
     } catch (error) {
       console.error("Error logging in:", error);
     }
