@@ -3,33 +3,38 @@ import { Route, Routes } from "react-router-dom";
 import LandingPage from "./Pages/landing-page/Landing-page";
 import Login from "./Pages/LoginPage/Login";
 import Register from "./Pages/Register/Register";
-import Footer from "./Component/Common/footer";
-import Navbar from "./Component/Common/Navbar";
-import Dashboard from "./Pages/dashboard/dashboard";
+import DashboardPage from "./Pages/dashboard/dashboard-page/dashboard-page";
 import { AppContextProvider } from "./providers/app-context";
-import { DashboardGourd } from "./providers/dasboardguard";
+import { DashboardGaurd } from "./providers/dasboardguard";
+import DashboardProjects from "./Pages/dashboard/projects/projects";
+import DashboardWrapper from "./Pages/dashboard/dashboard-wrapper";
+import AppWrapper from "./Component/Common/app-wrapper";
+import Projects from "./Pages/dashboard/projects/projects";
 
 function App() {
   return (
     <>
       <AppContextProvider>
-        <Navbar />
-
         <Routes>
-          <Route index path="/" element={<LandingPage />} />
-          <Route path="/registration" element={<Register />} />
-          <Route
-            path="/dashboard"
-            element={
-              <DashboardGourd>
-                <Dashboard />
-              </DashboardGourd>
-            }
-          />
-          <Route path="/login" element={<Login />} />
-        </Routes>
+          <Route element={<AppWrapper />}>
+            <Route index path="/" element={<LandingPage />} />
+            <Route path="/registration" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+          </Route>
 
-        <Footer />
+          <Route
+            element={
+              <DashboardGaurd>
+                <DashboardWrapper />
+              </DashboardGaurd>
+            }
+          >
+            <Route path="/dashboard" element={<DashboardPage />}>
+              <Route path="projects" element={<Projects/>} />
+              <Route path="profile" element={<DashboardProjects />} />
+            </Route>
+          </Route>
+        </Routes>
       </AppContextProvider>
     </>
   );
