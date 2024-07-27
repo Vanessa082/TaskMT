@@ -1,19 +1,30 @@
 import {
+  faAdd,
   faBars,
   faChevronDown,
   faChevronUp,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import ProjectDetailsModal from "../../../Pages/dashboard/projects/project-details-modal";
 
 export default function ProjectNavComponents() {
-  const [isProjectsvisible, setVisibleProjects] = useState(true);
-  const navigate = useNavigate
+  const [isProjectsvisible, setVisibleProjects] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const toggleProjects = () => {
     setVisibleProjects(!isProjectsvisible);
   };
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <>
       <div className="cursor-pointer">
@@ -25,13 +36,22 @@ export default function ProjectNavComponents() {
       </div>
 
       {isProjectsvisible && (
-        <Link to={"/dashboard/projects"}>
-          <div>
-          <FontAwesomeIcon icon={faBars} size="3x" />
-          Manage Projects
-        </div>
-        </Link>
+        <>
+          <Link to={"/dashboard/projects"}>
+            <div>
+              <FontAwesomeIcon icon={faBars} size="1x" />
+              Manage Projects
+            </div>
+          </Link>
+
+          <div onClick={openModal}>
+            <FontAwesomeIcon icon={faAdd} />
+            Add Projects
+          </div>
+        </>
       )}
+
+      {isModalOpen && <ProjectDetailsModal onClose={closeModal} />}
     </>
   );
 }
