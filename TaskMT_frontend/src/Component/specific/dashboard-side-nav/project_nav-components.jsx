@@ -44,7 +44,7 @@ export default function ProjectNavComponents() {
             </div>
           </Link>
 
-          <div onClick={openModal}>
+          <div onClick={openModal} className="cursor-pointer">
             <FontAwesomeIcon icon={faAdd} />
             Add Projects
           </div>
