@@ -32,15 +32,16 @@ export default function ProjectDetailsModal({ onClose }) {
   const handleSubmitProject = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${API_BASE_URL}/auth/login`, {
+      const response = await fetch(`${API_BASE_URL}/projects/project`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Authorisation": `Bearer ${localStorage.getItem("token")}`
         },
         body: JSON.stringify({
-          name,
-          description,
-          deadline,
+          name : projectName,
+          description : projectDescription,
+          deadline : projectDeadline,
         }),
       });
 
@@ -49,11 +50,9 @@ export default function ProjectDetailsModal({ onClose }) {
       }
       const data = await response.json();
 
-      localStorage.setItem("token", data.token);
-
-      setCurrentUser(data.user);
-      navigate("/dashboard");
-    } catch (error) {}
+    } catch (error) {
+      console.error("Error adding projects", error)
+    }
   };
 
   return (
