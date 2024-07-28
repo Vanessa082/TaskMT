@@ -12,8 +12,8 @@ export default {
         "text-color-1": "var(--text-color-1)",
         "text-color-2": "var(--text-color-2)",
         "primary-color": "var(--primary-color)",
-        "secondary-color": "var(--secondary-color)"
-        
+        "secondary-color": "var(--secondary-color)",
+        "sidebar-color": "var(--sidebar-color}"
       },
       transitionTimingFunction: {
         'custom-cubic': 'cubic-bezier(.8,0,.05,1)',

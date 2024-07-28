@@ -5,7 +5,7 @@ const AppContext = createContext(null);
 
 function AppContextProvider ({ children })  {
   const [currentUser, setCurrentUser] = useState(null);
-  const [userProjects, setUserProjects] = useState([]);
+  // const [userProjects, setUserProjects] = useState([]);
 
   useEffect(() => {
     fetchCurrentUser().then((data) => {
