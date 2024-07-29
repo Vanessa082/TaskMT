@@ -13,10 +13,10 @@ export default function ManageProjects() {
     }
   }, [data]);
   return (
-    <div>
+    <div className="">
+      Project Overview
       {project.map(() => {
-        <div key={project.id}>{project.name}</div>;
-      })}
+        <div key={project.id}>{project.name}
 
       <button>
         <FontAwesomeIcon icon={faPen} />
@@ -31,6 +31,8 @@ export default function ManageProjects() {
       <button>
         <FontAwesomeIcon icon={faTrash} />
       </button>
+        </div>;
+      })}
     </div>
   );
 }

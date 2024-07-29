@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useGetRequest } from "../../../providers/hooks/use-fetch";
 
 export default function ProjectList() {
-  const [project, setProjects] = useState([]);
+  const [projects, setProjects] = useState([]);
   const { data, error, loading } = useGetRequest("/projects");
 
   useEffect(() => {
@@ -10,10 +10,10 @@ export default function ProjectList() {
   }, [data]);
 
   return (
-    <ul>
-      {project.map(() => {
-        <li key={project.id}>{project.name}</li>;
-      })}
-    </ul>
+      <ul>
+        {projects.map((project) => (
+          <li key={project.id}>{project.name}</li>
+        ))}
+      </ul>
   );
 }

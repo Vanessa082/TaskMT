@@ -12,7 +12,7 @@ function useGetRequest(pathname) {
       try {
         const response = await fetch(`${API_BASE_URL}${pathname}`, {
           method: "GET",
-          header: {
+          headers: {
             "Content-Type": "Application/json",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -23,6 +23,7 @@ function useGetRequest(pathname) {
 
         const _data = await response.json();
         setData(_data);
+        console.log(data, 'fetched')
       } catch (error) {
         setError(error)
       } finally {

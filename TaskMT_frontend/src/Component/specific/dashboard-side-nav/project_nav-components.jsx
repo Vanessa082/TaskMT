@@ -28,7 +28,7 @@ export default function ProjectNavComponents() {
 
   return (
     <>
-      <div className="cursor-pointer">
+      <div className="cursor-pointer flex justify-between items-center gap-40 border-stone-900 font-bold">
         Projects
         <FontAwesomeIcon
           icon={isProjectsvisible ? faChevronUp : faChevronDown}
@@ -45,7 +45,7 @@ export default function ProjectNavComponents() {
               Manage Projects
             </div>
           </Link>
-
+          <hr className="bg-black w-[90%]"/>
           <div onClick={openModal} className="cursor-pointer">
             <FontAwesomeIcon icon={faAdd} />
             Add Projects
