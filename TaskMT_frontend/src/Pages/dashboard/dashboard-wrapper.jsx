@@ -6,7 +6,7 @@ export default function DashboardWrapper() {
     <div className="flex flex-row w-full items-stretch min-h-screen">
       <DashboardSideNav />
 
-      <div className="w-full h-full">
+      <div className="w-full h-full bg-linear-gradient-top-white">
         <Outlet />
       </div>
     </div>

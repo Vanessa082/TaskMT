@@ -9,7 +9,9 @@
   -moz-osx-font-smoothing: grayscale;
 
   --text-color-1: #fff;
+  --text-color-3: #000000de;
   --text-color-2: #333;
+  --text-color-4: #4878e5;
   --primary-color: #092c5a;
   --secondary-color: #83b5de;
   --sidebar-color: #ebebeb;
@@ -44,6 +46,7 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 
 button:hover {
   border-color: #646cff;
