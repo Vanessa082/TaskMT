@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useAppContext } from "../../providers/app-context";
+import { useAppContext } from "../../providers/context/app-context";
 
 export default function Login() {
   const [email, setEmail] = useState("");

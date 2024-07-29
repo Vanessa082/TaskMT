@@ -32,7 +32,7 @@ export default function ProjectDetailsModal({ onClose }) {
   const handleSubmitProject = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${API_BASE_URL}/projects/project`, {
+      const response = await fetch(`${API_BASE_URL}/projects`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

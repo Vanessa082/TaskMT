@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import ProjectDetailsModal from "../../../Pages/dashboard/projects/project-details-modal";
+import ProjectList from "../../../Pages/dashboard/projects/project-list";
 
 export default function ProjectNavComponents() {
   const [isProjectsvisible, setVisibleProjects] = useState(false);
@@ -37,6 +38,7 @@ export default function ProjectNavComponents() {
 
       {isProjectsvisible && (
         <>
+        <ProjectList />
           <Link to={"/dashboard/projects"}>
             <div>
               <FontAwesomeIcon icon={faBars} size="1x" />

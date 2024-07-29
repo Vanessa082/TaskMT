@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useAppContext } from "../../../providers/app-context";
+import { useAppContext } from "../../../providers/context/app-context";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import ProjectNavComponents from "./project_nav-components";

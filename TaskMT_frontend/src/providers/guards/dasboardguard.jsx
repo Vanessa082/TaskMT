@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useAppContext } from "./app-context";
+import { useAppContext } from "../context/app-context";
 
 const DashboardGaurd = ({ children }) => {
   const { currentUser } = useAppContext();
