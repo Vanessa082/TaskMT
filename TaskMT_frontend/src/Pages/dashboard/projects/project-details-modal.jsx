@@ -1,13 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { API_BASE_URL } from "../../../constants/constants";
 
-export default function ProjectDetailsModal({ onClose }) {
-  const [projectDescription, setProjectDescription] = useState("");
-  const [projectName, setProjectName] = useState("");
-  const [projectDeadline, setProjectDeadline] = useState(() => {
-    const today = new Date().toISOString().split("T")[0];
-    return today;
-  });
+export default function ProjectDetailsModal({initialData ={}, onClose, onSubmit, mode = 'create' }) {
+  const [projectDescription, setProjectDescription] = useState(initialData.description || "");
+  const [projectName, setProjectName] = useState(initialData.name || "");
+  const [projectDeadline, setProjectDeadline] = useState(initialData.deadline ||  new Date().toISOString().split("T")[0]);
 
   const modalRef = useRef(null);
 
@@ -31,8 +28,11 @@ export default function ProjectDetailsModal({ onClose }) {
   const handleSubmitProject = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${API_BASE_URL}/projects`, {
-        method: "POST",
+      // determing the method to be used
+      const url = mode === 'edit' ? `${API_BASE_URL}/projects/${initialData.id}` : `/projects`;
+      const method = mode === 'edit' ? 'PUT' : 'POST';
+      const response = await fetch(url,{
+        method,
         headers: {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${localStorage.getItem("token")}`
@@ -50,6 +50,7 @@ export default function ProjectDetailsModal({ onClose }) {
       }
       const data = await response.json();
       console.log("Project added successfully:", data);
+      onSubmit(data)
       onClose(); // Close the modal on successful submission
     } catch (error) {
       console.error("Error adding project:", error);
@@ -83,7 +84,7 @@ export default function ProjectDetailsModal({ onClose }) {
           </button>
           <button type="button">Edit</button>
           <button type="submit" className="w-full bg-primary text-white py-2 rounded-md hover:bg-primary-dark transition-colors">
-            Save
+          {mode === 'edit' ? 'Save Changes' : 'Create Project'}
           </button>
         </form>
       </div>
