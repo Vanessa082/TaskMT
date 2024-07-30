@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { API_BASE_URL } from "../../constants/constants";
 
 function useGetRequest(pathname) {
   const [loading, setLoading] = useState(true);
@@ -14,7 +15,7 @@ function useGetRequest(pathname) {
           method: "GET",
           headers: {
             "Content-Type": "Application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            "Authorization": `Bearer ${localStorage.getItem("token")}`,
           },
         });
         if (!response.ok) {
