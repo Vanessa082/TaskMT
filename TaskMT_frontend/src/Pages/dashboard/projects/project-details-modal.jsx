@@ -1,13 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { API_BASE_URL } from "../../../constants/constants";
 
-export default function ProjectDetailsModal({ onClose }) {
-  const [projectDescription, setProjectDescription] = useState("");
-  const [projectName, setProjectName] = useState("");
-  const [projectDeadline, setProjectDeadline] = useState(() => {
-    const today = new Date().toISOString().split("T")[0];
-    return today;
-  });
+export default function ProjectDetailsModal({initialData ={}, onClose, onSubmit, mode = 'create' }) {
+  const [projectDescription, setProjectDescription] = useState(initialData.description || "");
+  const [projectName, setProjectName] = useState(initialData.name || "");
+  const [projectDeadline, setProjectDeadline] = useState(initialData.deadline ||  new Date().toISOString().split("T")[0]);
 
   const modalRef = useRef(null);
 
