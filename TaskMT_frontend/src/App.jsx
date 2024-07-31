@@ -10,10 +10,13 @@ import DashboardWrapper from "./Pages/dashboard/dashboard-wrapper";
 import AppWrapper from "./Component/Common/app-wrapper";
 import Projects from "./Pages/dashboard/projects/projects";
 import ManageProjects from "./Pages/dashboard/projects/manage-project";
+import { Toaster } from "sonner";
 
 function App() {
   return (
     <>
+      <Toaster />
+
       <AppContextProvider>
         <Routes>
           <Route element={<AppWrapper />}>
