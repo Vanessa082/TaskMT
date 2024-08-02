@@ -25,7 +25,7 @@ export default {
       },
       backgroundImage: {
         'custom-gradient': 'radial-gradient(circle at top left, #83b5de, #6599ef 10%, #4385f4 20%, #0939a5 70%, #00288e 100%)',
-        'linear-gradient-top-white': 'linear-gradient(to top, #b7cbed, #ffffff 100%)',
+        'linear-gradient-top-white': 'linear-gradient(to top, #b7cbed,#b7cbed 20% ,  #b7cbed 20%,#ffffff)',
       },
     },
   },
