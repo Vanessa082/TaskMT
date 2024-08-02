@@ -8,7 +8,6 @@ import { AppContextProvider } from "./providers/context/app-context";
 import { DashboardGaurd } from "./providers/guards/dasboardguard";
 import DashboardWrapper from "./Pages/dashboard/dashboard-wrapper";
 import AppWrapper from "./Component/Common/app-wrapper";
-import Projects from "./Pages/dashboard/projects/projects";
 import ManageProjects from "./Pages/dashboard/projects/manage-project";
 import { Toaster } from "sonner";
 

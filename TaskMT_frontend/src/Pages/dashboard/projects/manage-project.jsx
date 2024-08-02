@@ -31,16 +31,16 @@ export default function ManageProjects() {
     setProjects((prevProjects) =>
       // checks if there is any project in the prevProjects array that has the same id as updatedProject.
       // If the condition prevProjects.some(project => project.id === updatedProject.id) is true (i.e., there is a project with the same id in prevProjects), the code after the ? will be executed
-      prevProjects.some((project) => project.id === updatedProject.id)
+      prevProjects.some((project) => project.project_id === updatedProject.project_id)
         ? prevProjects.map((project) =>
-            project.id === updatedProject.id ? updatedProject : project
+            project.project_id === updatedProject.project_id ? updatedProject : project
           )
         : [...prevProjects, updatedProject]
     );
   };
 
   const handleDelete = async (id) => {
-    toast("Are  sure you want to delete this project?", {
+    toast("Are you sure you want to delete this project?", {
       action: {
         label: "Delete Project",
         onClick: async () => {
@@ -55,12 +55,12 @@ export default function ManageProjects() {
             if (response.ok) {
               setProjects((prevProjects) => {
                 const data = prevProjects.filter(
-                  (project) => project.id !== id
+                  (project) => project.project_id !== id
                 );
                 return data;
               });
 
-              toast("Successfull deletion")
+              toast("Successfully deleted");
             }
           } catch (error) {
             console.error("Error deleting project", error);
@@ -75,15 +75,20 @@ export default function ManageProjects() {
       <h2 className="text-2xl">Project Overview</h2>
       {projects.length === 0 ? (
         <p>No projects available. Please add some projects.</p>
-      ) : (
+      ) : ( 
         projects.map((project) => (
           <div
-            key={project.id}
+            key={project.project_id}
             className="text-xl flex items-center bg-text-color-1 py-4 pl-2 border border-black/15 mb-5 rounded-lg transition-all duration-300 shadow-[2px_2px_3px_rgba(0,0,0,0.4)] w-[40%] gap-60"
           >
-            <h2 className="flex justify-between items-start gap-6">
-              <SixDotEllipsis /> {project.name}
-            </h2>
+            <div className="flex flex-col gap-2">
+              <h2 className="flex justify-between items-start gap-6">
+                <SixDotEllipsis /> {project.name}
+              </h2>
+              <span className={`status ${project.status === "completed" ? "text-green-500" : "text-yellow-500"}`}>
+                {project.status.charAt(0).toUpperCase() + project.status.slice(1)}
+              </span>
+            </div>
             <div className="flex justify-between items-center gap-20">
               <FontAwesomeIcon
                 icon={faPen}
@@ -94,7 +99,7 @@ export default function ManageProjects() {
               <FontAwesomeIcon
                 icon={faTrash}
                 className="text-red-500"
-                onClick={() => handleDelete(project.id)}
+                onClick={() => handleDelete(project.project_id)}
               />
             </div>
           </div>
