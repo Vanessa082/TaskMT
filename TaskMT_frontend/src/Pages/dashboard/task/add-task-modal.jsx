@@ -1,12 +1,15 @@
 import { useState, useRef, useEffect } from "react";
 import { API_BASE_URL } from "../../../constants/constants";
 
-export default function TaskCreationModal({ isOpen, onClose, onSubmit, projects }) {
-  const [taskName, setTaskName] = useState("");
-  const [taskDescription, setTaskDescription] = useState("");
-  const [dueDate, setDueDate] = useState(new Date().toISOString().split("T")[0]);
-  const [priority, setPriority] = useState("Low");
-  const [selectedProject, setSelectedProject] = useState("");
+export default function TaskCreationModal({ isOpen, onClose, onSubmit, projects, initialData = {} }) {
+  const [taskName, setTaskName] = useState(initialData.title || "");
+  const [taskDescription, setTaskDescription] = useState(initialData.description || "");
+  const [dueDate, setDueDate] = useState(initialData.deadline || new Date().toISOString().split("T")[0]);
+  const [priority, setPriority] = useState(initialData.priority || "Low");
+  const [selectedProject, setSelectedProject] = useState(initialData.project_id || "");
+  const [timeEstimate, setTimeEstimate] = useState(initialData.time_estimate || "");
+  const [isRecurring, setIsRecurring] = useState(initialData.is_recurring || false);
+  const [recurrencePattern, setRecurrencePattern] = useState(initialData.recurrence_pattern || "");
 
   const modalRef = useRef(null);
 
@@ -15,6 +18,9 @@ export default function TaskCreationModal({ isOpen, onClose, onSubmit, projects 
   const handleDueDateChange = (e) => setDueDate(e.target.value);
   const handlePriorityChange = (e) => setPriority(e.target.value);
   const handleProjectChange = (e) => setSelectedProject(e.target.value);
+  const handleTimeEstimateChange = (e) => setTimeEstimate(e.target.value);
+  const handleIsRecurringChange = (e) => setIsRecurring(e.target.checked);
+  const handleRecurrencePatternChange = (e) => setRecurrencePattern(e.target.value);
 
   const handleCloseModal = (e) => {
     if (modalRef.current && !modalRef.current.contains(e.target)) {
@@ -32,32 +38,32 @@ export default function TaskCreationModal({ isOpen, onClose, onSubmit, projects 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${API_BASE_URL}/tasks`, {
-        method: "POST",
+      const response = await fetch(`${API_BASE_URL}/tasks${initialData.task_id ? `/${initialData.task_id}` : ""}`, {
+        method: initialData.task_id ? 'PUT' : 'POST',
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${localStorage.getItem("token")}`,
+          "Authorization": `Bearer ${localStorage.getItem("token")}`
         },
         body: JSON.stringify({
-          name: taskName,
+          title: taskName,
           description: taskDescription,
-          due_date: dueDate,
           priority,
+          deadline: dueDate,
           project_id: selectedProject,
-        }),
+          time_estimate: timeEstimate,
+          is_recurring: isRecurring,
+          recurrence_pattern: recurrencePattern
+        })
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Network response was not ok");
+        throw new Error("Failed to submit the task");
       }
-      
-      const data = await response.json();
-      console.log("Task created successfully:", data);
-      onSubmit(data); // Notify parent component
-      onClose(); // Close modal on successful submission
+
+      const result = await response.json();
+      onSubmit(result);
     } catch (error) {
-      console.error("Error creating task:", error);
+      console.error("Error submitting task:", error);
     }
   };
 
@@ -69,7 +75,7 @@ export default function TaskCreationModal({ isOpen, onClose, onSubmit, projects 
         <span className="close cursor-pointer text-right" onClick={onClose}>
           &times;
         </span>
-        <h2 className="text-lg font-bold mb-4">Create Task</h2>
+        <h2 className="text-lg font-bold mb-4">{initialData.task_id ? "Update Task" : "Create Task"}</h2>
         <form onSubmit={handleSubmit} className="flex flex-col">
           <label>
             Task Name
@@ -129,6 +135,37 @@ export default function TaskCreationModal({ isOpen, onClose, onSubmit, projects 
               ))}
             </select>
           </label>
+          <label className="mt-2">
+            Time Estimate
+            <input
+              type="text"
+              value={timeEstimate}
+              onChange={handleTimeEstimateChange}
+              placeholder="e.g., 2 hours, 3 days"
+              className="border border-gray-300 p-2 rounded mt-1"
+            />
+          </label>
+          <label className="mt-2 flex items-center">
+            Recurring Task
+            <input
+              type="checkbox"
+              checked={isRecurring}
+              onChange={handleIsRecurringChange}
+              className="ml-2"
+            />
+          </label>
+          {isRecurring && (
+            <label className="mt-2">
+              Recurrence Pattern
+              <input
+                type="text"
+                value={recurrencePattern}
+                onChange={handleRecurrencePatternChange}
+                placeholder="e.g., every Monday"
+                className="border border-gray-300 p-2 rounded mt-1"
+              />
+            </label>
+          )}
           <div className="mt-4 flex justify-end gap-2">
             <button
               type="button"
@@ -141,7 +178,7 @@ export default function TaskCreationModal({ isOpen, onClose, onSubmit, projects 
               type="submit"
               className="bg-primary text-white px-4 py-2 rounded"
             >
-              Create Task
+              {initialData.task_id ? "Update Task" : "Create Task"}
             </button>
           </div>
         </form>
