@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { API_BASE_URL } from "../../../constants/constants";
 
-export default function ProjectDetailsModal({ initialData = {}, onClose, onSubmit, mode = 'create' }) {
+export default function ProjectDetailsModal({ initialData = {}, onClose, updateProjectState, mode = 'create' }) {
   const [projectDescription, setProjectDescription] = useState(initialData.description || "");
   const [projectName, setProjectName] = useState(initialData.name || "");
   const [projectDeadline, setProjectDeadline] = useState(initialData.deadline || new Date().toISOString().split("T")[0]);
@@ -33,6 +33,7 @@ export default function ProjectDetailsModal({ initialData = {}, onClose, onSubmi
       // Determine the method to be used
       const url = mode === 'edit' ? `${API_BASE_URL}/projects/${initialData.project_id}` : `${API_BASE_URL}/projects`;
       const method = mode === 'edit' ? 'PUT' : 'POST';
+
       const response = await fetch(url, {
         method,
         headers: {
@@ -47,16 +48,22 @@ export default function ProjectDetailsModal({ initialData = {}, onClose, onSubmi
         }),
       });
 
+      console.log(response);
+
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || "Network response was not ok");
+        console.log({ errorData });
+        throw new Error(errorData?.message || "Network response was not ok");
       }
+
       const data = await response.json();
       console.log("Project added/updated successfully:", data);
-      onSubmit(data);
+
+      if (updateProjectState) updateProjectState(data);
+
       onClose(); // Close the modal on successful submission
     } catch (error) {
-      console.error("Error adding/updating project:", error);
+      console.warn("Error adding/updating project:", error);
     }
   };
 

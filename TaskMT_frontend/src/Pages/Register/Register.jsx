@@ -33,7 +33,7 @@ export default function Register() {
       });
       const data = await response.json();
       if (response.ok) {
-        navigate("/dashboard");
+        navigate("/login");
       } else {
         console.error("Registration", data.message);
       }
