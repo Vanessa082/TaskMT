@@ -1,8 +1,8 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { API_BASE_URL } from "../../../constants/constants";
 import { useModalContext } from "../../../providers/context/modal-context";
 
-export default function TaskCreationModal({ isOpen, closeModal, projects }) {
+export default function TaskCreationModal() {
   const [isEditing, setIsEditing] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -15,12 +15,9 @@ export default function TaskCreationModal({ isOpen, closeModal, projects }) {
     }));
   };
 
-  const modalRef = useRef(null);
-
-  const handleCloseModal = (e) => {
-    if (modalRef.current && !modalRef.current.contains(e.target)) {
-      closeModal();
-    }
+  const closeModal = () => {
+    setTask(null);
+    setTaskModalOpen(false);
   };
 
   const handleSubmit = async (e) => {
@@ -55,150 +52,144 @@ export default function TaskCreationModal({ isOpen, closeModal, projects }) {
     }
   };
 
-  useEffect(() => {
-    document.addEventListener("mousedown", handleCloseModal);
+  // useEffect(() => {
+  //   document.addEventListener("mousedown", handle);
 
-    return () => {
-      document.removeEventListener("mousedown", handleCloseModal);
-    };
-  }, [closeModal]);
+  //   return () => {
+  //     document.removeEventListener("mousedown", handle);
+  //   };
+  // }, [closeModal]);
 
   useEffect(() => {
     if (task && task.task_id) setIsEditing(true);
     else setIsEditing(false);
   }, [task]);
 
-  if (!isOpen) return null;
-
   return (
     <>
-      {/* <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50"></div> */}
+      <div className="fixed inset-0 z-10 bg-gray-800 bg-opacity-50" />
 
-      <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
-        <div ref={modalRef} className="bg-white p-4 rounded-lg shadow-lg w-96">
-          <span
-            className="close cursor-pointer text-right"
-            onClick={closeModal}
-          >
-            &times;
-          </span>
-          <h2 className="text-lg font-bold mb-4">
-            {initialData.task_id ? "Update Task" : "Create Task"}
-          </h2>
-          <form onSubmit={handleSubmit} className="flex flex-col">
-            <label>
-              Task Name
+      <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 bg-white p-4 rounded-lg shadow-lg w-96">
+        <span className="close cursor-pointer text-right" onClick={closeModal}>
+          &times;
+        </span>
+
+        <h2 className="text-lg font-bold mb-4">
+          {isEditing? "Update Task" : "Create Task"}
+        </h2>
+        <form onSubmit={handleSubmit} className="flex flex-col">
+          <label>
+            Task Name
+            <input
+              type="text"
+              value={task.title}
+              onChange={(e) => updateTaskState("title", e.target.value)}
+              required
+              className="border border-gray-300 p-2 rounded mt-1"
+            />
+          </label>
+          <label className="mt-2">
+            Description
+            <textarea
+              value={task.description}
+              onChange={(e) => updateTaskState("description", e.target.value)}
+              rows="4"
+              className="border border-gray-300 p-2 rounded mt-1"
+              required
+            />
+          </label>
+          <label className="mt-2">
+            Deadline Date
+            <input
+              type="date"
+              value={task.deadline}
+              onChange={(e) => updateTaskState("deadline", e.target.value)}
+              className="border border-gray-300 p-2 rounded mt-1"
+              required
+            />
+          </label>
+          <label className="mt-2">
+            Priority
+            <select
+              value={task.priority}
+              onChange={(e) => updateTaskState("priority", e.target.value)}
+              className="border border-gray-300 p-2 rounded mt-1"
+            >
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+            </select>
+          </label>
+          {/* <label className="mt-2">
+            Project
+            <select
+              value={task.project_id}
+              onChange={(e) => updateTaskState("project_id", e.target.value)}
+              className="border border-gray-300 p-2 rounded mt-1"
+              required
+            >
+              <option value="">Select a project</option>
+              {projects.map((project) => (
+                <option key={project.project_id} value={project.project_id}>
+                  {project.name}
+                </option>
+              ))}
+            </select>
+          </label> */}
+
+          {/* TODO FOR TOMMORROW CREATE A CONTEXT TO HANDLE GET PROJECT SO IT IS BEING  USED IN THE DASHBOARD */}
+          <label className="mt-2">
+            Time Estimate
+            <input
+              type="text"
+              value={task.time_estimate}
+              onChange={(e) => updateTaskState("time_estimate", e.target.value)}
+              placeholder="e.g., 2 hours, 3 days"
+              className="border border-gray-300 p-2 rounded mt-1"
+            />
+          </label>
+          <label className="mt-2 flex items-center">
+            Recurring Task
+            <input
+              type="checkbox"
+              value={task.is_recurring}
+              onChange={(e) =>
+                updateTaskState("is_recurring", e.target.checked)
+              }
+              className="ml-2"
+            />
+          </label>
+
+          {isRecurring && (
+            <label className="mt-2">
+              Recurrence Pattern
               <input
                 type="text"
-                value={task.title}
-                onChange={(e) => updateTaskState("title", e.target.value)}
-                required
-                className="border border-gray-300 p-2 rounded mt-1"
-              />
-            </label>
-            <label className="mt-2">
-              Description
-              <textarea
-                value={task.description}
-                onChange={(e) => updateTaskState("description", e.target.value)}
-                rows="4"
-                className="border border-gray-300 p-2 rounded mt-1"
-                required
-              />
-            </label>
-            <label className="mt-2">
-              Deadline Date
-              <input
-                type="date"
-                value={task.deadline}
-                onChange={(e) => updateTaskState("deadline", e.target.value)}
-                className="border border-gray-300 p-2 rounded mt-1"
-                required
-              />
-            </label>
-            <label className="mt-2">
-              Priority
-              <select
-                value={task.priority}
-                onChange={(e) => updateTaskState("priority", e.target.value)}
-                className="border border-gray-300 p-2 rounded mt-1"
-              >
-                <option value="Low">Low</option>
-                <option value="Medium">Medium</option>
-                <option value="High">High</option>
-              </select>
-            </label>
-            <label className="mt-2">
-              Project
-              <select
-                value={task.project_id}
-                onChange={(e) => updateTaskState("project_id", e.target.value)}
-                className="border border-gray-300 p-2 rounded mt-1"
-                required
-              >
-                <option value="">Select a project</option>
-                {projects.map((project) => (
-                  <option key={project.project_id} value={project.project_id}>
-                    {project.name}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <label className="mt-2">
-              Time Estimate
-              <input
-                type="text"
-                value={task.time_estimate}
+                value={task.recurrence_pattern}
                 onChange={(e) =>
-                  updateTaskState("time_estimate", e.target.value)
+                  updateTaskState("recurrence_pattern", e.target.value)
                 }
-                placeholder="e.g., 2 hours, 3 days"
+                placeholder="e.g., every Monday"
                 className="border border-gray-300 p-2 rounded mt-1"
               />
             </label>
-            <label className="mt-2 flex items-center">
-              Recurring Task
-              <input
-                type="checkbox"
-                value={task.is_recurring}
-                onChange={(e) =>
-                  updateTaskState("is_recurring", e.target.checked)
-                }
-                className="ml-2"
-              />
-            </label>
-
-            {isRecurring && (
-              <label className="mt-2">
-                Recurrence Pattern
-                <input
-                  type="text"
-                  value={task.recurrence_pattern}
-                  onChange={(e) =>
-                    updateTaskState("recurrence_pattern", e.target.value)
-                  }
-                  placeholder="e.g., every Monday"
-                  className="border border-gray-300 p-2 rounded mt-1"
-                />
-              </label>
-            )}
-            <div className="mt-4 flex justify-end gap-2">
-              <button
-                type="button"
-                onClick={closeModal}
-                className="bg-gray-300 text-black px-4 py-2 rounded"
-              >
-                Cancel
-              </button>
-              <button
-                type="submit"
-                className="bg-primary text-white px-4 py-2 rounded"
-              >
-                {isEditing ? "Update Task" : "Create Task"}
-              </button>
-            </div>
-          </form>
-        </div>
+          )}
+          <div className="mt-4 flex justify-end gap-2">
+            <button
+              type="button"
+              onClick={closeModal}
+              className="bg-gray-300 text-black px-4 py-2 rounded"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              className="bg-primary text-white px-4 py-2 rounded"
+            >
+              {isEditing ? "Update Task" : "Create Task"}
+            </button>
+          </div>
+        </form>
       </div>
     </>
   );
