@@ -1,8 +1,21 @@
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useModalContext } from "../../../providers/context/modal-context";
 
-export default function AddTask () {
+export default function AddTask() {
+  const { setTaskModalOpen } = useModalContext();
+
+  const handleOpenModal = () => {
+    setTaskModalOpen(true);
+  }
+
   return (
-    <FontAwesomeIcon icon={faPlus} />
-  )
+    <div>
+      <FontAwesomeIcon
+        icon={faPlus}
+        onClick={handleOpenModal}
+        className="cursor-pointer"
+      />
+    </div>
+  );
 }

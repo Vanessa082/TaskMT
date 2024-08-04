@@ -27,7 +27,7 @@ export default function ManageProjects() {
     setIsModalOpen(false);
   };
 
-  const handleProjectSubmit = (updatedProject) => {
+  const updateProjectState = (updatedProject) => {
     setProjects((prevProjects) =>
       // checks if there is any project in the prevProjects array that has the same id as updatedProject.
       // If the condition prevProjects.some(project => project.id === updatedProject.id) is true (i.e., there is a project with the same id in prevProjects), the code after the ? will be executed
@@ -110,7 +110,7 @@ export default function ManageProjects() {
         <ProjectDetailsModal
           initialData={selectedProject}
           onClose={closeModal}
-          onSubmit={handleProjectSubmit}
+          updateProjectState={updateProjectState}
           mode={selectedProject ? "edit" : "create"}
         />
       )}
