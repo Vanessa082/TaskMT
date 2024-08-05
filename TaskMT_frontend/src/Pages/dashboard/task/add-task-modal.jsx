@@ -67,7 +67,7 @@ export default function TaskCreationModal() {
 
   return (
     <>
-      <div className="fixed inset-0 z-10 bg-gray-800 bg-opacity-50" />
+      <div className="fixed inset-0 z-10 bg-gray-800 bg-opacity-50" onClick={closeModal}/>
 
       <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 bg-white p-4 rounded-lg shadow-lg w-96">
         <span className="close cursor-pointer text-right" onClick={closeModal}>
@@ -160,7 +160,7 @@ export default function TaskCreationModal() {
             />
           </label>
 
-          {isRecurring && (
+          {task?.is_recurring && (
             <label className="mt-2">
               Recurrence Pattern
               <input
