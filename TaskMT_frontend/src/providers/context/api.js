@@ -26,6 +26,23 @@ const fetchCurrentUser = async () => {
   }
 };
 
+const fetchProjects = async () => {
+  const response = await fetch(`${API_BASE_URL}/projects`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "Application/json",
+      "Authorisation": `Bearer ${localStorage.getItem("token")}`
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error("Network Response was not ok");
+  };
+
+  return response.json();
+}
+
 export {
-  fetchCurrentUser
+  fetchCurrentUser,
+  fetchProjects
 }

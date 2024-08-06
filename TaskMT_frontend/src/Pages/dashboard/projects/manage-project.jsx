@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react";
-import { useGetRequest } from "../../../providers/hooks/use-fetch";
+// import { useGetRequest } from "../../../providers/hooks/use-fetch";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import SixDotEllipsis from "../../../assets/custom-icons/six-dot-elipsis";
 import ProjectDetailsModal from "./project-details-modal";
 import { API_BASE_URL } from "../../../constants/constants";
 import { toast } from "sonner";
+import { useDashboardContext } from "../../../providers/context/dashboard-context";
 
 export default function ManageProjects() {
-  const [projects, setProjects] = useState([]);
   const [selectedProject, setSelectedProject] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { data, error, loading } = useGetRequest("/projects");
+  const {projects, setProjects} = useDashboardContext
+  // const { data, error, loading } = useGetRequest("/projects");
 
   useEffect(() => {
     if (data) setProjects(data);

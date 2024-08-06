@@ -9,6 +9,7 @@ import DashboardWrapper from "./Pages/dashboard/dashboard-wrapper";
 import AppWrapper from "./Component/Common/app-wrapper";
 import ManageProjects from "./Pages/dashboard/projects/manage-project";
 import { ModalContextProvider } from "./providers/context/modal-context";
+import { DashboardContextProvider } from "./providers/context/dashboard-context";
 
 function App() {
   return (
@@ -23,9 +24,11 @@ function App() {
         path="/dashboard"
         element={
           <DashboardGaurd>
-            <ModalContextProvider>
-              <DashboardWrapper />
-            </ModalContextProvider>
+            <DashboardContextProvider>
+              <ModalContextProvider>
+                <DashboardWrapper />
+              </ModalContextProvider>
+            </DashboardContextProvider>
           </DashboardGaurd>
         }
       >

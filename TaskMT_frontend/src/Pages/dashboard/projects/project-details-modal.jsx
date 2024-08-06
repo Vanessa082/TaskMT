@@ -1,31 +1,43 @@
 import { useEffect, useRef, useState } from "react";
 import { API_BASE_URL } from "../../../constants/constants";
+import { useModalContext } from "../../../providers/context/modal-context";
 
-export default function ProjectDetailsModal({ initialData = {}, onClose, updateProjectState, mode = 'create' }) {
-  const [projectDescription, setProjectDescription] = useState(initialData.description || "");
-  const [projectName, setProjectName] = useState(initialData.name || "");
-  const [projectDeadline, setProjectDeadline] = useState(initialData.deadline || new Date().toISOString().split("T")[0]);
-  const [projectStatus, setProjectStatus] = useState(initialData.status || "active");
+export default function ProjectDetailsModal() {
+  const [isEditing, setIsEditing] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const modalRef = useRef(null);
+  const { project, setProject, seProjectModalOpen } = useModalContext()
+  // const [projectDescription, setProjectDescription] = useState(initialData.description || "");
+  // const [projectName, setProjectName] = useState(initialData.name || "");
+  // const [projectDeadline, setProjectDeadline] = useState(initialData.deadline || new Date().toISOString().split("T")[0]);
+  // const [projectStatus, setProjectStatus] = useState(initialData.status || "active");
 
-  const handleProjectDescription = (e) => setProjectDescription(e.target.value);
-  const handleProjectName = (e) => setProjectName(e.target.value);
-  const handleProjectDeadline = (e) => setProjectDeadline(e.target.value);
-  const handleProjectStatus = (e) => setProjectStatus(e.target.value);
+  // const modalRef = useRef(null);
 
-  const handleCloseModal = (e) => {
-    if (modalRef.current && !modalRef.current.contains(e.target)) {
-      onClose();
-    }
-  };
+  // const handleProjectDescription = (e) => setProjectDescription(e.target.value);
+  // const handleProjectName = (e) => setProjectName(e.target.value);
+  // const handleProjectDeadline = (e) => setProjectDeadline(e.target.value);
+  // const handleProjectStatus = (e) => setProjectStatus(e.target.value);
 
-  useEffect(() => {
-    document.addEventListener("mousedown", handleCloseModal);
-    return () => {
-      document.removeEventListener("mousedown", handleCloseModal);
-    };
-  }, [onClose]);
+  // const handleCloseModal = (e) => {
+  //   if (modalRef.current && !modalRef.current.contains(e.target)) {
+  //     onClose();
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   document.addEventListener("mousedown", handleCloseModal);
+  //   return () => {
+  //     document.removeEventListener("mousedown", handleCloseModal);
+  //   };
+  // }, [onClose]);
+
+  const updateProjectState = (key, value) => {
+    setProject((prev) => ({
+      ...prev,
+      [key] : value,
+    }))
+  }
 
   const handleSubmitProject = async (e) => {
     e.preventDefault();
@@ -75,10 +87,10 @@ export default function ProjectDetailsModal({ initialData = {}, onClose, updateP
         </span>
         <form className="flex flex-col" onSubmit={handleSubmitProject}>
           <label>Project Name</label>
-          <input type="text" value={projectName} onChange={handleProjectName} required />
+          <input type="text" value={project?.name || ""} onChange={(e) => updateProjectState("name", e.target.value)} required />
 
           <label>Project Deadline</label>
-          <input type="date" value={projectDeadline} onChange={handleProjectDeadline} required />
+          <input type="date" value={projectDeadline} onChange={(e) => updateProjectState("deadline", e.target.value)} required />
 
           <label>Status</label>
           <select value={projectStatus} onChange={handleProjectStatus} required>
