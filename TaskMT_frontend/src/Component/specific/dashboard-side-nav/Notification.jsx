@@ -1,7 +1,11 @@
-import { Popover, Transition } from "@headlessui/react";
+import { Popover,PopoverButton, PopoverPanel,  Transition } from "@headlessui/react";
+import dayjs from "dayjs";
+import relativeTime from 'dayjs/plugin/relativeTime';
 import React, { Fragment, useState } from "react";
 import { HiBellAlert } from "react-icons/hi2";
 import { IoIosNotificationOutline } from "react-icons/io";
+
+dayjs.extend(relativeTime);
 
 const ICONS = {
   alert: (
@@ -34,18 +38,18 @@ export default function Notification() {
   ];
   return (
     <>
-      <Popover className={relative}>
-        <Popover.Trigger className="inline-flex items-center outline-none">
+      <PopoverPanel className={relative}>
+        <PopoverButton className="inline-flex items-center outline-none">
           <div className="w-8 h-8 flex item-center justify-center text-gray-800 relative">
             <IoIosNotificationOutline className="text-2xl" />
             {/* when there is data  */}
-            {/* {data?.length > 0 && (
+            {data?.length > 0 && (
               <span className='absolute text-center top-0 right-1 text-sm text-white font-semibold w-4 h-4 rounded-full bg-red-600'>
                 {data?.length}
               </span>
-            )} */}
+            )}
           </div>
-        </Popover.Trigger>
+        </PopoverButton>
 
         <Transition
           as={Fragment}
@@ -56,7 +60,7 @@ export default function Notification() {
           leaveFrom="opacity-100 translate-y-0"
           leaveTo="opacity-0 translate-y-0"
         >
-          <Popover.Panel className="absolute -right-16 md:-right-2 z-10 mt-5 flex w-screen max-w-max  px-4">
+          <PopoverPanel className="absolute -right-16 md:-right-2 z-10 mt-5 flex w-screen max-w-max  px-4">
             {({ close }) =>
               data?.length > 0 && (
                 <div className="w-screen max-w-md flex-auto overflow-hidden rounded-3xl bg-white text-sm leading-6 shadow-lg ring-1 ring-gray-900/5">
@@ -77,7 +81,7 @@ export default function Notification() {
                           <div className="flex items-center gap-3 font-semibold text-gray-900 capitalize">
                             <p> {item.notiType}</p>
                             <span className="text-xs font-normal lowercase">
-                              {moment(item.createdAt).fromNow()}
+                              {dayjs(item.createdAt).fromNow()}
                             </span>
                           </div>
                           <p className="line-clamp-1 mt-1 text-gray-600">
@@ -104,9 +108,9 @@ export default function Notification() {
                 </div>
               )
             }
-          </Popover.Panel>
+          </PopoverPanel>
         </Transition>
-      </Popover>
+      </PopoverPanel>
     </>
   );
 }
