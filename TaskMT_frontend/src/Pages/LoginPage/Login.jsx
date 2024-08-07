@@ -52,14 +52,13 @@ export default function Login() {
       <div className="w-full md:w-auto flex ga-40 flex-col md:flex-row items-center">
         <div className="h-full w-full lg:w-2/3 flex flex-col items-center justify-center">
           <div className="w-full md:max-w-lg 2xl:max-w-3xl flex flex-col items-center gap-5 md:gap-y-10 2xl:-mt-20 ">
-            <span className="flex gap-1  py-3 border rounded-full text-sm md:text-base bordergray-300 text-gray-600">
-              The key is not to prioritize what's on your schedule, but to
-              schedule your priorities.
+            <span className="flex gap-1  py-3 border rounded-full text-sm md:text-base bordergray-300 text-gray-600 text-nowrap">
+              Prioritize your tasks; schedule them accordingly.
             </span>
 
-            <p className="flex flex-col gap-0 md:gap-4 text-4xl md:text6xl 2xl:text-7xl font-black text-primary-color">
-              <span>TaskMT</span>
-              <span>Managing Task</span>
+            <p className="flex flex-col gap-0 md:gap-4 text-4xl md:text-6xl 2xl:text-7xl font-black text-center text-primary-color">
+              <span>Personal</span>
+              <span>Task Manager</span>
             </p>
 
             <div className="cell">
@@ -114,12 +113,16 @@ export default function Login() {
             Submit
           </button>
         </form>
-        <h4 className="text-primary mt-6">Do Not Have An Account?</h4>
-        <Link to="/login">
-          <button className="w-full bg-secondary text-white py-2 rounded-md hover:bg-secondary-dark transition-colors mt-2">
+
+        <div className=" mt-6 text-nowrap">
+          <h4 className="text-primary inline">Do Not Have An Account?</h4>
+          <Link
+            to="/registration"
+            className="font-semibold text-center ml-1 "
+          >
             Register
-          </button>
-        </Link>
+          </Link>
+        </div>
       </div>
     </div>
   );

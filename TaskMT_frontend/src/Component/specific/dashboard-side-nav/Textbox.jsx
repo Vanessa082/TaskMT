@@ -2,7 +2,7 @@ import { clsx } from "clsx";
 import React from "react";
 
 const Textbox = React.forwardRef(
-  ({ type, placeholder, label, className, register, name, error }) => {
+  ({ type, placeholder, label, className, register, name, error }, ref) => {
     return (
       <div>
         {label && (
