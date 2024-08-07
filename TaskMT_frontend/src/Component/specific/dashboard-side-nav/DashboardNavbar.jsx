@@ -3,6 +3,7 @@ import { useAppContext } from '../../../providers/context/app-context'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { MdOutlineSearch} from "react-icons/md"
 import { faBars } from '@fortawesome/free-solid-svg-icons'
+import Notification from './Notification'
 
 export default function DashboardNavbar() {
 
@@ -21,7 +22,9 @@ export default function DashboardNavbar() {
         </div>
       </div>
 
-      
+      <div className='flex gap-2 items-center'>
+        <Notification />
+      </div>
     </div>
   )
 }

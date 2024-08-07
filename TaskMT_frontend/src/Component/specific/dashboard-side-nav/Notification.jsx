@@ -18,8 +18,8 @@ const ICONS = {
 
 export default function Notification() {
   // handle data manipulation
-  const [open, setOpen] = useState(false);
-  const [selected, setSelected] = useState(null);
+  // const [open, setOpen] = useState(false);
+  // const [selected, setSelected] = useState(null);
 
   //  const { data, refetch } = useGetNotificationsQuery();
   //  const [markAsRead] = useMarkNotiAsReadMutation();
