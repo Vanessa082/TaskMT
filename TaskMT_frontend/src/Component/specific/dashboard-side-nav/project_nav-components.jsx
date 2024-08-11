@@ -1,6 +1,5 @@
 import {
   faAdd,
-  faBars,
   faChevronDown,
   faChevronUp,
 } from "@fortawesome/free-solid-svg-icons";
@@ -28,7 +27,7 @@ export default function ProjectNavComponents() {
 
   return (
     <>
-      <div className="cursor-pointer flex justify-between items-center gap-40 border-stone-900 font-bold">
+      <div className="cursor-pointer px-3 py-2 flex  text-lg text-gray-800 hover:bg-blue-100 rounded-full justify-between items-center gap-14 border-stone-900 font-bold">
         Projects
         <FontAwesomeIcon
           icon={isProjectsvisible ? faChevronUp : faChevronDown}
@@ -41,11 +40,9 @@ export default function ProjectNavComponents() {
         <ProjectList />
           <Link to={"/dashboard/projects"}>
             <div>
-              <FontAwesomeIcon icon={faBars} size="1x" />
               Manage Projects
             </div>
           </Link>
-          <hr className="bg-black w-[90%]"/>
           <div onClick={openModal} className="cursor-pointer">
             <FontAwesomeIcon icon={faAdd} />
             Add Projects

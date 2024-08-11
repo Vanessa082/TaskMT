@@ -1,10 +1,9 @@
 import { API_BASE_URL } from "../../constants/constants";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useAppContext } from "../../providers/context/app-context";
 import Textbox from "../../Component/specific/dashboard-side-nav/Textbox";
+import { useState } from "react";
 
 export default function Login() {
   const {
@@ -16,11 +15,7 @@ export default function Login() {
   const { setCurrentUser } = useAppContext();
   const navigate = useNavigate();
 
-  const handleEmailChange = (e) => setEmail(e.target.value);
-  const handlePasswordChange = (e) => setPassword(e.target.value);
-
-  const handleFormSubmit = async (e) => {
-    e.preventDefault();
+  const handleFormSubmit = async ({ email, password }) => {
     try {
       const response = await fetch(`${API_BASE_URL}/auth/login`, {
         method: "POST",
@@ -116,10 +111,7 @@ export default function Login() {
 
         <div className=" mt-6 text-nowrap">
           <h4 className="text-primary inline">Do Not Have An Account?</h4>
-          <Link
-            to="/registration"
-            className="font-semibold text-center ml-1 "
-          >
+          <Link to="/registration" className="font-semibold text-center ml-1 ">
             Register
           </Link>
         </div>

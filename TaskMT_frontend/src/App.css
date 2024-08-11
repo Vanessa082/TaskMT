@@ -4,7 +4,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-
   font-family: "Nunito Sans", sans-serif;
 }
 
@@ -19,8 +18,8 @@
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  background: rgba(47, 74, 105, 0.671);
-  box-shadow: 4px -40px 60px 5px rgb(40, 37, 203) inset;
+  background: rgb(97,151,240);
+  box-shadow: 4px -40px 60px 5px rgb(18,69,178) inset;
 }
 
 .rotate-in-up-left {

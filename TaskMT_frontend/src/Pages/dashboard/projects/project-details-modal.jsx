@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import {  useState } from "react";
 import { API_BASE_URL } from "../../../constants/constants";
 import { useModalContext } from "../../../providers/context/modal-context";
 
