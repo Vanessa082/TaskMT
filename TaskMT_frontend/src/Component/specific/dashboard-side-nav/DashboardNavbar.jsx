@@ -1,19 +1,26 @@
-import React from 'react'
-import { useAppContext } from '../../../providers/context/app-context'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React, { useState } from 'react';                      
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { MdOutlineSearch} from "react-icons/md"
-import { faBars } from '@fortawesome/free-solid-svg-icons'
-import Notification from './Notification'
+import { faBars } from '@fortawesome/free-solid-svg-icons';
+import Notification from './Notification';
+import AddTask from "../../../Pages/dashboard/task/add-task";
+import DashboardSideNav from './dashboard-side-nav'
+import UserAvatar from './UserAvatar';
 
 export default function DashboardNavbar() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  const {setCurrentUser} = useAppContext();
+  const handleSidebarOpen = () => {
+    setIsSidebarOpen(prevState => !prevState)
+  }
+
   return (
     <div className='flex justify-between items-center bg-white px-4 py-3 2xl:py-4 sticky z-10 top-0'>
       <div className='flex gap-4'>
-        <button onClick={/*opensidebar component*/} className='text-2xl text-gray-400 block md:hidden'>
+        
+        <div onClick={handleSidebarOpen} className='text-2xl text-gray-400 block '>
           <FontAwesomeIcon icon={faBars}/>
-        </button>
+        </div>
 
         <div className="w-64:w-[400px] flex item-center py-2 px-3 gap-2 rounded-full bg-[#f3f4f6] ">
           <MdOutlineSearch />
@@ -23,8 +30,12 @@ export default function DashboardNavbar() {
       </div>
 
       <div className='flex gap-2 items-center'>
+        <AddTask />
         <Notification />
+        <UserAvatar />
       </div>
+      {isSidebarOpen && <DashboardSideNav />}
+
     </div>
   )
 }

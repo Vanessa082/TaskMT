@@ -1,6 +1,5 @@
 import {
   faAdd,
-  faBars,
   faChevronDown,
   faChevronUp,
 } from "@fortawesome/free-solid-svg-icons";
@@ -41,7 +40,6 @@ export default function ProjectNavComponents() {
         <ProjectList />
           <Link to={"/dashboard/projects"}>
             <div>
-              <FontAwesomeIcon icon={faBars} size="1x" />
               Manage Projects
             </div>
           </Link>
