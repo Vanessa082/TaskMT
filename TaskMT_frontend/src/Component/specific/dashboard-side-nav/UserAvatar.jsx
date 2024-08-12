@@ -15,17 +15,16 @@ function UserAvatar() {
   const initials = currentUser ? getInitials(currentUser.username) : "";
 
   return (
-    <div>
       <Menu as="div" className="relative inline-block text-left">
         <div>
-          <MenuButton className="w-full h-10 2xl:w-12 2xl:h-12 items-center justify-center rounded-full bg-blue-600">
+          <MenuButton className="w-full h-10 2xl:w-12 2xl:h-12 items-center  justify-center rounded-full bg-blue-600">
             <span className="text-white font-semibold">
             {initials}
             </span>
           </MenuButton>
         </div>
       </Menu>
-    </div>
+    
   );
 }
 
