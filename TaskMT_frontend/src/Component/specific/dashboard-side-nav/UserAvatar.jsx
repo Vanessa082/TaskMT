@@ -24,7 +24,6 @@ function UserAvatar() {
           </MenuButton>
         </div>
       </Menu>
-    
   );
 }
 

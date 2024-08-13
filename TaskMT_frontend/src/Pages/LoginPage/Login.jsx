@@ -1,9 +1,10 @@
 import { API_BASE_URL } from "../../constants/constants";
-import { Link, useNavigate } from "react-router-dom";
+import { json, Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useAppContext } from "../../providers/context/app-context";
 import Textbox from "../../Component/specific/dashboard-side-nav/Textbox";
-import { useState } from "react";
+import { toast } from "sonner";
+// import { useState } from "react";
 
 export default function Login() {
   const {
@@ -29,14 +30,19 @@ export default function Login() {
       });
 
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        toast.error("Can not Login Invalid Email or Password...");
+        throw new Error("Network response was not ok")
       }
-      const data = await response.json();
 
-      localStorage.setItem("token", data.token);
+      if (response.ok) {
+        const data = await response.json();
+        localStorage.setItem("token", data.token);
+        setCurrentUser(data.user);
+        toast.success("Login successful! Redirecting to Dashboard...");
+        navigate("/dashboard");
+      }
 
-      setCurrentUser(data.user);
-      navigate("/dashboard");
+
     } catch (error) {
       console.error("Error logging in:", error);
     }
@@ -73,7 +79,7 @@ export default function Login() {
               Welcome back!
             </p>
             <p className="text-center text-base text-gray-700 ">
-              Keep all your credential safge.
+              Keep all your credential safe.
             </p>
           </div>
 
@@ -107,14 +113,16 @@ export default function Login() {
           >
             Submit
           </button>
+          <div className=" mt-6 text-nowrap">
+            <h4 className="text-primary inline">Do Not Have An Account?</h4>
+            <Link
+              to="/registration"
+              className="font-semibold text-center ml-1 "
+            >
+              Register
+            </Link>
+          </div>
         </form>
-
-        <div className=" mt-6 text-nowrap">
-          <h4 className="text-primary inline">Do Not Have An Account?</h4>
-          <Link to="/registration" className="font-semibold text-center ml-1 ">
-            Register
-          </Link>
-        </div>
       </div>
     </div>
   );
