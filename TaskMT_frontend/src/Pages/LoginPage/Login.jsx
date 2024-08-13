@@ -73,7 +73,7 @@ export default function Login() {
               Welcome back!
             </p>
             <p className="text-center text-base text-gray-700 ">
-              Keep all your credential safge.
+              Keep all your credential safe.
             </p>
           </div>
 
@@ -107,14 +107,16 @@ export default function Login() {
           >
             Submit
           </button>
+          <div className=" mt-6 text-nowrap text-center">
+            <h4 className="text-primary inline">Do Not Have An Account?</h4>
+            <Link
+              to="/registration"
+              className="font-semibold text-center ml-1 "
+            >
+              Register
+            </Link>
+          </div>
         </form>
-
-        <div className=" mt-6 text-nowrap">
-          <h4 className="text-primary inline">Do Not Have An Account?</h4>
-          <Link to="/registration" className="font-semibold text-center ml-1 ">
-            Register
-          </Link>
-        </div>
       </div>
     </div>
   );

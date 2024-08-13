@@ -1,26 +1,23 @@
-import img1 from "../../../public/assets/img1.jpeg"
-import img2 from "../../../public/assets/img2.jpeg"
-import img3 from "../../../public/assets/img3.jpg"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLinkedin, faFacebook, faTwitter, faGithub, faDev, faReddit } from '@fortawesome/free-brands-svg-icons';
 
 const TestimonialItems = [
     {
-        image: img1,
+        image: "/assets/img1.jpeg",
         quote: {
             text: "This is an amazing System!",
             author: "Wah Vanessa",
         },
     },
     {
-        image: img2,
+        image: "/assets/img2.jpeg",
         quote: {
             text: "I would highly recommend this.",
             author: "Ayuk Gires",
         },
     },
     {
-        image: img3,
+        image: "/assets/img3.jpg",
         quote: {
             text: "A must-have for everyone.",
             author: "Alice Johnson",
