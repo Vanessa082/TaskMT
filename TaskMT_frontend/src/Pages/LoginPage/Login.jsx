@@ -1,8 +1,9 @@
 import { API_BASE_URL } from "../../constants/constants";
-import { Link, useNavigate } from "react-router-dom";
+import { json, Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useAppContext } from "../../providers/context/app-context";
 import Textbox from "../../Component/specific/dashboard-side-nav/Textbox";
+import { toast } from "sonner";
 // import { useState } from "react";
 
 export default function Login() {
@@ -29,14 +30,19 @@ export default function Login() {
       });
 
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        toast.error("Can not Login Invalid Email or Password...");
+        throw new Error("Network response was not ok")
       }
-      const data = await response.json();
 
-      localStorage.setItem("token", data.token);
+      if (response.ok) {
+        const data = await response.json();
+        localStorage.setItem("token", data.token);
+        setCurrentUser(data.user);
+        toast.success("Login successful! Redirecting to Dashboard...");
+        navigate("/dashboard");
+      }
 
-      setCurrentUser(data.user);
-      navigate("/dashboard");
+
     } catch (error) {
       console.error("Error logging in:", error);
     }

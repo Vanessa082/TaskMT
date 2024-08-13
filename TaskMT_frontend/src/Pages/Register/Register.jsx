@@ -3,12 +3,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "sonner"; // Import Sonner's toast
 
 export default function Register() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState({}); 
+  const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
   const handleInputChanged = (e) => {
@@ -21,7 +22,7 @@ export default function Register() {
   const validateForm = () => {
     const newErrors = {};
 
-    if (!username.trim())(newErrors.username = "username is required");
+    if (!username.trim()) newErrors.username = "Username is required";
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!email) {
       newErrors.email = "Email is required";
@@ -29,7 +30,6 @@ export default function Register() {
       newErrors.email = "Invalid email format";
     }
 
-    // Password validation
     if (!password) {
       newErrors.password = "Password is required";
     } else if (password.length < 8) {
@@ -59,30 +59,32 @@ export default function Register() {
           password,
         }),
       });
-  
-      const contentType = response.headers.get("content-type");
-      if (contentType && contentType.includes("application/json")) {
+
+      if (response.ok) {
         const data = await response.json();
-        if (response.ok) {
-          navigate("/login");
-        } else {
-          console.error("Registration failed:", data.message);
-        }
+        localStorage.setItem("token", data.token);
+        toast.success("Registration successful! Redirecting to login...");
+        navigate("/login");
+      } else if (response.status === 409) {
+        setErrors({ email: "Email already exists. Please log in." });
+        toast.error("Email already exists. Please log in.");
       } else {
-        const text = await response.text(); // If not JSON, fetch the response as text
-        console.error("Registration failed: Non-JSON response received", text);
+        const data = await response.json();
+        console.error("Registration failed:", data.message);
+        toast.error(`Registration failed: ${data.message}`);
       }
     } catch (error) {
       console.error("Error:", error);
+      toast.error("An error occurred during registration. Please try again later.");
     }
   };
-  
+
   return (
     <div className="flex flex-col justify-center items-center min-h-screen bg-[#f3f4f6] p-4 lg:flex-row">
       <div className="w-full md:w-auto flex ga-40 flex-col md:flex-row items-center">
         <div className="h-full w-full lg:w-2/3 flex flex-col items-center justify-center">
           <div className="w-full md:max-w-lg 2xl:max-w-3xl flex flex-col items-center gap-5 md:gap-y-10 2xl:-mt-20">
-            <span className="flex gap-1  py-3 border rounded-full text-sm md:text-base bordergray-300 text-gray-600 text-nowrap">
+            <span className="flex gap-1 py-3 border rounded-full text-sm md:text-base border-gray-300 text-gray-600 text-nowrap">
               Prioritize your tasks; schedule them accordingly.
             </span>
 
@@ -107,7 +109,7 @@ export default function Register() {
             <p className="text-blue-600 text-3xl font-bold text-center">
               Welcome!
             </p>
-            <p className="text-center text-base text-gray-700 ">
+            <p className="text-center text-base text-gray-700">
               Register and Get Started.
             </p>
           </div>
@@ -195,11 +197,11 @@ export default function Register() {
           </button>
 
           <div className=" mt-6 text-nowrap">
-          <h4 className="text-primary inline"> Have An Account?</h4>
-          <Link to="/login" className="font-semibold text-center ml-1 ">
-            Login
-          </Link>
-        </div>
+            <h4 className="text-primary inline"> Have An Account?</h4>
+            <Link to="/login" className="font-semibold text-center ml-1">
+              Login
+            </Link>
+          </div>
         </form>
       </div>
     </div>
