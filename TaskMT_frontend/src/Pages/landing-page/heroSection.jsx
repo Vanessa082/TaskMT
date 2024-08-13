@@ -18,7 +18,7 @@ export default function Herosection() {
         <p className="text-secondary-color font-bold text-lg text-nowrap pb-8">
           Create track, and manage your daily tasks
         </p>
-        <Link to="registration">
+        <Link to="login">
           <button className="bg-primary-color text-text-color-1 px-16 py-2 rounded-md hover:animate-bounce">
             Get Started
           </button>

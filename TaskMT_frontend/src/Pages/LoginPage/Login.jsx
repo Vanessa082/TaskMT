@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useAppContext } from "../../providers/context/app-context";
 import Textbox from "../../Component/specific/dashboard-side-nav/Textbox";
-import { useState } from "react";
+// import { useState } from "react";
 
 export default function Login() {
   const {
@@ -107,7 +107,7 @@ export default function Login() {
           >
             Submit
           </button>
-          <div className=" mt-6 text-nowrap text-center">
+          <div className=" mt-6 text-nowrap">
             <h4 className="text-primary inline">Do Not Have An Account?</h4>
             <Link
               to="/registration"
