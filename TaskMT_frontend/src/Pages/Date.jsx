@@ -1,9 +1,10 @@
-import React from 'react'
+import React from 'react';  
 
-const Date = () => {
-  return (
-    <div>Date</div>
-  )
-}
+const TodayDate = () => {  
+  const today = new Date(); // Gets the current date  
+  const formattedDate = today.toLocaleDateString(); // Formats the date  
 
-export default Date
+  return <div>{formattedDate}</div>;  
+};  
+
+export default TodayDate;

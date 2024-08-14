@@ -4,6 +4,7 @@ body {
     justify-content: center;
     flex-direction: column;
     background-color: #d9dfee;
+    overflow: scroll;
 }
 
 .menubar {
