@@ -10,6 +10,7 @@ import AppWrapper from "./Component/Common/app-wrapper";
 import ManageProjects from "./Pages/dashboard/projects/manage-project";
 import { ModalContextProvider } from "./providers/context/modal-context";
 import { DashboardContextProvider } from "./providers/context/dashboard-context";
+import Trash from "./Pages/dashboard/Trash/Trash";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
         <Route index element={<DashboardPage />} />
 
         <Route path="projects" element={<ManageProjects />} />
+        <Route path="trashed" element={<Trash />} />
       </Route>
     </Routes>
   );

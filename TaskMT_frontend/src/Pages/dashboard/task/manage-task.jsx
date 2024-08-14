@@ -1,5 +1,5 @@
 // import { useEffect, useState } from "react";
-// import { useGetRequest } from "../../../providers/hooks/use-fetch";
+// import { useQueryRequest } from "../../../providers/hooks/use-fetch";
 // import TaskCreationModal from "./TaskCreationModal"; // Import your Task Creation Modal component
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faCheckCircle, faTrash, faPen, faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
@@ -10,7 +10,7 @@
 //   const [tasks, setTasks] = useState([]);
 //   const [isModalOpen, setIsModalOpen] = useState(false);
 //   const [selectedTask, setSelectedTask] = useState(null);
-//   const { data, error, loading } = useGetRequest("/tasks");
+//   const { data, error, loading } = useQueryRequest("/tasks");
 
 //   useEffect(() => {
 //     if (data) setTasks(data);

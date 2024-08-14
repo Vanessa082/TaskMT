@@ -33,14 +33,15 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <nav className="w-full px-4 py-4 flex items-center justify-between bg-custom-gradient text-primary-color relative">
+    <nav className="w-full px-4 py-4 flex items-center justify-between bg-custom-gradient text-primary-color lg:text-text-color-1 relative">
+      {/* Logo */}
       <Link to="/">
         <img src={logo} alt="TaskMT logo" className="h-10" />
       </Link>
 
       {/* Hamburger Icon for Mobile */}
       <div
-        className="md:hidden text- z-20"
+        className="md:hidden text-primary-color z-20"
         onClick={() => setMenuOpen(!menuOpen)}
       >
         <FontAwesomeIcon icon={menuOpen ? faTimes : faBars} size="2x" />
@@ -58,7 +59,7 @@ export default function Navbar() {
       <div
         className={`fixed top-0 right-0 w-2/3 h-full bg-white shadow-lg transform transition-transform duration-300 z-10 md:static md:w-auto md:bg-transparent md:shadow-none md:flex items-center gap-4 ${
           menuOpen ? "translate-x-0" : "translate-x-full"
-        }`}
+        } md:translate-x-0`}
       >
         <ul className="flex flex-col md:flex-row gap-6 p-6 md:p-0">
           {NavItems.map(({ text, href }) => (

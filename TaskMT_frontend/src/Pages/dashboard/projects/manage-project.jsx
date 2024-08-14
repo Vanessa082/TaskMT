@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-// import { useGetRequest } from "../../../providers/hooks/use-fetch";
+import { useQueryRequest } from "../../../providers/hooks/use-query-request";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import SixDotEllipsis from "../../../assets/custom-icons/six-dot-elipsis";
@@ -11,8 +11,8 @@ import { useDashboardContext } from "../../../providers/context/dashboard-contex
 export default function ManageProjects() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const {projects, setProjects} = useDashboardContext
-  // const { data, error, loading } = useGetRequest("/projects");
+  const {projects, setProjects} = useDashboardContext()
+  const { data, error, loading } = useQueryRequest("/projects");
 
   useEffect(() => {
     if (data) setProjects(data);
