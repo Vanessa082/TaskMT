@@ -2,17 +2,17 @@ import { useEffect, useState } from "react";
 import { useQueryRequest } from "../../../providers/hooks/use-query-request";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
-import SixDotEllipsis from "../../../assets/custom-icons/six-dot-elipsis";
-import ProjectDetailsModal from "./project-details-modal";
-import { API_BASE_URL } from "../../../constants/constants";
 import { toast } from "sonner";
 import { useDashboardContext } from "../../../providers/context/dashboard-context";
+import ProjectDetailsModal from "./project-details-modal";
+import { API_BASE_URL } from "../../../constants/constants";
+import clsx from "clsx";
 
 export default function ManageProjects() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const {projects, setProjects} = useDashboardContext()
-  const { data, error, loading } = useQueryRequest("/projects");
+  const { projects, setProjects } = useDashboardContext();
+  const { data, error, loading, refetch } = useQueryRequest("/projects");
 
   useEffect(() => {
     if (data) setProjects(data);
@@ -30,8 +30,6 @@ export default function ManageProjects() {
 
   const updateProjectState = (updatedProject) => {
     setProjects((prevProjects) =>
-      // checks if there is any project in the prevProjects array that has the same id as updatedProject.
-      // If the condition prevProjects.some(project => project.id === updatedProject.id) is true (i.e., there is a project with the same id in prevProjects), the code after the ? will be executed
       prevProjects.some((project) => project.project_id === updatedProject.project_id)
         ? prevProjects.map((project) =>
             project.project_id === updatedProject.project_id ? updatedProject : project
@@ -54,13 +52,9 @@ export default function ManageProjects() {
             });
 
             if (response.ok) {
-              setProjects((prevProjects) => {
-                const data = prevProjects.filter(
-                  (project) => project.project_id !== id
-                );
-                return data;
-              });
-
+              setProjects((prevProjects) =>
+                prevProjects.filter((project) => project.project_id !== id)
+              );
               toast("Successfully deleted");
             }
           } catch (error) {
@@ -71,41 +65,75 @@ export default function ManageProjects() {
     });
   };
 
+  const TableHeader = () => (
+    <thead className="border-b border-gray-300">
+      <tr className="text-black text-left">
+        <th className="py-2">Project Name</th>
+        <th className="py-2">Status</th>
+        <th className="py-2">Actions</th>
+      </tr>
+    </thead>
+  );
+
+  const TableRow = ({ project }) => (
+    <tr className="border-b border-gray-200 text-gray-600 hover:bg-gray-400/10">
+      <td className="py-2">
+        <div className="flex items-center gap-2">
+          <span className="line-clamp-2 text-base text-black">
+            {project.name}
+          </span>
+        </div>
+      </td>
+
+      <td className="py-2 capitalize text-center">
+        <span
+          className={clsx(
+            "text-lg",
+            project.status === "completed" ? "text-green-500" : "text-yellow-500"
+          )}
+        >
+          {project.status.charAt(0).toUpperCase() + project.status.slice(1)}
+        </span>
+      </td>
+
+      <td className="py-2 flex gap-2 justify-end">
+        <FontAwesomeIcon
+          icon={faPen}
+          className="text-primary-color cursor-pointer"
+          onClick={() => openModal(project)}
+        />
+        <FontAwesomeIcon icon={faEye} className="cursor-pointer" />
+        <FontAwesomeIcon
+          icon={faTrash}
+          className="text-red-500 cursor-pointer"
+          onClick={() => handleDelete(project.project_id)}
+        />
+      </td>
+    </tr>
+  );
+
   return (
-    <div className="flex flex-col items-center justify-between gap-8 font-sans px-10">
-      <h2 className="text-2xl">Project Overview</h2>
-      {projects.length === 0 ? (
-        <p>No projects available. Please add some projects.</p>
-      ) : ( 
-        projects.map((project) => (
-          <div
-            key={project.project_id}
-            className="text-xl flex items-center bg-text-color-1 py-4 pl-2 border border-black/15 mb-5 rounded-lg transition-all duration-300 shadow-[2px_2px_3px_rgba(0,0,0,0.4)] w-[40%] gap-60"
-          >
-            <div className="flex flex-col gap-2">
-              <h2 className="flex justify-between items-start gap-6">
-                <SixDotEllipsis /> {project.name}
-              </h2>
-              <span className={`status ${project.status === "completed" ? "text-green-500" : "text-yellow-500"}`}>
-                {project.status.charAt(0).toUpperCase() + project.status.slice(1)}
-              </span>
-            </div>
-            <div className="flex justify-between items-center gap-20">
-              <FontAwesomeIcon
-                icon={faPen}
-                className="text-primary-color"
-                onClick={() => openModal(project)}
-              />
-              <FontAwesomeIcon icon={faEye} />
-              <FontAwesomeIcon
-                icon={faTrash}
-                className="text-red-500"
-                onClick={() => handleDelete(project.project_id)}
-              />
-            </div>
+    <div className="w-full md:px-1 px-0 mb-6">
+      <div className="flex items-center justify-between mb-8">
+        <h2 className="text-2xl">Project Overview</h2>
+      </div>
+
+      <div className="bg-white px-2 md:px-6 py-4 shadow-md rounded">
+        {projects.length === 0 ? (
+          <p>No projects available. Please add some projects.</p>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full mb-5">
+              <TableHeader />
+              <tbody>
+                {projects.map((project) => (
+                  <TableRow key={project.project_id} project={project} />
+                ))}
+              </tbody>
+            </table>
           </div>
-        ))
-      )}
+        )}
+      </div>
 
       {isModalOpen && (
         <ProjectDetailsModal
