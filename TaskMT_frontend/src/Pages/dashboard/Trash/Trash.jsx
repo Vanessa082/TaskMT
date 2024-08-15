@@ -22,7 +22,7 @@ const ICONS = {
   low: <MdKeyboardArrowDown />,
 };
 
-const Trash = () => {
+export default function Trash  () {
   const [openDialog, setOpenDialog] = useState(false);
   const [msg, setMsg] = useState(null);
   const [type, setType] = useState("delete");
@@ -153,5 +153,3 @@ const Trash = () => {
     </>
   );
 };
-
-export default Trash;

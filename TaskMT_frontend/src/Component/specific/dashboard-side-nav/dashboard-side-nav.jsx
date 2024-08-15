@@ -1,14 +1,13 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faBars,
   faCalendarAlt,
   faCog,
   faHome,
   faTasks,
+  faThLarge,
   faTimes,
   faTrashAlt,
-  faUsers,
 } from "@fortawesome/free-solid-svg-icons";
 import clsx from "clsx";
 import { Link } from "react-router-dom";
@@ -16,18 +15,23 @@ import ProjectNavComponent from "./project_nav-components"
 
 const sidebarContent = [
   {
+    text: "Dashboard",
+    to: "/dashboard",
+    icon: faThLarge,
+  },
+  {
     text: "Home",
     to: "/",
     icon: faHome,
   },
   {
     text: "Calendar",
-    to: "/dashboard/calendar",
+    to: "/calendar",
     icon: faCalendarAlt,
   },
   {
     text: "Tasks",
-    to: "/dashboard/tasks",
+    to: "/tasks",
     icon: faTasks,
   },
 ];

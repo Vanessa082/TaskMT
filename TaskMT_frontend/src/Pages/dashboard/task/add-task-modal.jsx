@@ -26,12 +26,6 @@ export default function TaskCreationModal() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (!task.title || !task.description || !task.deadline || !task.project_id) {
-      notify("Please fill out all required fields.", "error");
-      return;
-    }
-
     try {
       setLoading(true);
 
@@ -52,7 +46,7 @@ export default function TaskCreationModal() {
       }
 
       const result = await response.json();
-      // notify(`Task ${isEditing ? "updated" : "created"} successfully.`, "success");
+      toast.success(`Task ${isEditing ? "updated" : "created"} successfully.`, "success");
       closeModal();
       // Update the project context or refetch tasks here if needed
     } catch (error) {

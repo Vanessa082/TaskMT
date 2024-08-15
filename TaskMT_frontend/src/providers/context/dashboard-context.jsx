@@ -4,7 +4,7 @@ import { fetchProjects } from "./api";
 const DashboardContext = createContext(null);
 
 function DashboardContextProvider({ children }) {
-  const [projects, setProjects] = useState(null);
+  const [projects, setProjects] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
 
