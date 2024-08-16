@@ -33,10 +33,10 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <nav className="w-full px-4 py-4 flex items-center justify-between bg-custom-gradient text-primary-color lg:text-text-color-1 relative">
+    <nav className="w-full px-4 py-4 flex items-center justify-between bg-text-color-1 text-primary-color lg:text-primary-color relative border-b-4">
       {/* Logo */}
       <Link to="/">
-        <img src={logo} alt="TaskMT logo" className="h-10" />
+        <img src={logo} alt="TaskMT logo" className="h-12 w-20"  />
       </Link>
 
       {/* Hamburger Icon for Mobile */}
@@ -74,7 +74,7 @@ export default function Navbar() {
         {/* User Action */}
         {currentUser ? (
           <Link to="/dashboard" className="mt-4 md:mt-0">
-            <div className="user-action-icon flex flex-col items-center text-text-color-1 cursor-pointer">
+            <div className="user-action-icon flex flex-col items-center text-primary-color cursor-pointer">
               <FontAwesomeIcon icon={faUserCircle} size="2x" />
               <span>{currentUser.username}</span>
             </div>

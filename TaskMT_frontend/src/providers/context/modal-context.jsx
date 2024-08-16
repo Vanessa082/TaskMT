@@ -2,7 +2,7 @@ import { createContext, useContext, useState } from "react";
 import TaskCreationModal from "../../Pages/dashboard/task/add-task-modal";
 import ProjectDetailsModal from "../../Pages/dashboard/projects/project-details-modal";
 
-const ModalContext = createContext(null);
+const ModalContext = createContext([]);
 
 function ModalContextProvider ({ children })  {
   const [task, setTask] = useState({
