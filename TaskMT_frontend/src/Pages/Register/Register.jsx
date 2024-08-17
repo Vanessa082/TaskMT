@@ -80,129 +80,129 @@ export default function Register() {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center min-h-screen bg-[#f3f4f6] p-4 lg:flex-row">
-      <div className="w-full md:w-auto flex ga-40 flex-col md:flex-row items-center">
-        <div className="h-full w-full lg:w-2/3 flex flex-col items-center justify-center">
-          <div className="w-full md:max-w-lg 2xl:max-w-3xl flex flex-col items-center gap-5 md:gap-y-10 2xl:-mt-20">
-            <span className="flex gap-1 py-3 border rounded-full text-sm md:text-base border-gray-300 text-gray-600 text-nowrap">
-              Prioritize your tasks; schedule them accordingly.
-            </span>
-
-            <p className="flex flex-col gap-0 md:gap-4 text-4xl md:text-6xl 2xl:text-7xl font-black text-center text-primary-color">
-              <span>Personal</span>
-              <span>Task Manager</span>
-            </p>
-
-            <div className="cell">
-              <div className="circle rotate-in-up-left"></div>
-            </div>
+    <div className="flex flex-col min-h-screen bg-gray-100 p-4 lg:p-8">
+      {/* Main Content Wrapper */}
+      <span className="py-2 border text-sm text-center text-gray-600">
+        Prioritize your tasks; schedule them accordingly.
+      </span>
+      <div className="flex flex-col lg:flex-row justify-center items-center flex-1 max-w-5xl mx-auto">
+        {/* Left Side */}
+        <div className="hidden lg:flex flex-1 flex-col items-center justify-center lg:items-start lg:justify-center gap-5 text-center lg:text-left">
+          <p className="text-4xl md:text-5xl font-bold text-primary-color leading-tight">
+            Personal Task Manager
+          </p>
+          <div className="cell">
+            <div className="circle rotate-in-up-left"></div>
           </div>
         </div>
-      </div>
-
-      <div className="w-full md:w-1/3 p-4 md:p-1 flex flex-col justify-center items-center">
-        <form
-          className="form-container w-full md:w-[400px] flex flex-col gap-y-8 bg-white px-10 pt-14 pb-14"
-          onSubmit={handleSubmit}
-        >
-          <div className="">
-            <p className="text-blue-600 text-3xl font-bold text-center">
-              Welcome!
-            </p>
-            <p className="text-center text-base text-gray-700">
-              Register and Get Started.
-            </p>
-          </div>
-
-          <div className="mb-4">
-            <label htmlFor="username" className="block text-secondary mb-2">
-              Username
-            </label>
-            <div className="relative">
-              <input
-                type="text"
-                id="username"
-                placeholder="Enter username"
-                value={username}
-                onChange={handleInputChanged}
-                className={`w-full px-4 py-2 border border-gray-300 rounded-md focus:border-secondary focus:ring-secondary ${
-                  errors.username ? "border-red-500" : ""
-                }`}
-              />
-              <FontAwesomeIcon
-                icon={faUser}
-                className="absolute right-3 top-3 text-primary"
-              />
-            </div>
-            {errors.username && (
-              <p className="text-red-500 text-sm mt-1">{errors.username}</p>
-            )}
-          </div>
-
-          <div className="mb-4">
-            <label htmlFor="email" className="block text-secondary mb-2">
-              Email
-            </label>
-            <div className="relative">
-              <input
-                type="email"
-                id="email"
-                placeholder="Enter email"
-                value={email}
-                onChange={handleInputChanged}
-                className={`w-full px-4 py-2 border border-gray-300 rounded-md focus:border-secondary focus:ring-secondary ${
-                  errors.email ? "border-red-500" : ""
-                }`}
-              />
-              <FontAwesomeIcon
-                icon={faEnvelope}
-                className="absolute right-3 top-3 text-primary"
-              />
-            </div>
-            {errors.email && (
-              <p className="text-red-500 text-sm mt-1">{errors.email}</p>
-            )}
-          </div>
-
-          <div className="mb-4">
-            <label htmlFor="password" className="block text-secondary mb-2">
-              Password
-            </label>
-            <div className="relative">
-              <input
-                type="password"
-                id="password"
-                placeholder="Enter password"
-                value={password}
-                onChange={handleInputChanged}
-                className={`w-full px-4 py-2 border border-gray-300 rounded-md focus:border-secondary focus:ring-secondary ${
-                  errors.password ? "border-red-500" : ""
-                }`}
-              />
-              <FontAwesomeIcon
-                icon={faLock}
-                className="absolute right-3 top-3 text-primary"
-              />
-            </div>
-            {errors.password && (
-              <p className="text-red-500 text-sm mt-1">{errors.password}</p>
-            )}
-          </div>
-
-          <button
-            type="submit"
-            className="w-full h-10 bg-blue-700 text-white rounded-full"
+        {/* Right Side - Form */}
+        <div className="flex-1 w-full max-w-md flex items-center justify-center">
+          <form
+            className="bg-white p-8 rounded-lg shadow-lg w-full flex flex-col gap-6"
+            onSubmit={handleSubmit}
           >
-            Register
-          </button>
+            <div>
+              <p className="text-primary-color text-3xl font-bold text-center">
+                Welcome!
+              </p>
+              <p className="text-center text-base text-gray-700">
+                Register and Get Started.
+              </p>
+            </div>
 
-          <div className=" mt-6 text-nowrap">
-            <h4 className="text-primary inline"> Have An Account?</h4>
-            <Link to="/login" className="font-semibold text-center ml-1">
-              Login
-            </Link>
-          </div>
-        </form>
+            <div className="mb-4">
+              <label htmlFor="username" className="block text-primary-color mb-2">
+                Username
+              </label>
+              <div className="relative">
+                <input
+                  type="text"
+                  id="username"
+                  placeholder="Enter username"
+                  value={username}
+                  onChange={handleInputChanged}
+                  className={`w-full px-4 py-2 border border-gray-300 rounded-full focus:border-primary-color focus:ring-primary-color ${
+                    errors.username ? "border-red-500" : ""
+                  }`}
+                />
+                <FontAwesomeIcon
+                  icon={faUser}
+                  className="absolute right-3 top-3 text-primary-color"
+                />
+              </div>
+              {errors.username && (
+                <p className="text-red-500 text-sm mt-1">{errors.username}</p>
+              )}
+            </div>
+
+            <div className="mb-4">
+              <label htmlFor="email" className="block text-primary-color mb-2">
+                Email Address
+              </label>
+              <div className="relative">
+                <input
+                  type="email"
+                  id="email"
+                  placeholder="Enter email"
+                  value={email}
+                  onChange={handleInputChanged}
+                  className={`w-full px-4 py-2 border border-gray-300 rounded-full focus:border-primary-color focus:ring-primary-color ${
+                    errors.email ? "border-red-500" : ""
+                  }`}
+                />
+                <FontAwesomeIcon
+                  icon={faEnvelope}
+                  className="absolute right-3 top-3 text-primary-color"
+                />
+              </div>
+              {errors.email && (
+                <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+              )}
+            </div>
+
+            <div className="mb-4">
+              <label htmlFor="password" className="block text-primary-color mb-2">
+                Password
+              </label>
+              <div className="relative">
+                <input
+                  type="password"
+                  id="password"
+                  placeholder="Enter password"
+                  value={password}
+                  onChange={handleInputChanged}
+                  className={`w-full px-4 py-2 border border-gray-300 rounded-full focus:border-primary-color focus:ring-primary-color ${
+                    errors.password ? "border-red-500" : ""
+                  }`}
+                />
+                <FontAwesomeIcon
+                  icon={faLock}
+                  className="absolute right-3 top-3 text-primary-color"
+                />
+              </div>
+              {errors.password && (
+                <p className="text-red-500 text-sm mt-1">{errors.password}</p>
+              )}
+            </div>
+
+            <button
+              type="submit"
+              className="w-full h-12 bg-primary-color text-white rounded-full hover:bg-secondary-color transition-colors duration-300"
+            >
+              Register
+            </button>
+
+            <div className="text-center">
+              <h4 className="text-primary-color inline">Have An Account?</h4>
+              <Link
+                to="/login"
+                className="font-semibold text-primary-color ml-1"
+              >
+                Login
+              </Link>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );

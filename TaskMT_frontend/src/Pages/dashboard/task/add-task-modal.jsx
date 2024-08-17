@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { API_BASE_URL } from "../../../constants/constants";
 import { useModalContext } from "../../../providers/context/modal-context";
 import { useDashboardContext } from "../../../providers/context/dashboard-context";
-// import { useNotificationContext } from "../../../providers/context/notification-context"; // Assuming you have a notification context
 
 export default function TaskCreationModal() {
   const [isEditing, setIsEditing] = useState(false);
@@ -10,7 +9,6 @@ export default function TaskCreationModal() {
 
   const { task, setTask, setTaskModalOpen } = useModalContext();
   const { projects  } = useDashboardContext();
-  // const { notify } = useNotificationContext(); // Assuming you have a notification context
 
   const updateTaskState = (key, value) => {
     setTask((prev) => ({
@@ -40,12 +38,14 @@ export default function TaskCreationModal() {
         },
         body: JSON.stringify(task),
       });
+      console.log("Response status:", response.status);
 
       if (!response.ok) {
-        throw new Error("Failed to submit the task");
+        throw new Error("Failed to submit the task,");
       }
 
       const result = await response.json();
+      console.log("Result:", result);
       toast.success(`Task ${isEditing ? "updated" : "created"} successfully.`, "success");
       closeModal();
       // Update the project context or refetch tasks here if needed
@@ -126,7 +126,6 @@ export default function TaskCreationModal() {
               value={task?.project_id || ""}
               onChange={(e) => updateTaskState("project_id", e.target.value)}
               className="border border-gray-300 p-2 rounded mt-1"
-              required
             >
               <option value="">Select a project</option>
               {projects?.map((project) => (

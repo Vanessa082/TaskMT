@@ -7,7 +7,7 @@ import { API_BASE_URL } from "../../constants/constants";
 */
 function useQueryRequest(pathname) {
   const [loading, setLoading] = useState(true);
-  const [data, setData] = useState(null);
+  const [data, setData] = useState([]);
   const [error, setError] = useState("");
   const [reload, setReload] = useState(false);
 

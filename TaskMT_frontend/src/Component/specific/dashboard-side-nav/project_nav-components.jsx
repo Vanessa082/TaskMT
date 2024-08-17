@@ -29,7 +29,7 @@ export default function ProjectNavComponents() {
 
   return (
     <>
-      <div className="cursor-pointer px-3 py-2 flex  text-lg text-gray-800 hover:bg-blue-100 rounded-full justify-between items-center gap-14 border-stone-900 font-bold">
+      <div className="cursor-pointer px-3 py-2 flex  text-lg text-gray-800 hover:bg-primary-color hover:text-text-color-1 rounded-full justify-between items-center gap-14 border-stone-900 font-bold">
         Projects
         <FontAwesomeIcon
           icon={isProjectsvisible ? faChevronUp : faChevronDown}
@@ -38,16 +38,18 @@ export default function ProjectNavComponents() {
       </div>
 
       {isProjectsvisible && (
-        <>
+        <div className="mt-2 pl-4 space-y-2">
           <ProjectList />
           <Link to={"/dashboard/projects"}>
-            <div>Manage Projects</div>
+            <div className="">
+              Manage Projects
+            </div>
           </Link>
           <div onClick={handleOpenModal} className="cursor-pointer">
             <FontAwesomeIcon icon={faAdd} />
             Add Projects
           </div>
-        </>
+        </div>
       )}
 
       {/* {isModalOpen && <ProjectDetailsModal onClose={closeModal} />} */}

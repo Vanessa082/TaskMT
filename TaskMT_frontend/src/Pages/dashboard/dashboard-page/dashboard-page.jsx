@@ -107,14 +107,14 @@ const Dashboard = () => {
       label: "TOTAL TASK",
       total:  0,
       icon: <FaNewspaper />,
-      bg: "bg-[#1d4ed8]",
+      bg: "bg-text-color-4",
     },
     {
       _id: "2",
       label: "COMPLTED TASK",
       total:  0,
       icon: <MdAdminPanelSettings />,
-      bg: "bg-[#0f766e]",
+      bg: "bg-secondary-color",
     },
     {
       _id: "3",
@@ -134,8 +134,8 @@ const Dashboard = () => {
 
   const Card = ({ label, count, bg, icon }) => {
     return (
-      <div className='w-full h-32 bg-white p-5 shadow-md rounded-md flex items-center justify-between'>
-        <div className='h-full flex flex-1 flex-col justify-between'>
+      <div className='w-full bg-white  p-5 shadow-md rounded-md flex items-center justify-between'>
+        <div className=' flex flex-1 flex-col justify-between'>
           <p className='text-base text-gray-600'>{label}</p>
           <span className='text-2xl font-semibold'>{count}</span>
           <span className='text-sm text-gray-400'>{"110 last month"}</span>
@@ -153,7 +153,7 @@ const Dashboard = () => {
     );
   };
   return (
-    <div className='h-full py-4'>
+    <div className=' py-4'>
       <div className='grid grid-cols-1 md:grid-cols-4 gap-5'>
         {stats.map(({ icon, bg, label, total }, index) => (
           <Card key={index} icon={icon} bg={bg} label={label} count={total} />

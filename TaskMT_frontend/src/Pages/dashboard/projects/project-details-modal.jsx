@@ -101,7 +101,7 @@ export default function ProjectDetailsModal() {
 
           <label>Status</label>
           <select
-            value={project?.status || "active"}
+            value={project?.status || ""}
             onChange={(e) => updateProjectState("status", e.target.value)}
             required
             className="border border-gray-300 p-2 rounded mt-1"
