@@ -12,19 +12,19 @@ const NavItems = [
   },
   {
     text: "Tblog",
-    href: "#",
+    href: "/blog",
   },
   {
     text: "About",
-    href: "#",
+    href: "/about",
   },
   {
     text: "Subscribe",
-    href: "#",
+    href: "/subscribe",
   },
   {
     text: "Testimonial",
-    href: "#",
+    href: "/testimonials",
   },
 ];
 
@@ -33,16 +33,17 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <nav className="w-full px-4 py-4 flex items-center justify-between bg-text-color-1 text-primary-color lg:text-primary-color relative border-b-4">
+    <nav className="w-full px-4 py-4 flex items-center justify-between bg-white text-primary-color shadow-md sticky top-0 z-50">
       {/* Logo */}
       <Link to="/">
-        <img src={logo} alt="TaskMT logo" className="h-12 w-20"  />
+        <img src={logo} alt="TaskMT logo" className="h-12 w-20" />
       </Link>
 
       {/* Hamburger Icon for Mobile */}
       <div
         className="md:hidden text-primary-color z-20"
         onClick={() => setMenuOpen(!menuOpen)}
+        aria-label="Toggle menu"
       >
         <FontAwesomeIcon icon={menuOpen ? faTimes : faBars} size="2x" />
       </div>
@@ -53,6 +54,7 @@ export default function Navbar() {
           menuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
         } md:hidden`}
         onClick={() => setMenuOpen(false)}
+        aria-hidden="true"
       ></div>
 
       {/* Nav Items */}
@@ -64,7 +66,7 @@ export default function Navbar() {
         <ul className="flex flex-col md:flex-row gap-6 p-6 md:p-0">
           {NavItems.map(({ text, href }) => (
             <li key={text}>
-              <a href={href} className="hover:text-primary">
+              <a href={href} className="hover:text-secondary-color transition-colors duration-200">
                 {text}
               </a>
             </li>
@@ -81,7 +83,7 @@ export default function Navbar() {
           </Link>
         ) : (
           <Link to="/login" className="mt-4 md:mt-0">
-            <div className="user-action-icon flex flex-col items-center text-text-color-1 cursor-pointer">
+            <div className="user-action-icon flex flex-col items-center text-primary-color cursor-pointer">
               <FontAwesomeIcon icon={faUserCircle} size="2x" />
               <span>Login</span>
             </div>

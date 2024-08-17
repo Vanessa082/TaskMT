@@ -7,32 +7,32 @@ import { useDashboardContext } from "../../../providers/context/dashboard-contex
 import ProjectDetailsModal from "./project-details-modal";
 import { API_BASE_URL } from "../../../constants/constants";
 import clsx from "clsx";
+import { useModalContext } from "../../../providers/context/modal-context";
 
 export default function ManageProjects() {
-  const [selectedProject, setSelectedProject] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const { projects, setProjects } = useDashboardContext();
   const { data, error, loading, refetch } = useQueryRequest("/projects");
+
+  const { setProjectModalOpen, setProject } = useModalContext();
 
   useEffect(() => {
     if (data) setProjects(data);
   }, [data]);
 
   const openModal = (project) => {
-    setSelectedProject(project);
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setSelectedProject(null);
-    setIsModalOpen(false);
+    setProject(project);
+    setProjectModalOpen(true);
   };
 
   const updateProjectState = (updatedProject) => {
     setProjects((prevProjects) =>
-      prevProjects.some((project) => project.project_id === updatedProject.project_id)
+      prevProjects.some(
+        (project) => project.project_id === updatedProject.project_id
+      )
         ? prevProjects.map((project) =>
-            project.project_id === updatedProject.project_id ? updatedProject : project
+            project.project_id === updatedProject.project_id
+              ? updatedProject
+              : project
           )
         : [...prevProjects, updatedProject]
     );
@@ -89,7 +89,9 @@ export default function ManageProjects() {
         <span
           className={clsx(
             "text-lg",
-            project.status === "completed" ? "text-green-500" : "text-yellow-500"
+            project.status === "completed"
+              ? "text-green-500"
+              : "text-yellow-500"
           )}
         >
           {project.status.charAt(0).toUpperCase() + project.status.slice(1)}
@@ -103,6 +105,7 @@ export default function ManageProjects() {
           onClick={() => openModal(project)}
         />
         <FontAwesomeIcon icon={faEye} className="cursor-pointer" />
+
         <FontAwesomeIcon
           icon={faTrash}
           className="text-red-500 cursor-pointer"
@@ -134,15 +137,6 @@ export default function ManageProjects() {
           </div>
         )}
       </div>
-
-      {isModalOpen && (
-        <ProjectDetailsModal
-          initialData={selectedProject}
-          onClose={closeModal}
-          updateProjectState={updateProjectState}
-          mode={selectedProject ? "edit" : "create"}
-        />
-      )}
     </div>
   );
 }

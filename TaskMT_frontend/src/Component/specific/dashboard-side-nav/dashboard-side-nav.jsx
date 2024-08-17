@@ -49,7 +49,7 @@ export default function DashboardSideNav({ isOpen, toggleSidebar }) {
         isOpen ? "translate-x-0" : "-translate-x-full"
       }`}
     >
-      <div className="flex justify-end pr-6 pl-4 py-4">
+      <div className="flex justify-end pr-6 pl-4 py-4 cursor-pointer">
         <div onClick={toggleSidebar} className="text-xl">
           <FontAwesomeIcon icon={faTimes} />
         </div>
@@ -64,7 +64,7 @@ export default function DashboardSideNav({ isOpen, toggleSidebar }) {
                 key={text}
                 to={to}
                 className={clsx(
-                  "w-full flex gap-2 px-3 py-2 rounded-full items-center text-gray-800 text-base hover:bg-blue-100"
+                  "w-full flex gap-2 px-3 py-2 rounded-full items-center text-gray-800 text-base hover:bg-primary-color hover:text-text-color-1"
                 )}
               >
                 <FontAwesomeIcon icon={icon} />
@@ -88,7 +88,7 @@ export default function DashboardSideNav({ isOpen, toggleSidebar }) {
           </Link>
         </div>
 
-        <div className="w-full px-3 py-2 flex gap-2 items-center cursor-pointer text-lg text-gray-800 hover:bg-blue-100 rounded-full">
+        <div className="w-full px-3 py-2 flex gap-2 items-center cursor-pointer text-lg text-gray-800 hover:bg-primary-color hover:text-text-color-1 rounded-full">
           <FontAwesomeIcon icon={faCog} />
           <span>Settings</span>
         </div>
