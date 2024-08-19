@@ -24,6 +24,11 @@ function ModalContextProvider({ children }) {
     status: "",
   });
 
+  /**
+   * callback to call when project modal is done executing
+  */
+  const [onProjectModalDone, setOnProjectModalDone] = useState(null);
+
   const [projectModalOpen, setProjectModalOpen] = useState(false);
 
   return (
@@ -40,6 +45,9 @@ function ModalContextProvider({ children }) {
 
         project,
         setProject,
+
+        onProjectModalDone,
+        setOnProjectModalDone,
       }}
     >
       {taskModalOpen && <TaskCreationModal />}

@@ -1,13 +1,19 @@
 import { useState, useEffect } from "react";
 import { API_BASE_URL } from "../../../constants/constants";
 import { useModalContext } from "../../../providers/context/modal-context";
-import { toast } from "sonner"; // Ensure you import the correct toast library
+import { toast } from "sonner";
 
 export default function ProjectDetailsModal() {
   const [isEditing, setIsEditing] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const { project, setProject, setProjectModalOpen } = useModalContext();
+  const {
+    project,
+    setProject,
+    setProjectModalOpen,
+    
+    onProjectModalDone,
+  } = useModalContext();
 
   const updateProjectState = (key, value) => {
     setProject((prev) => ({
@@ -16,7 +22,8 @@ export default function ProjectDetailsModal() {
     }));
   };
 
-  const closeModal = () => {
+  const closeModal = async () => {
+    if (onProjectModalDone) await onProjectModalDone();
     setProject(null);
     setProjectModalOpen(false);
   };
@@ -26,18 +33,25 @@ export default function ProjectDetailsModal() {
     try {
       setLoading(true);
 
-      const url = `${API_BASE_URL}/projects/${
-        isEditing ? project.project_id : ""
-      }`;
+      const url = `${API_BASE_URL}/projects/${isEditing ? project.project_id : ""}`;
       const method = isEditing ? "PUT" : "POST";
+      
+      const update = {
+        deadline: project.deadline,
+        description: project.description,
+        name: project.name,
+        status: project.status,
+      }
 
+      // console.log({ update });
+      
       const response = await fetch(url, {
         method,
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
-        body: JSON.stringify(project),
+        body: JSON.stringify(update),
       });
 
       if (!response.ok) {

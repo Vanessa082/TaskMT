@@ -13,7 +13,7 @@ export default function ManageProjects() {
   const { projects, setProjects } = useDashboardContext();
   const { data, error, loading, refetch } = useQueryRequest("/projects");
 
-  const { setProjectModalOpen, setProject } = useModalContext();
+  const { setProjectModalOpen, setProject, setOnProjectModalDone } = useModalContext();
 
   useEffect(() => {
     if (data) setProjects(data);
@@ -22,6 +22,9 @@ export default function ManageProjects() {
   const openModal = (project) => {
     setProject(project);
     setProjectModalOpen(true);
+    setOnProjectModalDone(()=> {
+      return refetch;
+    });
   };
 
   const updateProjectState = (updatedProject) => {
