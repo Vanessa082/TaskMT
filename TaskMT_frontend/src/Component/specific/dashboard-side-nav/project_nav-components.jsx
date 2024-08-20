@@ -6,14 +6,13 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import ProjectDetailsModal from "../../../Pages/dashboard/projects/project-details-modal";
 import ProjectList from "../../../Pages/dashboard/projects/project-list";
 import { useModalContext } from "../../../providers/context/modal-context";
 
 export default function ProjectNavComponents() {
   const [isProjectsvisible, setVisibleProjects] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const { setProjectModalOpen } = useModalContext();
+
+  const {projectModalOpen, setProjectModalOpen } = useModalContext();
 
   const toggleProjects = () => {
     setVisibleProjects(!isProjectsvisible);
@@ -22,10 +21,6 @@ export default function ProjectNavComponents() {
   const handleOpenModal = () => {
     setProjectModalOpen(true);
   };
-
-  // const closeModal = () => {
-  //   setIsModalOpen(false);
-  // };
 
   return (
     <>
@@ -52,7 +47,6 @@ export default function ProjectNavComponents() {
         </div>
       )}
 
-      {/* {isModalOpen && <ProjectDetailsModal onClose={closeModal} />} */}
     </>
   );
 }

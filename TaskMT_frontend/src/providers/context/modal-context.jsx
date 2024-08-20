@@ -6,10 +6,11 @@ const ModalContext = createContext([]);
 
 function ModalContextProvider({ children }) {
   const [task, setTask] = useState({
-    title: "",
+    name: "",
     description: "",
     priority: "",
     deadline: "",
+    status: "",
     project_id: "",
     time_estimate: "",
     is_recurring: "",
@@ -23,6 +24,11 @@ function ModalContextProvider({ children }) {
     description: "",
     status: "",
   });
+
+  /**
+   * callback to call when project modal is done executing
+  */
+  const [onProjectModalDone, setOnProjectModalDone] = useState(null);
 
   const [projectModalOpen, setProjectModalOpen] = useState(false);
 
@@ -40,6 +46,9 @@ function ModalContextProvider({ children }) {
 
         project,
         setProject,
+
+        onProjectModalDone,
+        setOnProjectModalDone,
       }}
     >
       {taskModalOpen && <TaskCreationModal />}

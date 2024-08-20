@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { API_BASE_URL } from "../../../constants/constants";
 import { useModalContext } from "../../../providers/context/modal-context";
 import { useDashboardContext } from "../../../providers/context/dashboard-context";
+import { toast } from "sonner";
 
 export default function TaskCreationModal() {
   const [isEditing, setIsEditing] = useState(false);
@@ -24,6 +25,7 @@ export default function TaskCreationModal() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("ttttttttt", task)
     try {
       setLoading(true);
 
@@ -34,15 +36,15 @@ export default function TaskCreationModal() {
         method,
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Authorization": `Bearer ${localStorage.getItem("token")}`,
         },
         body: JSON.stringify(task),
       });
       console.log("Response status:", response.status);
 
-      if (!response.ok) {
-        throw new Error("Failed to submit the task,");
-      }
+      // if (!response.ok) {
+      //   throw new Error("Failed to submit the task,");
+      // }
 
       const result = await response.json();
       console.log("Result:", result);
@@ -82,8 +84,8 @@ export default function TaskCreationModal() {
             Task Name
             <input
               type="text"
-              value={task?.title || ""}
-              onChange={(e) => updateTaskState("title", e.target.value)}
+              value={task?.name || ""}
+              onChange={(e) => updateTaskState("name", e.target.value)}
               required
               className="border border-gray-300 p-2 rounded mt-1"
             />
@@ -108,10 +110,12 @@ export default function TaskCreationModal() {
               required
             />
           </label>
+
+          <div className="flex">
           <label className="mt-2">
             Priority
             <select
-              value={task?.priority || "Low"}
+              value={task?.priority || ""}
               onChange={(e) => updateTaskState("priority", e.target.value)}
               className="border border-gray-300 p-2 rounded mt-1"
             >
@@ -120,6 +124,19 @@ export default function TaskCreationModal() {
               <option value="High">High</option>
             </select>
           </label>
+          <label className="mt-2">
+            Status
+            <select
+              value={task?.status || ""}
+              onChange={(e) => updateTaskState("status", e.target.value)}
+              className="border border-gray-300 p-2 rounded mt-1"
+            >
+              <option value="Pending">Pending</option>
+              <option value="Completed">Completed</option>
+        
+            </select>
+          </label>
+          </div>
           <label className="mt-2">
             Project
             <select

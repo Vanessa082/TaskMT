@@ -120,7 +120,7 @@ export default function ProjectPage({ match }) {
           <ul>
             {tasks.map(task => (
               <li key={task.id} className="flex justify-between items-center p-2 border-b">
-                <span>{task.title}</span>
+                <span>{task.name}</span>
                 <div className="flex gap-2">
                   <FontAwesomeIcon
                     icon={faCheckCircle}
@@ -149,7 +149,7 @@ export default function ProjectPage({ match }) {
           <ul>
             {completedTasks.map(task => (
               <li key={task.id} className="flex justify-between items-center p-2 border-b">
-                <span>{task.title}</span>
+                <span>{task.name}</span>
                 <FontAwesomeIcon icon={faCircle} className="text-gray-500" />
               </li>
             ))}

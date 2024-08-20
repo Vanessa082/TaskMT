@@ -16,6 +16,7 @@ function useQueryRequest(pathname) {
   };
 
   useEffect(() => {
+    console.log("in refetch useEffect", {loading})
     setLoading(true);
 
     const fetchProjects = async () => {
