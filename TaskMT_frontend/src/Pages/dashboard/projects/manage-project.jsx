@@ -27,20 +27,6 @@ export default function ManageProjects() {
     });
   };
 
-  const updateProjectState = (updatedProject) => {
-    setProjects((prevProjects) =>
-      prevProjects.some(
-        (project) => project.project_id === updatedProject.project_id
-      )
-        ? prevProjects.map((project) =>
-            project.project_id === updatedProject.project_id
-              ? updatedProject
-              : project
-          )
-        : [...prevProjects, updatedProject]
-    );
-  };
-
   const handleDelete = async (id) => {
     toast("Are you sure you want to delete this project?", {
       action: {
@@ -89,17 +75,22 @@ export default function ManageProjects() {
       </td>
 
       <td className="py-2 capitalize text-center">
-        <span
-          className={clsx(
-            "text-lg",
-            project.status === "completed"
-              ? "text-green-500"
-              : "text-yellow-500"
-          )}
-        >
-          {project.status.charAt(0).toUpperCase() + project.status.slice(1)}
-        </span>
-      </td>
+  <span
+    className={clsx(
+      "text-lg",
+      project.status === "completed"
+        ? "text-green-500"
+        : project.status === "active"
+        ? "text-yellow-500"
+        : project.status === "planned"
+        ? "text-[#87b8e1]"  // Light blue color for "planned" status
+        : "text-gray-500" // Default color if no match
+    )}
+  >
+    {project.status.charAt(0).toUpperCase() + project.status.slice(1)}
+  </span>
+</td>
+
 
       <td className="py-2 flex gap-2 justify-end">
         <FontAwesomeIcon

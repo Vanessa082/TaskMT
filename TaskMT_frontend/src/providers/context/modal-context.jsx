@@ -6,10 +6,11 @@ const ModalContext = createContext([]);
 
 function ModalContextProvider({ children }) {
   const [task, setTask] = useState({
-    title: "",
+    name: "",
     description: "",
     priority: "",
     deadline: "",
+    status: "",
     project_id: "",
     time_estimate: "",
     is_recurring: "",

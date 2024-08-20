@@ -7,7 +7,6 @@ import {
   faTasks,
   faThLarge,
   faTimes,
-  faTrashAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import clsx from "clsx";
 import { Link } from "react-router-dom";
@@ -35,12 +34,6 @@ const sidebarContent = [
     icon: faTasks,
   },
 ];
-
-const trashLink = {
-  text: "Trash",
-  to: "/dashboard/trashed",
-  icon: faTrashAlt,
-};
 
 export default function DashboardSideNav({ isOpen, toggleSidebar }) {
   return (
@@ -76,17 +69,6 @@ export default function DashboardSideNav({ isOpen, toggleSidebar }) {
           <div className="w-full">
             <ProjectNavComponent />
           </div>
-        <div className="w-full px-3 py-2 flex gap-2 items-center cursor-pointer text-lg text-gray-800 hover:bg-red-200 rounded-full mb-4">
-          <FontAwesomeIcon icon={trashLink.icon} />
-          <Link
-            to={trashLink.to}
-            className={clsx(
-              "w-full flex gap-2 items-center text-base"
-            )}
-          >
-            {trashLink.text}
-          </Link>
-        </div>
 
         <div className="w-full px-3 py-2 flex gap-2 items-center cursor-pointer text-lg text-gray-800 hover:bg-primary-color hover:text-text-color-1 rounded-full">
           <FontAwesomeIcon icon={faCog} />
