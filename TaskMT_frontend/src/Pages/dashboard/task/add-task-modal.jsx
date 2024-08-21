@@ -119,6 +119,7 @@ export default function TaskCreationModal() {
               onChange={(e) => updateTaskState("priority", e.target.value)}
               className="border border-gray-300 p-2 rounded mt-1"
             >
+              <option value="" disabled>Select Priority</option>
               <option value="Low">Low</option>
               <option value="Medium">Medium</option>
               <option value="High">High</option>
@@ -131,6 +132,7 @@ export default function TaskCreationModal() {
               onChange={(e) => updateTaskState("status", e.target.value)}
               className="border border-gray-300 p-2 rounded mt-1"
             >
+              <option value=""disabled>Select Status</option>
               <option value="Pending">Pending</option>
               <option value="Completed">Completed</option>
         
