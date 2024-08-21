@@ -11,68 +11,71 @@ import { FaArrowsToDot } from "react-icons/fa6";
 import { summary } from "../../../utils/data";
 import clsx from "clsx";
 import {  PRIOTITYSTYELS, TASK_TYPE, getInitials } from "../../../utils/index";
+import { TaskTable } from "../task/independent-task/TaskTable";
+import Calendar from "../calender/calendar";
 
-const TaskTable = ({ tasks }) => {
-  const ICONS = {
-    high: <MdKeyboardDoubleArrowUp />,
-    medium: <MdKeyboardArrowUp />,
-    low: <MdKeyboardArrowDown />,
-  };
+// const TaskTable = ({ tasks }) => {
+//   const ICONS = {
+//     high: <MdKeyboardDoubleArrowUp />,
+//     medium: <MdKeyboardArrowUp />,
+//     low: <MdKeyboardArrowDown />,
+//   };
 
-  const TableHeader = () => (
-    <thead className='border-b border-gray-300 '>
-      <tr className='text-black text-left'>
-        <th className='py-2'>Task Title</th>
-        <th className='py-2'>Priority</th>
-        <th className='py-2'>Deadline </th>
-        <th className='py-2 hidden md:block'>Created At</th>
-      </tr>
-    </thead>
-  );
+//   const TableHeader = () => (
+//     <thead className='border-b border-gray-300 '>
+//       <tr className='text-black text-left'>
+//         <th className='py-2'>Task Title</th>
+//         <th className='py-2'>Priority</th>
+//         <th className='py-2'>Deadline </th>
+//         <th className='py-2 hidden md:block'>Created At</th>
+//       </tr>
+//     </thead>
+//   );
 
-  const TableRow = ({ task }) => (
-    <tr className='border-b border-gray-300 text-gray-600 hover:bg-gray-300/10'>
-      <td className='py-2'>
-        <div className='flex items-center gap-2'>
-          <div
-            className={clsx("w-4 h-4 rounded-full", TASK_TYPE[task.stage])}
-          />
+//   const TableRow = ({ task }) => (
+//     <tr className='border-b border-gray-300 text-gray-600 hover:bg-gray-300/10'>
+//       <td className='py-2'>
+//         <div className='flex items-center gap-2'>
+//           <div
+//             className={clsx("w-4 h-4 rounded-full", TASK_TYPE[task.stage])}
+//           />
 
-          <p className='text-base text-black'>{task.title}</p>
-        </div>
-      </td>
+//           <p className='text-base text-black'>{task.title}</p>
+//         </div>
+//       </td>
 
-      <td className='py-2'>
-        <div className='flex gap-1 items-center'>
-          <span className={clsx("text-lg", PRIOTITYSTYELS[task.priority])}>
-            {ICONS[task.priority]}
-          </span>
-          <span className='capitalize'>{task.priority}</span>
-        </div>
-      </td>
+//       <td className='py-2'>
+//         <div className='flex gap-1 items-center'>
+//           <span className={clsx("text-lg", PRIOTITYSTYELS[task.priority])}>
+//             {ICONS[task.priority]}
+//           </span>
+//           <span className='capitalize'>{task.priority}</span>
+//         </div>
+//       </td>
 
-      <td className='py-2 hidden md:block'>
-        <span className='text-base text-gray-600'>
-          {(task?.date)}
-        </span>
-      </td>
-    </tr>
-  );
-  return (
-    <>
-      <div className='w-full md:w-4/5 bg-white px-2 md:px-4 pt-4 pb-4 shadow-md rounded flex flex-col  justify-center mx-auto m-0 items-center '>
-        <table className='w-full'>
-          <TableHeader />
-          <tbody>
-            {tasks?.map((task, id) => (
-              <TableRow key={id} task={task} />
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </>
-  );
-};
+//       <td className='py-2 hidden md:block'>
+//         <span className='text-base text-gray-600'>
+//           {(task?.date)}
+//         </span>
+//       </td>
+//     </tr>
+//   );
+//   return (
+//     <>
+//       <div className='w-full md:w-4/5 bg-white px-2 md:px-4 pt-4 pb-4 shadow-md rounded flex flex-col  justify-center mx-auto m-0 items-center '>
+//         {/* <table className='w-full'>
+//           <TableHeader />
+//           <tbody>
+//             {tasks?.map((task, id) => (
+//               <TableRow key={id} task={task} />
+//             ))}
+//           </tbody>
+//         </table> */}
+//         <TaskTable />
+//       </div>
+//     </>
+//   );
+// };
 
 // const UserTable = ({ users }) => {
 //   const TableHeader = () => (
@@ -171,6 +174,7 @@ const Dashboard = () => {
         {/* /left */}
 
         <TaskTable />
+        <Calendar />
       </div>
     </div>
   );

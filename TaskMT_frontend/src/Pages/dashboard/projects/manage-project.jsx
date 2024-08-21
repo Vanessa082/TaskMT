@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useQueryRequest } from "../../../providers/hooks/use-query-request";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
@@ -13,7 +13,8 @@ export default function ManageProjects() {
   const { projects, setProjects } = useDashboardContext();
   const { data, error, loading, refetch } = useQueryRequest("/projects");
 
-  const { setProjectModalOpen, setProject, setOnProjectModalDone } = useModalContext();
+  const { setProjectModalOpen, setProject, setOnProjectModalDone } =
+    useModalContext();
 
   useEffect(() => {
     if (data) setProjects(data);
@@ -22,7 +23,7 @@ export default function ManageProjects() {
   const openModal = (project) => {
     setProject(project);
     setProjectModalOpen(true);
-    setOnProjectModalDone(()=> {
+    setOnProjectModalDone(() => {
       return refetch;
     });
   };
@@ -75,22 +76,21 @@ export default function ManageProjects() {
       </td>
 
       <td className="py-2 capitalize text-center">
-  <span
-    className={clsx(
-      "text-lg",
-      project.status === "completed"
-        ? "text-green-500"
-        : project.status === "active"
-        ? "text-yellow-500"
-        : project.status === "planned"
-        ? "text-[#87b8e1]"  // Light blue color for "planned" status
-        : "text-gray-500" // Default color if no match
-    )}
-  >
-    {project.status.charAt(0).toUpperCase() + project.status.slice(1)}
-  </span>
-</td>
-
+        <span
+          className={clsx(
+            "text-lg",
+            project.status === "completed"
+              ? "text-green-500"
+              : project.status === "active"
+              ? "text-yellow-500"
+              : project.status === "planned"
+              ? "text-[#87b8e1]" 
+              : "text-gray-500" // Default color if no match
+          )}
+        >
+          {project.status.charAt(0).toUpperCase() + project.status.slice(1)}
+        </span>
+      </td>
 
       <td className="py-2 flex gap-2 justify-end">
         <FontAwesomeIcon
@@ -108,6 +108,7 @@ export default function ManageProjects() {
       </td>
     </tr>
   );
+
 
   return (
     <div className="w-full md:px-1 px-0 mb-6">

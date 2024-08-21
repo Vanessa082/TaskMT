@@ -5,6 +5,7 @@ const DashboardContext = createContext(null);
 
 function DashboardContextProvider({ children }) {
   const [projects, setProjects] = useState([]);
+  const [tasks, setTasks] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
 
@@ -26,6 +27,8 @@ function DashboardContextProvider({ children }) {
       value={{
         projects,
         setProjects,
+        tasks,
+        setTasks,
         error,
         setError,
         loading,
