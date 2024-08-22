@@ -17,8 +17,6 @@ const fetchCurrentUser = async () => {
     }
 
     const data = await response.json();
-    console.log('Protected data:', data);
-
     return data;
   } catch (error) {
     console.error('Error fetching protected data:', error);
@@ -36,7 +34,7 @@ const fetchProjects = async () => {
   });
 
   if (!response.ok) {
-    throw new Error("Network Response was not ok");
+    console.error('Response Was not ok', error);
   };
 
   return response.json();

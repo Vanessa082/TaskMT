@@ -2,7 +2,7 @@ import clsx from "clsx";
 import React from "react";
 export default function TableRow({ task }) {
   return (
-    <tr>
+    <tr className="flex justify-between gap-10 lg:gap-0 px-10 font-sans">
     <td>
       <div>
         <span>{task.name}</span>
@@ -22,7 +22,7 @@ export default function TableRow({ task }) {
             : "text-gray-500"
         )}
       >
-        {task.priority.charAt(0).toUpperCase() + task.priority(slice(1))}
+        {task.priority.charAt(0).toUpperCase() + task.priority.slice(1)}
       </span>
     </td>
 
@@ -37,7 +37,7 @@ export default function TableRow({ task }) {
             : "text-gray-500"
         )}
       >
-        {task.status.charAt(0).toUpperCase() + task.status(slice(1))}
+        {task.status.charAt(0).toUpperCase() + task.status.slice(1)}
       </span>
     </td>
 
