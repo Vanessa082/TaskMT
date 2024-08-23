@@ -12,18 +12,20 @@ export function TaskTable() {
   useEffect(() => {
     if (data) setTasks(data);
   }, [data]);
+
   const TableHeader = () => {
     return (
-      <thead className="border-b border-gray-300 bg-white ">
-        <tr className="flex justify-between gap-10 lg:gap-0 px-10 font-sans">
-          <th className="py-2"> Name</th>
-          <th className="py-2">Priority</th>
-          <th className="py-2">Status</th>
-          <th className="py-2 hidden md:block">Deadline</th>
+      <thead className="bg-white border-b border-gray-300">
+        <tr>
+          <th className="px-4 py-2 text-left">Name</th>
+          <th className="px-4 py-2 text-left">Priority</th>
+          <th className="px-4 py-2 text-left">Status</th>
+          <th className="px-4 py-2 text-left hidden md:table-cell">Deadline</th>
         </tr>
       </thead>
     );
   };
+
   return (
     <div className="">
       <div className="w-full md:px-1 px-0 mb-6">
@@ -32,14 +34,14 @@ export function TaskTable() {
 
       <div className="bg-white px-2 md:px-6 py-4 shadow-md rounded">
         {tasks.length === 0 ? (
-          <FontAwesomeIcon  icon={faClipboardList}/>
+          <FontAwesomeIcon icon={faClipboardList} />
         ) : (
           <div className="overflow-x-auto">
-            <table className="w-">
+            <table className="min-w-full table-auto">
               <TableHeader />
               <tbody>
                 {tasks.map((task) => (
-                  <TableRow  key={task.task_id} task={task}/>
+                  <TableRow key={task.task_id} task={task} />
                 ))}
               </tbody>
             </table>

@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { toast } from "sonner";
 import { useDashboardContext } from "../../../providers/context/dashboard-context";
-import ProjectDetailsModal from "./project-details-modal";
 import { API_BASE_URL } from "../../../constants/constants";
 import clsx from "clsx";
 import { useModalContext } from "../../../providers/context/modal-context";
