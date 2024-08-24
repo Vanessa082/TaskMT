@@ -45,6 +45,7 @@ export default function ManageProjects() {
                 prevProjects.filter((project) => project.project_id !== id)
               );
               toast("Successfully deleted");
+              refetch();
             }
           } catch (error) {
             console.error("Error deleting project", error);
@@ -83,7 +84,7 @@ export default function ManageProjects() {
               : project.status === "active"
               ? "text-yellow-500"
               : project.status === "planned"
-              ? "text-[#87b8e1]" 
+              ? "text-[#87b8e1]"
               : "text-gray-500" // Default color if no match
           )}
         >
@@ -102,12 +103,11 @@ export default function ManageProjects() {
         <FontAwesomeIcon
           icon={faTrash}
           className="text-red-500 cursor-pointer"
-          onClick={() => handleDelete(project.project_id)}
+          onClick={() => handleDelete(project.id)}
         />
       </td>
     </tr>
   );
-
 
   return (
     <div className="w-full md:px-1 px-0 mb-6">
