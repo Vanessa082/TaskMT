@@ -33,7 +33,7 @@ export default function ProjectDetailsModal() {
     try {
       setLoading(true);
 
-      const url = `${API_BASE_URL}/projects/${isEditing ? project.project_id : ""}`;
+      const url = `${API_BASE_URL}/projects/${isEditing ? project.id : ""}`;
       const method = isEditing ? "PUT" : "POST";
       
       const update = {
@@ -74,7 +74,7 @@ export default function ProjectDetailsModal() {
   };
 
   useEffect(() => {
-    if (project && project.project_id) {
+    if (project && project.id) {
       setIsEditing(true);
     } else {
       setIsEditing(false);
