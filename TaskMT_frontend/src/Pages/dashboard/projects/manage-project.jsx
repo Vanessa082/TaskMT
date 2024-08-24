@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { toast } from "sonner";
 import { useDashboardContext } from "../../../providers/context/dashboard-context";
-import ProjectDetailsModal from "./project-details-modal";
 import { API_BASE_URL } from "../../../constants/constants";
 import clsx from "clsx";
 import { useModalContext } from "../../../providers/context/modal-context";
@@ -46,6 +45,7 @@ export default function ManageProjects() {
                 prevProjects.filter((project) => project.project_id !== id)
               );
               toast("Successfully deleted");
+              refetch();
             }
           } catch (error) {
             console.error("Error deleting project", error);
@@ -84,7 +84,7 @@ export default function ManageProjects() {
               : project.status === "active"
               ? "text-yellow-500"
               : project.status === "planned"
-              ? "text-[#87b8e1]" 
+              ? "text-[#87b8e1]"
               : "text-gray-500" // Default color if no match
           )}
         >
@@ -103,12 +103,11 @@ export default function ManageProjects() {
         <FontAwesomeIcon
           icon={faTrash}
           className="text-red-500 cursor-pointer"
-          onClick={() => handleDelete(project.project_id)}
+          onClick={() => handleDelete(project.id)}
         />
       </td>
     </tr>
   );
-
 
   return (
     <div className="w-full md:px-1 px-0 mb-6">
@@ -125,7 +124,7 @@ export default function ManageProjects() {
               <TableHeader />
               <tbody>
                 {projects.map((project) => (
-                  <TableRow key={project.project_id} project={project} />
+                  <TableRow key={project.id} project={project} />
                 ))}
               </tbody>
             </table>
