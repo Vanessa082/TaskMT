@@ -174,7 +174,7 @@ const Dashboard = () => {
         {/* /left */}
 
         <TaskTable />
-        <Calendar />
+        <Calendar/>
       </div>
     </div>
   );
