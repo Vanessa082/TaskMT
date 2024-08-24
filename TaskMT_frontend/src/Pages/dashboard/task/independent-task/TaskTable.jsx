@@ -21,6 +21,7 @@ export function TaskTable() {
           <th className="px-4 py-2 text-left">Priority</th>
           <th className="px-4 py-2 text-left">Status</th>
           <th className="px-4 py-2 text-left hidden md:table-cell">Deadline</th>
+          <th className="px-4 py-2"></th>
         </tr>
       </thead>
     );
@@ -31,21 +32,24 @@ export function TaskTable() {
       <div className="w-full md:px-1 px-0 mb-6">
         <h2>Task List</h2>
       </div>
-
-      <div className="bg-white px-2 md:px-6 py-4 shadow-md rounded">
+      <div className="bg-white px-2 md:px-6 py-4 shadow-md rounded w-full">
         {tasks.length === 0 ? (
-          <FontAwesomeIcon icon={faClipboardList} />
-        ) : (
-          <div className="overflow-x-auto">
-            <table className="min-w-full table-auto">
-              <TableHeader />
-              <tbody>
-                {tasks.map((task) => (
-                  <TableRow key={task.task_id} task={task} />
-                ))}
-              </tbody>
-            </table>
+          <div className="flex flex-col items-center justify-center w-full h-64">
+            <FontAwesomeIcon
+              icon={faClipboardList}
+              className="text-gray-400 text-6xl mb-4"
+            />
+            <p className="text-gray-500 text-lg">No tasks available</p>
           </div>
+        ) : (
+          <table className="min-w-full table-auto">
+            <TableHeader />
+            <tbody>
+              {tasks.map((task) => (
+                <TableRow key={task.id} task={task} />
+              ))}
+            </tbody>
+          </table>
         )}
       </div>
     </div>

@@ -124,7 +124,7 @@ export default function ManageProjects() {
               <TableHeader />
               <tbody>
                 {projects.map((project) => (
-                  <TableRow key={project.project_id} project={project} />
+                  <TableRow key={project.id} project={project} />
                 ))}
               </tbody>
             </table>
