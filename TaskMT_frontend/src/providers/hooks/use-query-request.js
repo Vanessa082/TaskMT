@@ -23,7 +23,7 @@ function useQueryRequest(pathname, {
     setReload((prev) => !prev);
   };
 
-  const fetchProjects = async () => {
+  const fetchData = async () => {
     setLoading(true);
     try {
       const response = await fetch(`${API_BASE_URL}${pathname}`, {
@@ -33,6 +33,7 @@ function useQueryRequest(pathname, {
           "Authorization": `Bearer ${localStorage.getItem("token")}`,
         },
       });
+
       if (!response.ok) {
         throw new Error("Network Response was not ok");
       }
@@ -51,7 +52,7 @@ function useQueryRequest(pathname, {
   useEffect(() => {
     if (!fetchOnCall && isFirstFetch) return;
 
-    fetchProjects();
+    fetchData();
   }, [reload]);
 
   return { data, setData, loading, error, refetch };

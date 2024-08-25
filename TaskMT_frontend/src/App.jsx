@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Outlet, Route, Routes } from "react-router-dom";
 
 import LandingPage from "./Pages/landing-page/Landing-page";
 import Login from "./Pages/LoginPage/Login";
@@ -36,8 +36,14 @@ function App() {
       >
         <Route index element={<DashboardPage />} />
 
-        <Route path="projects" element={<ManageProjects />} />
-        <Route path="/dashboard/:id/" element={<Project />}/>
+        <Route
+          path="projects"
+          element={<Outlet />}
+        >
+          <Route index element={<ManageProjects />} />
+
+          <Route path=":id" element={<Project />} />
+        </Route>
       </Route>
     </Routes>
   );

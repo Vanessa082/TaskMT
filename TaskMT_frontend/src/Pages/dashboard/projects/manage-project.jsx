@@ -15,11 +15,6 @@ export default function ManageProjects() {
   const { setProjectModalOpen, setProject } =
     useModalContext();
 
-  // useEffect(() => {
-  //   if (data) setProjects(data);
-  //   console.log(data)
-  // }, [data]);
-
   const openModal = (project) => {
     setProject(project);
     setProjectModalOpen(true);
@@ -97,7 +92,7 @@ export default function ManageProjects() {
           onClick={() => openModal(project)}
         />
 
-        <Link to="/dashboard/:id/">
+        <Link to={`/dashboard/projects/${project.id}`}>
           <FontAwesomeIcon icon={faEye} className="cursor-pointer" />
         </Link>
 
