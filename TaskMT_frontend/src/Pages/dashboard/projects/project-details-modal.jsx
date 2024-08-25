@@ -2,18 +2,18 @@ import { useState, useEffect } from "react";
 import { API_BASE_URL } from "../../../constants/constants";
 import { useModalContext } from "../../../providers/context/modal-context";
 import { toast } from "sonner";
+import { useDashboardContext } from "../../../providers/context/dashboard-context";
 
 export default function ProjectDetailsModal() {
   const [isEditing, setIsEditing] = useState(false);
   const [loading, setLoading] = useState(false);
-
   const {
     project,
     setProject,
     setProjectModalOpen,
-    
-    onProjectModalDone,
   } = useModalContext();
+
+  const { refetchProjects } = useDashboardContext();
 
   const updateProjectState = (key, value) => {
     setProject((prev) => ({
@@ -23,7 +23,8 @@ export default function ProjectDetailsModal() {
   };
 
   const closeModal = async () => {
-    if (onProjectModalDone) await onProjectModalDone();
+    await refetchProjects();
+
     setProject(null);
     setProjectModalOpen(false);
   };
@@ -35,7 +36,7 @@ export default function ProjectDetailsModal() {
 
       const url = `${API_BASE_URL}/projects/${isEditing ? project.id : ""}`;
       const method = isEditing ? "PUT" : "POST";
-      
+
       const update = {
         deadline: project.deadline,
         description: project.description,
@@ -43,8 +44,12 @@ export default function ProjectDetailsModal() {
         status: project.status,
       }
 
+      // if (!isEditing) {
+      //   update.user_id = currentUser.user_id;
+      // }
+
       // console.log({ update });
-      
+
       const response = await fetch(url, {
         method,
         headers: {
@@ -152,8 +157,8 @@ export default function ProjectDetailsModal() {
               {loading
                 ? "Submitting..."
                 : isEditing
-                ? "Update Project"
-                : "Create Project"}
+                  ? "Update Project"
+                  : "Create Project"}
             </button>
           </div>
         </form>

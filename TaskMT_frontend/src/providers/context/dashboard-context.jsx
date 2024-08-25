@@ -1,38 +1,29 @@
-import { createContext, useEffect, useState, useContext } from "react";
-import { fetchProjects } from "./api";
+import { createContext, useContext } from "react";
+import { useQueryRequest } from "../hooks/use-query-request";
 
 const DashboardContext = createContext(null);
 
 function DashboardContextProvider({ children }) {
-  const [projects, setProjects] = useState([]);
-  const [tasks, setTasks] = useState([]);
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetchProjects()
-      .then((response) => {
-        setProjects(response)
-      })
-      .catch((error) => {
-        setError(error.message)
-      })
-      .finally(() => {
-        setLoading(false)
-      });
-  }, []);
+  const {
+    data: projects,
+    setData: setProjects,
+    refetch: refetchProjects,
+    error: projectsError,
+    loading: projectsLoading,
+  } = useQueryRequest("/projects",
+    {
+      initialData: [],
+    }
+  );
 
   return (
     <DashboardContext.Provider
       value={{
         projects,
         setProjects,
-        tasks,
-        setTasks,
-        error,
-        setError,
-        loading,
-        setLoading,
+        refetchProjects,
+        projectsLoading,
+        projectsError,
       }}
     >
       {children}
