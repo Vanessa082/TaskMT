@@ -3,13 +3,15 @@ import { API_BASE_URL } from "../../../constants/constants";
 import { useModalContext } from "../../../providers/context/modal-context";
 import { useDashboardContext } from "../../../providers/context/dashboard-context";
 import { toast } from "sonner";
+import { useAppContext } from "../../../providers/context/app-context";
 
 export default function TaskCreationModal() {
   const [isEditing, setIsEditing] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const { task, setTask, setTaskModalOpen } = useModalContext();
-  const { projects  } = useDashboardContext();
+  const { projects } = useDashboardContext();
+  const { currentUser } = useAppContext();
 
   const updateTaskState = (key, value) => {
     setTask((prev) => ({
@@ -25,12 +27,16 @@ export default function TaskCreationModal() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("ttttttttt", task)
+    console.log("ttttttttt", task);
     try {
       setLoading(true);
 
       const url = `${API_BASE_URL}/tasks/${isEditing ? task.task_id : ""}`;
       const method = isEditing ? "PUT" : "POST";
+
+      if (!isEditing) {
+        update.user_id = currentUser.user_id;
+      }
 
       const response = await fetch(url, {
         method,
@@ -50,10 +56,8 @@ export default function TaskCreationModal() {
       console.log("Result:", result);
       toast.success(`Task ${isEditing ? "updated" : "created"} successfully.`, "success");
       closeModal();
-      // Update the project context or refetch tasks here if needed
     } catch (error) {
       console.error("Error submitting task:", error);
-      // notify("Error submitting task. Please try again.", "error");
     } finally {
       setLoading(false);
     }
@@ -112,32 +116,32 @@ export default function TaskCreationModal() {
           </label>
 
           <div className="flex">
-          <label className="mt-2">
-            Priority
-            <select
-              value={task?.priority || ""}
-              onChange={(e) => updateTaskState("priority", e.target.value)}
-              className="border border-gray-300 p-2 rounded mt-1"
-            >
-              <option value="" disabled>Select Priority</option>
-              <option value="Low">Low</option>
-              <option value="Medium">Medium</option>
-              <option value="High">High</option>
-            </select>
-          </label>
-          <label className="mt-2">
-            Status
-            <select
-              value={task?.status || ""}
-              onChange={(e) => updateTaskState("status", e.target.value)}
-              className="border border-gray-300 p-2 rounded mt-1"
-            >
-              <option value=""disabled>Select Status</option>
-              <option value="Pending">Pending</option>
-              <option value="Completed">Completed</option>
-        
-            </select>
-          </label>
+            <label className="mt-2">
+              Priority
+              <select
+                value={task?.priority || ""}
+                onChange={(e) => updateTaskState("priority", e.target.value)}
+                className="border border-gray-300 p-2 rounded mt-1"
+              >
+                <option value="" disabled>Select Priority</option>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+              </select>
+            </label>
+            <label className="mt-2">
+              Status
+              <select
+                value={task?.status || ""}
+                onChange={(e) => updateTaskState("status", e.target.value)}
+                className="border border-gray-300 p-2 rounded mt-1"
+              >
+                <option value="" disabled>Select Status</option>
+                <option value="Pending">Pending</option>
+                <option value="Completed">Completed</option>
+
+              </select>
+            </label>
           </div>
           <label className="mt-2">
             Project

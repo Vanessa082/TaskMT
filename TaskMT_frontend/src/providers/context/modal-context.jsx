@@ -16,6 +16,7 @@ function ModalContextProvider({ children }) {
     is_recurring: "",
     recurrence_pattern: "",
   });
+
   const [taskModalOpen, setTaskModalOpen] = useState(false);
 
   const [project, setProject] = useState({
@@ -24,11 +25,6 @@ function ModalContextProvider({ children }) {
     description: "",
     status: "",
   });
-
-  /**
-   * callback to call when project modal is done executing
-  */
-  const [onProjectModalDone, setOnProjectModalDone] = useState(null);
 
   const [projectModalOpen, setProjectModalOpen] = useState(false);
 
@@ -46,9 +42,6 @@ function ModalContextProvider({ children }) {
 
         project,
         setProject,
-
-        onProjectModalDone,
-        setOnProjectModalDone,
       }}
     >
       {taskModalOpen && <TaskCreationModal />}

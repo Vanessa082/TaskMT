@@ -1,4 +1,4 @@
-import React, { useState } from 'react';                      
+import React, { useState } from 'react';
 import { MdOutlineSearch } from "react-icons/md";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
@@ -10,8 +10,12 @@ import UserAvatar from './UserAvatar';
 export default function DashboardNavbar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  const toggleSidebar = () => {
-    setIsSidebarOpen(prevState => !prevState);
+  const openSidebar = () => {
+    setIsSidebarOpen(true);
+  };
+
+  const closeSidebar = () => {
+    setIsSidebarOpen(false);
   };
 
   return (
@@ -20,7 +24,7 @@ export default function DashboardNavbar() {
         <div className='flex gap-4 items-center'>
           {/* Menu icon always visible */}
           <div
-            onClick={toggleSidebar}
+            onClick={() => setIsSidebarOpen(true)}
             className='text-2xl text-gray-500 cursor-pointer'
           >
             <FontAwesomeIcon icon={faBars} />
@@ -40,13 +44,17 @@ export default function DashboardNavbar() {
           <AddTask />
           <Notification />
 
-          <UserAvatar/>
+          <UserAvatar />
         </div>
       </div>
       <hr className="bg-primary-color w-full" />
 
       {/* Sidebar */}
-      <DashboardSideNav isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+      <DashboardSideNav
+        isOpen={isSidebarOpen}
+        openSidebar={openSidebar}
+        closeSidebar={closeSidebar}
+      />
     </div>
   );
 }

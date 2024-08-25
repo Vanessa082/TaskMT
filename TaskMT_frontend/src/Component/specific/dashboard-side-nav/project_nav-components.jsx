@@ -9,10 +9,10 @@ import { Link } from "react-router-dom";
 import ProjectList from "../../../Pages/dashboard/projects/project-list";
 import { useModalContext } from "../../../providers/context/modal-context";
 
-export default function ProjectNavComponents() {
+export default function ProjectNavComponents({ closeSidebar }) {
   const [isProjectsvisible, setVisibleProjects] = useState(false);
 
-  const {projectModalOpen, setProjectModalOpen } = useModalContext();
+  const { projectModalOpen, setProjectModalOpen } = useModalContext();
 
   const toggleProjects = () => {
     setVisibleProjects(!isProjectsvisible);
@@ -20,6 +20,7 @@ export default function ProjectNavComponents() {
 
   const handleOpenModal = () => {
     setProjectModalOpen(true);
+    closeSidebar();
   };
 
   return (
@@ -35,18 +36,19 @@ export default function ProjectNavComponents() {
       {isProjectsvisible && (
         <div className="mt-2 pl-4 space-y-2">
           <ProjectList />
-          <Link to={"/dashboard/projects"}>
+
+          <Link to={"/dashboard/projects"} onClick={closeSidebar}>
             <div className="">
               Manage Projects
             </div>
           </Link>
+
           <div onClick={handleOpenModal} className="cursor-pointer">
             <FontAwesomeIcon icon={faAdd} />
             Add Projects
           </div>
         </div>
       )}
-
     </>
   );
 }

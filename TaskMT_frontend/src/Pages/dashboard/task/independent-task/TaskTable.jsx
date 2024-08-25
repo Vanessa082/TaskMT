@@ -6,12 +6,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClipboardList } from "@fortawesome/free-solid-svg-icons";
 
 export function TaskTable() {
-  const { tasks, setTasks } = useDashboardContext();
-  const { data, error, loading, refetch } = useQueryRequest("/tasks");
-
-  useEffect(() => {
-    if (data) setTasks(data);
-  }, [data]);
+  const {
+    data: tasks,
+    error,
+    loading,
+    refetch
+  } = useQueryRequest("/tasks", { initialData: [] });
 
   const TableHeader = () => {
     return (

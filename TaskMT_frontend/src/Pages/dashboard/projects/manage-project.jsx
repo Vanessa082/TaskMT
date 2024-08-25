@@ -7,24 +7,22 @@ import { useDashboardContext } from "../../../providers/context/dashboard-contex
 import { API_BASE_URL } from "../../../constants/constants";
 import clsx from "clsx";
 import { useModalContext } from "../../../providers/context/modal-context";
+import { Link } from "react-router-dom";
 
 export default function ManageProjects() {
-  const { projects, setProjects } = useDashboardContext();
-  const { data, error, loading, refetch } = useQueryRequest("/projects");
+  const { projects, setProjects, refetchProjects } = useDashboardContext();
 
-  const { setProjectModalOpen, setProject, setOnProjectModalDone } =
+  const { setProjectModalOpen, setProject } =
     useModalContext();
 
-  useEffect(() => {
-    if (data) setProjects(data);
-  }, [data]);
+  // useEffect(() => {
+  //   if (data) setProjects(data);
+  //   console.log(data)
+  // }, [data]);
 
   const openModal = (project) => {
     setProject(project);
     setProjectModalOpen(true);
-    setOnProjectModalDone(() => {
-      return refetch;
-    });
   };
 
   const handleDelete = async (id) => {
@@ -98,7 +96,10 @@ export default function ManageProjects() {
           className="text-primary-color cursor-pointer"
           onClick={() => openModal(project)}
         />
-        <FontAwesomeIcon icon={faEye} className="cursor-pointer" />
+
+        <Link to="/dashboard/:id/">
+          <FontAwesomeIcon icon={faEye} className="cursor-pointer" />
+        </Link>
 
         <FontAwesomeIcon
           icon={faTrash}
