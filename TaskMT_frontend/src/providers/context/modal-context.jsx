@@ -13,7 +13,7 @@ function ModalContextProvider({ children }) {
     status: "",
     project_id: "",
     time_estimate: "",
-    is_recurring: "",
+    is_recurring: false,
     recurrence_pattern: "",
   });
 

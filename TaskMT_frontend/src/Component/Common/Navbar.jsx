@@ -76,10 +76,10 @@ export default function Navbar() {
         {/* User Action */}
         {currentUser ? (
           <Link to="/dashboard" className="mt-4 md:mt-0">
-            <div className="user-action-icon flex flex-col items-center text-primary-color cursor-pointer">
-              <FontAwesomeIcon icon={faUserCircle} size="2x" />
+            <button className="user-action-icon flex flex-col items-center bg-primary-color text-text-color-1 cursor-pointer">
+              {/* <FontAwesomeIcon icon={faUserCircle} size="2x" /> */}
               <span>{currentUser.username}</span>
-            </div>
+            </button>
           </Link>
         ) : (
           <Link to="/login" className="mt-4 md:mt-0">

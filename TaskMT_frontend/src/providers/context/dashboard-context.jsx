@@ -16,6 +16,14 @@ function DashboardContextProvider({ children }) {
     }
   );
 
+  const {
+    data: tasks,
+    setData: setTasks,
+    refetch: refetchTasks,
+    error: tasksError,
+    loading: tasksLoading,
+  } = useQueryRequest("/tasks", { fetchOncall: false, initialData: [] });
+
   return (
     <DashboardContext.Provider
       value={{
@@ -24,6 +32,12 @@ function DashboardContextProvider({ children }) {
         refetchProjects,
         projectsLoading,
         projectsError,
+
+        tasks,
+        setTasks,
+        refetchTasks,
+        tasksLoading,
+        tasksError,
       }}
     >
       {children}

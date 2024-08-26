@@ -1,128 +1,34 @@
 import React from "react";
 import {
   MdAdminPanelSettings,
-  MdKeyboardArrowDown,
-  MdKeyboardArrowUp,
-  MdKeyboardDoubleArrowUp,
 } from "react-icons/md";
 import { LuClipboardEdit } from "react-icons/lu";
 import { FaNewspaper } from "react-icons/fa";
 import { FaArrowsToDot } from "react-icons/fa6";
-import { summary } from "../../../utils/data";
 import clsx from "clsx";
-import {  PRIOTITYSTYELS, TASK_TYPE, getInitials } from "../../../utils/index";
 import { TaskTable } from "../task/independent-task/TaskTable";
 import Calendar from "../calender/calendar";
 
-// const TaskTable = ({ tasks }) => {
-//   const ICONS = {
-//     high: <MdKeyboardDoubleArrowUp />,
-//     medium: <MdKeyboardArrowUp />,
-//     low: <MdKeyboardArrowDown />,
-//   };
-
-//   const TableHeader = () => (
-//     <thead className='border-b border-gray-300 '>
-//       <tr className='text-black text-left'>
-//         <th className='py-2'>Task Title</th>
-//         <th className='py-2'>Priority</th>
-//         <th className='py-2'>Deadline </th>
-//         <th className='py-2 hidden md:block'>Created At</th>
-//       </tr>
-//     </thead>
-//   );
-
-//   const TableRow = ({ task }) => (
-//     <tr className='border-b border-gray-300 text-gray-600 hover:bg-gray-300/10'>
-//       <td className='py-2'>
-//         <div className='flex items-center gap-2'>
-//           <div
-//             className={clsx("w-4 h-4 rounded-full", TASK_TYPE[task.stage])}
-//           />
-
-//           <p className='text-base text-black'>{task.title}</p>
-//         </div>
-//       </td>
-
-//       <td className='py-2'>
-//         <div className='flex gap-1 items-center'>
-//           <span className={clsx("text-lg", PRIOTITYSTYELS[task.priority])}>
-//             {ICONS[task.priority]}
-//           </span>
-//           <span className='capitalize'>{task.priority}</span>
-//         </div>
-//       </td>
-
-//       <td className='py-2 hidden md:block'>
-//         <span className='text-base text-gray-600'>
-//           {(task?.date)}
-//         </span>
-//       </td>
-//     </tr>
-//   );
-//   return (
-//     <>
-//       <div className='w-full md:w-4/5 bg-white px-2 md:px-4 pt-4 pb-4 shadow-md rounded flex flex-col  justify-center mx-auto m-0 items-center '>
-//         {/* <table className='w-full'>
-//           <TableHeader />
-//           <tbody>
-//             {tasks?.map((task, id) => (
-//               <TableRow key={id} task={task} />
-//             ))}
-//           </tbody>
-//         </table> */}
-//         <TaskTable />
-//       </div>
-//     </>
-//   );
-// };
-
-// const UserTable = ({ users }) => {
-//   const TableHeader = () => (
-//     <thead className='border-b border-gray-300 '>
-//       <tr className='text-black  text-left'>
-//         <th className='py-2'>Full Name</th>
-//         <th className='py-2'>Status</th>
-//         <th className='py-2'>Created At</th>
-//       </tr>
-//     </thead>
-//   );
-
-//   return (
-//     <div className='w-full md:w-1/3 bg-white h-fit px-2 md:px-6 py-4 shadow-md rounded'>
-//       <table className='w-full mb-5'>
-//         <TableHeader />
-//         <tbody>
-//           {users?.map((user, index) => (
-//             <TableRow key={index + user?._id} user={user} />
-//           ))}
-//         </tbody>
-//       </table>
-//     </div>
-//   );
-// };
 const Dashboard = () => {
-  const totals = summary.tasks;
-
   const stats = [
     {
       _id: "1",
-      label: "TOTAL TASK",
-      total:  0,
+      label: "Task",
+      total: 0,
       icon: <FaNewspaper />,
       bg: "bg-text-color-4",
     },
     {
       _id: "2",
-      label: "COMPLTED TASK",
-      total:  0,
+      label: "Completed Task",
+      total: 0,
       icon: <MdAdminPanelSettings />,
       bg: "bg-secondary-color",
     },
     {
       _id: "3",
-      label: "TASK IN PROGRESS ",
-      total:  0,
+      label: "Pending ",
+      total: 0,
       icon: <LuClipboardEdit />,
       bg: "bg-[#f59e0b]",
     },
@@ -141,7 +47,7 @@ const Dashboard = () => {
         <div className=' flex flex-1 flex-col justify-between'>
           <p className='text-base text-gray-600'>{label}</p>
           <span className='text-2xl font-semibold'>{count}</span>
-          <span className='text-sm text-gray-400'>{"110 last month"}</span>
+          <span className='text-sm text-gray-400'>{"Period"}</span>
         </div>
 
         <div
@@ -163,18 +69,11 @@ const Dashboard = () => {
         ))}
       </div>
 
-      {/* <div className='w-full bg-white my-16 p-4 rounded shadow-sm'>
-        <h4 className='text-xl text-gray-600 font-semibold'>
-          Chart by Priority
-        </h4>
-        <Chart />
-      </div> */}
-
       <div className='w-full flex flex-col md:flex-row gap-4 2xl:gap-10 py-8'>
         {/* /left */}
 
         <TaskTable />
-        <Calendar/>
+        <Calendar />
       </div>
     </div>
   );

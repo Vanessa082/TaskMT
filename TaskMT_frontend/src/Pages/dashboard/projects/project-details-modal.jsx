@@ -44,11 +44,6 @@ export default function ProjectDetailsModal() {
         status: project.status,
       }
 
-      // if (!isEditing) {
-      //   update.user_id = currentUser.user_id;
-      // }
-
-      // console.log({ update });
 
       const response = await fetch(url, {
         method,

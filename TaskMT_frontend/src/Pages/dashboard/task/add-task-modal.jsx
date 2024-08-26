@@ -3,16 +3,14 @@ import { API_BASE_URL } from "../../../constants/constants";
 import { useModalContext } from "../../../providers/context/modal-context";
 import { useDashboardContext } from "../../../providers/context/dashboard-context";
 import { toast } from "sonner";
-import { useAppContext } from "../../../providers/context/app-context";
 
 export default function TaskCreationModal() {
   const [isEditing, setIsEditing] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const { task, setTask, setTaskModalOpen } = useModalContext();
-  const { projects } = useDashboardContext();
-  const { currentUser } = useAppContext();
-
+  const { projects, refetchTasks} = useDashboardContext();
+ 
   const updateTaskState = (key, value) => {
     setTask((prev) => ({
       ...prev,
@@ -20,7 +18,8 @@ export default function TaskCreationModal() {
     }));
   };
 
-  const closeModal = () => {
+  const closeModal = async() => {
+    await refetchTasks()
     setTask(null);
     setTaskModalOpen(false);
   };
@@ -34,10 +33,6 @@ export default function TaskCreationModal() {
       const url = `${API_BASE_URL}/tasks/${isEditing ? task.task_id : ""}`;
       const method = isEditing ? "PUT" : "POST";
 
-      if (!isEditing) {
-        update.user_id = currentUser.user_id;
-      }
-
       const response = await fetch(url, {
         method,
         headers: {
@@ -48,9 +43,6 @@ export default function TaskCreationModal() {
       });
       console.log("Response status:", response.status);
 
-      // if (!response.ok) {
-      //   throw new Error("Failed to submit the task,");
-      // }
 
       const result = await response.json();
       console.log("Result:", result);
@@ -152,7 +144,7 @@ export default function TaskCreationModal() {
             >
               <option value="">Select a project</option>
               {projects?.map((project) => (
-                <option key={project.project_id} value={project.project_id}>
+                <option key={project.id} value={project.id}>
                   {project.name}
                 </option>
               ))}
