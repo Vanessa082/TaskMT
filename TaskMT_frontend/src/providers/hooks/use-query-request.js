@@ -8,10 +8,7 @@ import { API_BASE_URL } from "../../constants/constants";
  * @argument options object to controll how hook works, properties below
  * * fetchOnCall: Boolean // option wether or not to make request as soon as hook is called. true by default
 */
-function useQueryRequest(pathname, {
-  fetchOnCall = true,
-  initialData = null,
-} = {}) {
+function useQueryRequest(pathname, { fetchOnCall = true, initialData = null } = {}) {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState(initialData);
   const [error, setError] = useState("");
@@ -20,6 +17,7 @@ function useQueryRequest(pathname, {
   const [isFirstFetch, setIsFirstFetch] = useState(true);
 
   const refetch = () => {
+    setIsFirstFetch(false);
     setReload((prev) => !prev);
   };
 
@@ -40,17 +38,17 @@ function useQueryRequest(pathname, {
 
       const _data = await response.json();
       setData(_data);
-      console.log(data, 'fetched')
     } catch (error) {
       setError(error)
     } finally {
       setLoading(false);
-      setIsFirstFetch(false);
     }
   };
 
   useEffect(() => {
-    if (!fetchOnCall && isFirstFetch) return;
+    if (!fetchOnCall && isFirstFetch) {
+      return;
+    };
 
     fetchData();
   }, [reload]);

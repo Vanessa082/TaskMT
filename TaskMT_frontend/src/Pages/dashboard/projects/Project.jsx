@@ -13,14 +13,15 @@ export const Project = () => {
     initialData: []
   });
 
-  const handleTaskStatus = async (task_id, currentStatus) => {
-    const newStatus = currentStatus === 'completed' ? 'pending' : 'completed';
-
+  const handleTaskStatus = async (id, currentStatus) => {
+    const newStatus = currentStatus === 'Completed' ? 'Pending' : 'Completed';
+  
     try {
-      await fetch(`${API_BASE_URL}/${task_id}`, {
+      await fetch(`${API_BASE_URL}/tasks/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
+          "Authorization": `Bearer ${localStorage.getItem("token")}`,
         },
         body: JSON.stringify({ status: newStatus }),
       });
@@ -29,6 +30,7 @@ export const Project = () => {
       console.error('Failed to update task status', error);
     }
   };
+  
 
   if (projectLoading || tasksLoading) {
     return <p className="text-center text-gray-500">Loading...</p>;
@@ -74,19 +76,22 @@ export const Project = () => {
                 {tasks.map(task => (
                   <tr key={task.id} className="border-b border-gray-200">
                     <td className="py-3 px-6 text-left">{task?.name}</td>
-                    {task?.time_estimate
-                      ? `${task.time_estimate.hours} hours${task.time_estimate.minutes ? ` ${task.time_estimate.minutes} minutes` : ''}`
-                      : 'No estimate'}
+                    <td className="py-3 px-6 text-left">
+                      {task?.time_estimate
+                        ? `${task.time_estimate.hours} hours${task.time_estimate.minutes ? ` ${task.time_estimate.minutes} minutes` : ''}`
+                        : 'No estimate'}
+                    </td>
                     <td className="py-3 px-6 text-center">
                       <input
                         type="checkbox"
-                        checked={task.status === 'completed'}
-                        onChange={() => handleTaskStatus(task.id, task.status)}
+                        checked={task.status === 'Completed'}  // Checkbox is checked if the task is completed
+                        onChange={() => handleTaskStatus(task.id, task.status)}  // Toggle status on change
                       />
                     </td>
                   </tr>
                 ))}
               </tbody>
+
             </table>
           </div>
         )}

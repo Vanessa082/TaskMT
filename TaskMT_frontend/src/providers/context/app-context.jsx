@@ -3,7 +3,7 @@ import { useQueryRequest } from "../hooks/use-query-request";
 
 const AppContext = createContext(null);
 
-function AppContextProvider ({ children })  {
+function AppContextProvider({ children }) {
   const {
     data: currentUser,
     setData: setCurrentUser,

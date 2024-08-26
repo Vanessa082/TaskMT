@@ -9,7 +9,7 @@ export default function TaskCreationModal() {
   const [loading, setLoading] = useState(false);
 
   const { task, setTask, setTaskModalOpen } = useModalContext();
-  const { projects } = useDashboardContext();
+  const { projects, refetchTasks} = useDashboardContext();
  
   const updateTaskState = (key, value) => {
     setTask((prev) => ({
@@ -18,7 +18,8 @@ export default function TaskCreationModal() {
     }));
   };
 
-  const closeModal = () => {
+  const closeModal = async() => {
+    await refetchTasks()
     setTask(null);
     setTaskModalOpen(false);
   };

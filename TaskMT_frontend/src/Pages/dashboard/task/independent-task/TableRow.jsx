@@ -101,11 +101,11 @@ export default function TableRow({ task }) {
             onBlur={() => setOpenDropdown(false)}
             className="absolute right-0 top-full -mt-1 w-32 bg-white border rounded shadow-lg z-10 outline-none"
           >
-            <div className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100">
+            <div className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 cursor-pointer">
               View Task
             </div>
             <div
-              className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
+              className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 cursor-pointer"
               onClick={() => handleDelete(task.id)}
             >
               Delete Task
