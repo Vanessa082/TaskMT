@@ -33,63 +33,60 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <nav className="w-full px-4 py-4 flex items-center justify-between bg-white text-primary-color shadow-md sticky top-0 z-50">
+    <header className="w-full px-4 py-4 flex items-center  justify-between bg-accent-color shadow-md sticky top-0 z-50">
       {/* Logo */}
       <Link to="/">
-        <img src={logo} alt="TaskMT logo" className="h-12 w-20" />
+        <img src={logo} alt="TaskMT logo" className="hidden md:block h-10 w-auto" />
       </Link>
 
-      {/* Hamburger Icon for Mobile */}
-      <div
-        className="md:hidden text-primary-color z-20"
-        onClick={() => setMenuOpen(!menuOpen)}
-        aria-label="Toggle menu"
-      >
-        <FontAwesomeIcon icon={menuOpen ? faTimes : faBars} size="2x" />
-      </div>
+      <nav className="font-sans font-bold flex items-center justify-between text-background-color ">
 
-      {/* Overlay for Mobile Menu */}
-      <div
-        className={`fixed inset-0 bg-black bg-opacity-50 transition-opacity duration-300 ${
-          menuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
-        } md:hidden`}
-        onClick={() => setMenuOpen(false)}
-        aria-hidden="true"
-      ></div>
+        {/* Hamburger Icon for Mobile */}
+        <div
+          className="md:hidden text-primary-color z-20"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Toggle menu"
+        >
+          <FontAwesomeIcon icon={menuOpen ? faTimes : faBars} size="2x" />
+        </div>
 
-      {/* Nav Items */}
-      <div
-        className={`fixed top-0 right-0 w-2/3 h-full bg-white shadow-lg transform transition-transform duration-300 z-10 md:static md:w-auto md:bg-transparent md:shadow-none md:flex items-center gap-4 ${
-          menuOpen ? "translate-x-0" : "translate-x-full"
-        } md:translate-x-0`}
-      >
-        <ul className="flex flex-col md:flex-row gap-6 p-6 md:p-0">
-          {NavItems.map(({ text, href }) => (
-            <li key={text}>
-              <a href={href} className="hover:text-secondary-color transition-colors duration-200">
-                {text}
-              </a>
-            </li>
-          ))}
-        </ul>
+        {/* Overlay for Mobile Menu */}
+        <div
+          className={`fixed inset-0 bg-black bg-opacity-50 transition-opacity duration-300 ${menuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+            } md:hidden`}
+          onClick={() => setMenuOpen(false)}
+          aria-hidden="true"
+        ></div>
 
-        {/* User Action */}
-        {currentUser ? (
-          <Link to="/dashboard" className="mt-4 md:mt-0">
-            <button className="user-action-icon flex flex-col items-center bg-primary-color text-text-color-1 cursor-pointer">
-              {/* <FontAwesomeIcon icon={faUserCircle} size="2x" /> */}
-              <span>{currentUser.username}</span>
-            </button>
-          </Link>
-        ) : (
-          <Link to="/login" className="mt-4 md:mt-0">
-            <div className="user-action-icon flex flex-col items-center text-primary-color cursor-pointer">
-              <FontAwesomeIcon icon={faUserCircle} size="2x" />
-              <span>Login</span>
-            </div>
-          </Link>
-        )}
-      </div>
-    </nav>
+        {/* Nav Items */}
+        <div
+          className={`fixed top-0 right-0 w-2/3 h-full bg-white shadow-lg transform transition-transform duration-300 z-10 md:static md:w-auto md:bg-transparent md:shadow-none md:flex items-center gap-4 ${menuOpen ? "translate-x-0" : "translate-x-full"
+            } md:translate-x-0`}
+        >
+          <ul className="flex flex-col md:flex-row gap-6 p-6 md:p-0">
+            {NavItems.map(({ text, href }) => (
+              <li key={text}>
+                <a href={href} className="hover:text-secondary-color transition-colors duration-200">
+                  {text}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </nav>
+
+      {/* User Action */}
+      {currentUser ? (
+        <Link to="/dashboard">
+          <button className="bg-primary-color px-5 py-2.5 font-sans font-bold rounded-md cursor-pointer text-base text-background-color">
+            {currentUser.username}
+          </button>
+        </Link>
+      ) : (
+        <Link to="/login">
+          <button className="bg-primary-color px-5 py-2.5  rounded-md cursor-pointer font-bold font-sans text-background-color text-nowrap">Get Started</button>
+        </Link>
+      )}
+    </header>
   );
 }

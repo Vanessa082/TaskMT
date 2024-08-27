@@ -7,13 +7,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        "text-color-1": "var(--text-color-1)",
-        "text-color-2": "var(--text-color-2)",
-        "text-color-3": "var(--text-color-3)",
-        "text-color-4": "var(--text-color-4)",
         "primary-color": "var(--primary-color)",
         "secondary-color": "var(--secondary-color)",
-        "sidebar-color": "var(--sidebar-color)"
+        "accent-color": "var(--accent-color)",
+        "text-color": "var(--text-color)",
+        "muted-text-color": "var(--muted-text-color)",
+        "background-color": "var(--background-color)",
+        "overlay-color": "var(--overlay-color)"
       },
       transitionTimingFunction: {
         'custom-cubic': 'cubic-bezier(.8,0,.05,1)',
