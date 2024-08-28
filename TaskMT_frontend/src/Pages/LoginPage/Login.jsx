@@ -45,18 +45,7 @@ export default function Login() {
           <span className=" py-2 border  text-sm text-center text-gray-600">
             Prioritize your tasks; schedule them accordingly.
           </span>
-      <div className="flex flex-col lg:flex-row justify-center items-center flex-1 max-w-5xl mx-auto">
-        {/* Left Side */}
-        <div className="hidden lg:flex flex-1 flex-col items-center justify-center lg:items-start lg:justify-center gap-5 text-center lg:text-left">
-
-          <p className="text-4xl md:text-5xl font-bold text-primary-color leading-tight">
-            Personal Task Manager
-          </p>
-          <div className="cell">
-            <div className="circle rotate-in-up-left"></div>
-          </div>
-        </div>
-        {/* Right Side - Form */}
+      <div className="flex flex-col justify-center items-center flex-1 max-w-5xl mx-auto">
         <div className="flex-1 w-full max-w-md flex items-center justify-center">
           <form
             className="bg-white p-8 rounded-lg shadow-lg w-full flex flex-col gap-6"

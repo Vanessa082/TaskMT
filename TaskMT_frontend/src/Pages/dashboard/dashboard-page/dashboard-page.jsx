@@ -16,14 +16,14 @@ const Dashboard = () => {
       label: "Task",
       total: 0,
       icon: <FaNewspaper />,
-      bg: "bg-text-color-4",
+      bg: "bg-[#d398e7]",
     },
     {
       _id: "2",
       label: "Completed Task",
       total: 0,
       icon: <MdAdminPanelSettings />,
-      bg: "bg-secondary-color",
+      bg: "bg-[#4caf50]",
     },
     {
       _id: "3",
@@ -43,7 +43,7 @@ const Dashboard = () => {
 
   const Card = ({ label, count, bg, icon }) => {
     return (
-      <div className='w-full bg-white  p-5 shadow-md rounded-md flex items-center justify-between'>
+      <div className='w-full  p-5 shadow-md rounded-md flex items-center justify-between bg-lighter-shade-s-color'>
         <div className=' flex flex-1 flex-col justify-between'>
           <p className='text-base text-gray-600'>{label}</p>
           <span className='text-2xl font-semibold'>{count}</span>
@@ -62,19 +62,13 @@ const Dashboard = () => {
     );
   };
   return (
-    <div className=' py-4'>
+    <div className='flex flex-col justify-between gap-5 py-4'>
       <div className='grid grid-cols-1 md:grid-cols-4 gap-5'>
         {stats.map(({ icon, bg, label, total }, index) => (
           <Card key={index} icon={icon} bg={bg} label={label} count={total} />
         ))}
       </div>
-
-      <div className='w-full flex flex-col md:flex-row gap-4 2xl:gap-10 py-8'>
-        {/* /left */}
-
-        <TaskTable />
-        <Calendar />
-      </div>
+        <TaskTable /> 
     </div>
   );
 };

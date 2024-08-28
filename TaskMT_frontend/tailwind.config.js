@@ -5,10 +5,14 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    backgroundImage: {
+      "hero-banner": "linear-gradient(0deg, #00000069, #00000069), url('/landing/banner-img.jpg')",
+    },
     extend: {
       colors: {
         "primary-color": "var(--primary-color)",
         "secondary-color": "var(--secondary-color)",
+        "lighter-shade-s-color": "var(--lighter-shade-s-color)",
         "accent-color": "var(--accent-color)",
         "text-color": "var(--text-color)",
         "muted-text-color": "var(--muted-text-color)",

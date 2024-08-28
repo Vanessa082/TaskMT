@@ -9,8 +9,8 @@ export default function TaskCreationModal() {
   const [loading, setLoading] = useState(false);
 
   const { task, setTask, setTaskModalOpen } = useModalContext();
-  const { projects, refetchTasks} = useDashboardContext();
- 
+  const { projects, refetchTasks } = useDashboardContext();
+
   const updateTaskState = (key, value) => {
     setTask((prev) => ({
       ...prev,
@@ -18,7 +18,7 @@ export default function TaskCreationModal() {
     }));
   };
 
-  const closeModal = async() => {
+  const closeModal = async () => {
     await refetchTasks()
     setTask(null);
     setTaskModalOpen(false);
@@ -96,14 +96,23 @@ export default function TaskCreationModal() {
               required
             />
           </label>
+
           <label className="mt-2">
-            Deadline Date
+            Start Date
+            <input
+              type="date"
+              value={task?.start_time || ""}
+              onChange={(e) => updateTaskState("start_time", e.target.value)}
+              className="border border-gray-300 p-2 rounded mt-1"
+            />
+          </label>
+          <label className="mt-2">
+            Due Date
             <input
               type="date"
               value={task?.deadline || ""}
               onChange={(e) => updateTaskState("deadline", e.target.value)}
               className="border border-gray-300 p-2 rounded mt-1"
-              required
             />
           </label>
 
@@ -115,10 +124,10 @@ export default function TaskCreationModal() {
                 onChange={(e) => updateTaskState("priority", e.target.value)}
                 className="border border-gray-300 p-2 rounded mt-1"
               >
-                <option value="" disabled>Select Priority</option>
                 <option value="Low">Low</option>
                 <option value="Medium">Medium</option>
                 <option value="High">High</option>
+                <option value="Urgent">Urgent</option>
               </select>
             </label>
             <label className="mt-2">
@@ -128,12 +137,14 @@ export default function TaskCreationModal() {
                 onChange={(e) => updateTaskState("status", e.target.value)}
                 className="border border-gray-300 p-2 rounded mt-1"
               >
-                <option value="" disabled>Select Status</option>
+                <option value="">Select Status</option>
+                <option value="Not Started">Not Started</option>
                 <option value="Pending">Pending</option>
                 <option value="Completed">Completed</option>
-
+                <option value="On hold">On hold</option>
               </select>
             </label>
+
           </div>
           <label className="mt-2">
             Project

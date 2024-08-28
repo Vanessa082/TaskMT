@@ -1,9 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle, faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
-import logo from "../../assets/logo.svg";
 import { Link } from "react-router-dom";
 import { useAppContext } from "../../providers/context/app-context";
 import { useState } from "react";
+import { TextLogo } from "../ui/text-logo";
 
 const NavItems = [
   {
@@ -36,7 +36,7 @@ export default function Navbar() {
     <header className="w-full px-4 py-4 flex items-center  justify-between bg-accent-color shadow-md sticky top-0 z-50">
       {/* Logo */}
       <Link to="/">
-        <img src={logo} alt="TaskMT logo" className="hidden md:block h-10 w-auto" />
+        <TextLogo />
       </Link>
 
       <nav className="font-sans font-bold flex items-center justify-between text-background-color ">

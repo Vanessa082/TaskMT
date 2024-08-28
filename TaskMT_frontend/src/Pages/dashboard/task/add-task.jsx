@@ -14,7 +14,7 @@ export default function AddTask() {
       <FontAwesomeIcon
         icon={faPlus}
         onClick={handleOpenModal}
-        className="cursor-pointer"
+        className="text-accent-color cursor-pointer"
       />
     </div>
   );

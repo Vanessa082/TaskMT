@@ -1,8 +1,7 @@
 export default function Tblog() {
   return (
-    <div className="flex flex-col items-center justify-center py-12 px-6 lg:py-16 lg:px-12 bg-white shadow-lg rounded-lg text-center max-w-4xl mx-auto">
-      {/* Text Content */}
-      <div className="w-full flex flex-col gap-6">
+    <div className="w-full min-h-screen flex flex-col items-center justify-center py-6 bg-white text-center mx-auto">
+      <div className="w-[90vw] max-w-[700px] flex flex-col gap-6">
         <h2 className="text-3xl font-bold text-primary-color">
           Getting Started with Super TaskMT
         </h2>
