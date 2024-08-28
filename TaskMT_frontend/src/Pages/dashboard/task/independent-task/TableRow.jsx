@@ -2,7 +2,7 @@ import clsx from "clsx";
 import React, { useEffect, useRef, useState } from "react";
 import { formatDate } from "../../../../utils/dateFormat";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEllipsisH } from "@fortawesome/free-solid-svg-icons";
+import { faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 import { API_BASE_URL } from "../../../../constants/constants";
 import { useDashboardContext } from "../../../../providers/context/dashboard-context";
 import { toast } from "sonner";
@@ -51,48 +51,12 @@ export default function TableRow({ task }) {
 
   return (
     <tr className="border-b border-gray-200">
-      <td className="px-4 py-2" tabIndex={3}>
-        {task.name}
-      </td>
-      <td className="px-4 py-2">
-        <span
-          className={clsx(
-            "text-xs",
-            task.priority === "Low"
-              ? "text-yellow-500"
-              : task.priority === "Medium"
-              ? "text-green-500"
-              : task.priority === "High"
-              ? "text-red-500"
-              : "text-gray-500"
-          )}
-        >
-          {task.priority.charAt(0).toUpperCase() + task.priority.slice(1)}
-        </span>
-      </td>
-      <td className="px-4 py-2">
-        <span
-          className={clsx(
-            "text-xs",
-            task.status === "Pending"
-              ? "text-orange-500"
-              : task.status === "Completed"
-              ? "text-blue-500"
-              : "text-gray-500"
-          )}
-        >
-          {task.status.charAt(0).toUpperCase() + task.status.slice(1)}
-        </span>
-      </td>
-      <td className="px-4 py-2 hidden md:table-cell text-gray-500 text-xs">
-        {formatDate(task.deadline)}
-      </td>
-      <td className="px-4 py-2 text-right relative">
+      <td className="py-2 text-right relative">
         <div
           onClick={toggleDropdown}
           className="text-gray-500 hover:text-gray-700 focus:outline-none cursor-pointer"
         >
-          <FontAwesomeIcon icon={faEllipsisH} />
+          <FontAwesomeIcon icon={faEllipsisV} />
         </div>
         {openDropdown && (
           <div
@@ -112,6 +76,49 @@ export default function TableRow({ task }) {
             </div>
           </div>
         )}
+      </td>
+      <td className="px-4 py-2" tabIndex={3}>
+        {task.name}
+      </td>
+      <td className="w-auto px-2 py-2">
+  <span
+    className={clsx(
+      "inline-flex items-center justify-center w-24 py-1 px-3 rounded-full text-xs font-semibold",
+      task.priority === "Low"
+        ? "bg-yellow-100 text-yellow-500"
+        : task.priority === "Medium"
+          ? "bg-green-100 text-green-500"
+          : task.priority === "High"
+            ? "bg-blue-200 text-blue-700"
+            : task.priority === "Urgent"
+              ? "bg-red-100 text-red-500"
+              : "text-gray-500"
+    )}
+  >
+    {task.priority.charAt(0).toUpperCase() + task.priority.slice(1)}
+  </span>
+</td>
+<td className="w-auto px-2 py-2">
+  <span
+    className={clsx(
+      "inline-flex items-center justify-center w-24 py-1 px-3 rounded-full text-xs font-semibold",
+      task.status === "Not Started"
+        ? "bg-blue-100 text-blue-500"
+        : task.status === "Pending"
+          ? "bg-orange-100 text-orange-500"
+          : task.status === "Completed"
+            ? "bg-green-100 text-green-500"
+            : task.status === "On hold"
+              ? "bg-yellow-100 text-yellow-500"
+              : "text-gray-500"
+    )}
+  >
+    {task.status.charAt(0).toUpperCase() + task.status.slice(1)}
+  </span>
+</td>
+
+      <td className="px-4 py-2 hidden md:table-cell text-xs">
+        {formatDate(task.deadline)}
       </td>
     </tr>
   );

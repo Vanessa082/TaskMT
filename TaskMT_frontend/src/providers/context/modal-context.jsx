@@ -9,6 +9,7 @@ function ModalContextProvider({ children }) {
     name: "",
     description: "",
     priority: "",
+    start_time: "",
     deadline: "",
     status: "",
     project_id: "",

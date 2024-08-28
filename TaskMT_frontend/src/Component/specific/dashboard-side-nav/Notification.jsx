@@ -11,7 +11,7 @@ export default function Notification() {
             className="inline-flex items-center cursor-pointer"
             aria-expanded={open}
           >
-            <div className="w-8 h-8 flex items-center justify-center text-gray-800">
+            <div className="w-10 h-10 flex items-center justify-center text-accent-color rounded-full bg-background-color p-2">
               <IoIosNotificationsOutline className="text-2xl" />
             </div>
           </div>

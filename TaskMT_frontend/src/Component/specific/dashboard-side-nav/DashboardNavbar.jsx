@@ -20,16 +20,19 @@ export default function DashboardNavbar() {
 
   return (
     <div>
-      <div className='flex justify-between items-center bg-white px-4 py-3 2xl:py-4 sticky z-10 top-0 w-full'>
+      <div className='flex justify-between items-center bg-secondary-color px-4 py-3 2xl:py-4 sticky z-10 top-0 w-full'>
         <div className='flex gap-4 items-center'>
           {/* Menu icon always visible */}
           <div
             onClick={() => setIsSidebarOpen(true)}
             className='text-2xl text-gray-500 cursor-pointer'
           >
-            <FontAwesomeIcon icon={faBars} />
+            <FontAwesomeIcon icon={faBars} className='text-accent-color'/>
           </div>
+          <h1 className='font-sans font-bold text-xl text-accent-color'>Dashboard</h1>
+        </div>
 
+        <div className='flex gap-2 items-center'>
           <div className='hidden lg:flex w-64 2xl:w-[400px] items-center py-2 px-3 gap-2 rounded-full bg-[#f3f4f6]'>
             <MdOutlineSearch className='text-gray-500 text-xl' />
             <input
@@ -38,16 +41,13 @@ export default function DashboardNavbar() {
               className='flex-1 outline-none bg-transparent placeholder:text-gray-500 text-gray-800'
             />
           </div>
-        </div>
-
-        <div className='flex gap-2 items-center'>
           <AddTask />
           <Notification />
 
           <UserAvatar />
         </div>
       </div>
-      <hr className="bg-primary-color w-full" />
+      <hr className="bg-[#e1d6ce] w-full" />
 
       {/* Sidebar */}
       <DashboardSideNav

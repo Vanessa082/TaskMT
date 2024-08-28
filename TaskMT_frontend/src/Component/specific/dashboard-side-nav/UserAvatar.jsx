@@ -9,14 +9,12 @@ function UserAvatar() {
     // required logic
   };
 
-  const initials = currentUser ? getInitials(currentUser.username) : "";
-
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
         <MenuButton
-          className="w-full h-10 2xl:w-12 2xl:h-12 items-center  justify-center rounded-full bg-primary-color" >
-          <span className="text-white font-semibold">{initials}</span>
+          className="bg-background-color px-5 py-2.5  rounded-full cursor-pointer font-bold font-sans text-accent-color w-full" >
+          {currentUser.username}
         </MenuButton>
       </div>
     </Menu>
