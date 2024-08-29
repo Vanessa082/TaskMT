@@ -1,30 +1,8 @@
-# TaskMT
-TaskMT is a user-friendly task management tool built with React, Vite, Node.js, and Express. It allows users to efficiently organize tasks, set deadlines, and collaborate on projects. Featuring a calendar view, notification system, and more, TaskMate simplifies task management and improves productivity.
+# React + Vite
 
-## Overview
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-This project aims to create a user-friendly and efficient task management tool using React, Vite, Node.js, Express, and other libraries.
+Currently, two official plugins are available:
 
-## Features
-
-- Organize tasks into projects
-- Set deadlines for tasks and projects
-- Calendar view for tracking deadlines
-- Notification system for task updates
-
-## Installation
-
-*Placeholder for installation instructions once the project development starts*
-
-## Usage
-
-*Placeholder for usage guidelines and examples once the project development starts*
-
-## License
-
-*Include the type of license used for your project, if applicable*
-
-## Contributors
-*Wah Vanessa
-
-*Ayuk Gires
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
