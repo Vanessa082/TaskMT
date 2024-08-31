@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+// import React, { useEffect } from "react";
 import TableRow from "./TableRow";
 import { useDashboardContext } from "../../../../providers/context/dashboard-context";
 import TableFilters from "./filters";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FaSpinner } from "react-icons/fa";
 
 const TableHeader = () => {
@@ -38,7 +38,7 @@ export function TaskTable() {
           {
             tasksLoading ? (
               <>
-                <FontAwesomeIcon icon={FaSpinner} spin />
+                {/* <FontAwesomeIcon icon={} spin /> */}
                 loading...
               </>
             ) : null

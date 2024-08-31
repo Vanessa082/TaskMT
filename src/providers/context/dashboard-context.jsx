@@ -25,6 +25,11 @@ function DashboardContextProvider({ children }) {
     setQuery: setTaskQuery,
   } = useQueryRequest("/tasks", { fetchOncall: false, initialData: [] });
 
+  const taskCount = tasks.length;
+  const completedTasks = tasks.filter(task => task.status === 'Completed').length;
+  const pendingTasks = tasks.filter(task => task.status === 'Pending').length;
+  const projectCount = projects.length;
+
   return (
     <DashboardContext.Provider
       value={{
@@ -40,6 +45,11 @@ function DashboardContextProvider({ children }) {
         tasksLoading,
         tasksError,
         setTaskQuery,
+
+        taskCount,
+        completedTasks,
+        pendingTasks,
+        projectCount,
       }}
     >
       {children}

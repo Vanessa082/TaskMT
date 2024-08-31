@@ -11,10 +11,11 @@ import {
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import clsx from "clsx";
-import logo from "../../../../public/logo.svg";
-import { Link } from "react-router-dom";
+import { Link , useNavigate} from "react-router-dom";
 import { useModalContext } from "../../../providers/context/modal-context";
 import { TextLogo } from "../../ui/text-logo";
+import { toast } from "sonner";
+import { useAppContext } from "../../../providers/context/app-context";
 
 const sidebarContent = [
   {
@@ -37,11 +38,27 @@ const sidebarContent = [
 
 export default function DashboardSideNav({ isOpen, closeSidebar }) {
   const { projectModalOpen, setProjectModalOpen } = useModalContext();
+  const { setCurrentUser } = useAppContext();
+
+  const navigate = useNavigate()
 
   const handleOpenModal = () => {
     setProjectModalOpen(true);
     closeSidebar();
   };
+
+  const handleLogOut = async () => {
+    try {
+      await fetch('/logout', { method: 'POST' });
+    } catch (error) {
+      console.error('Logout failed', error);
+    }
+    localStorage.removeItem("token");
+    setCurrentUser(null);
+    toast.success('Logged out! Redirecting to Homepage ...');
+    navigate("/");
+  };
+  
   return (
     <>
       {
@@ -105,7 +122,7 @@ export default function DashboardSideNav({ isOpen, closeSidebar }) {
               <FontAwesomeIcon icon={faCog} />
               <span>Settings</span>
             </div>
-          <div className="w-full flex gap-2  px-3 py-2 text-background-color hover:text-accent-color rounded-full items-center font-sans text-base hover:bg-background-color cursor-pointe">
+          <div className="w-full flex gap-2  px-3 py-2 text-background-color hover:text-accent-color rounded-full items-center font-sans text-base hover:bg-background-color cursor-pointe" onClick={handleLogOut}>
             <FontAwesomeIcon icon={faSignOutAlt} className="text-primary-color"/>
            <span> Logout</span>
           </div>

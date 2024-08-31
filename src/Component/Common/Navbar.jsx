@@ -1,9 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserCircle, faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { useAppContext } from "../../providers/context/app-context";
 import { useState } from "react";
 import { TextLogo } from "../ui/text-logo";
+import { MdClose, MdMenu } from "react-icons/md";
 
 const NavItems = [
   {
@@ -43,12 +43,12 @@ export default function Navbar() {
 
         {/* Hamburger Icon for Mobile */}
         <div
-          className="md:hidden text-primary-color z-20"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle menu"
-        >
-          <FontAwesomeIcon icon={menuOpen ? faTimes : faBars} size="2x" />
-        </div>
+      className="md:hidden text-primary-color z-20"
+      onClick={() => setMenuOpen(!menuOpen)}
+      aria-label="Toggle menu"
+    >
+      {menuOpen ? <MdClose size={32} /> : <MdMenu size={32} />} {/* Using react-icons */}
+    </div>
 
         {/* Overlay for Mobile Menu */}
         <div

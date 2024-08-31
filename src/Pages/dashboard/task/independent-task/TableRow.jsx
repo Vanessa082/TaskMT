@@ -6,17 +6,40 @@ import { faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 import { API_BASE_URL } from "../../../../constants/constants";
 import { useDashboardContext } from "../../../../providers/context/dashboard-context";
 import { toast } from "sonner";
+import { useModalContext } from "../../../../providers/context/modal-context";
 
 export default function TableRow({ task }) {
   const [openDropdown, setOpenDropdown] = useState(false);
-  const { tasks, setTasks,projects } = useDashboardContext();
-
+  const { tasks, loading: tasksLoading, setTasks, refetch: refetchTasks, projects } = useDashboardContext();
+  const { setTask, setTaskModalOpen, } = useModalContext();
   const dropdownRef = useRef();
+
+  const openModal = (task) => {
+    setTask(task);
+    setTaskModalOpen(true)
+  }
 
   const toggleDropdown = () => {
     setOpenDropdown(!openDropdown);
 
     if (dropdownRef.current) dropdownRef.current?.focus();
+  };
+
+  const handleTaskStatus = async (id, currentStatus) => {
+    const newStatus = currentStatus === 'Completed' ? 'Pending' : 'Completed';
+
+    try {
+      await fetch(`${API_BASE_URL}/tasks/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          "Authorization": `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify({ status: newStatus }),
+      });
+    } catch (error) {
+      console.error('Failed to update task status', error);
+    }
   };
 
   const handleDelete = (id) => {
@@ -46,7 +69,7 @@ export default function TableRow({ task }) {
   };
 
   const getProjectName = (projectId) => {
-    const project = projects.find((proj)=>proj.id === projectId)
+    const project = projects.find((proj) => proj.id === projectId)
     return project ? project.name : "--"
   }
 
@@ -71,13 +94,17 @@ export default function TableRow({ task }) {
             className="absolute left-0 top-full -mt-1 w-32 bg-white border rounded shadow-lg z-10 outline-none"
           >
             <div className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 cursor-pointer">
-              View Task
+              View
+            </div>
+            <div className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 cursor-pointer" onClick={() => openModal(task)}>
+
+              Edit
             </div>
             <div
               className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 cursor-pointer"
               onClick={() => handleDelete(task.id)}
             >
-              Delete Task
+              Delete
             </div>
           </div>
         )}
@@ -128,6 +155,14 @@ export default function TableRow({ task }) {
 
       <td className="px-2 py-2 hidden md:table-cell text-xs">
         {formatDate(task.deadline)}
+      </td>
+
+      <td className="py-3 px-6 text-center">
+        <input
+          type="checkbox"
+          checked={task.status === 'Completed'}
+          onChange={() => handleTaskStatus(task.id, task.status)}
+        />
       </td>
     </tr>
   );

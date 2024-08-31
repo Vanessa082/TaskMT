@@ -80,22 +80,21 @@ export default function Register() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-100 p-4 lg:p-8">
-      {/* Main Content Wrapper */}
-      <span className="py-2 border text-sm text-center text-gray-600">
+    <div className="flex flex-col min-h-screen bg-lighter-shade-s-color p-4 lg:p-8">
+      <span className="py-2 text-sm text-center text-muted-text-color">
         Prioritize your tasks; schedule them accordingly.
       </span>
       <div className="flex flex-col justify-center items-center flex-1 max-w-5xl mx-auto">
-        <div className="flex-1 w-full max-w-md flex items-center justify-center">
+        <div className="flex-1 w-full max-w-lg flex items-center justify-center">
           <form
-            className="bg-white p-8 rounded-lg shadow-lg w-full flex flex-col gap-6"
+            className=" p-8 md:p-10 lg:p-12  w-full flex flex-col gap-6"
             onSubmit={handleSubmit}
           >
             <div>
               <p className="text-primary-color text-3xl font-bold text-center">
                 Welcome!
               </p>
-              <p className="text-center text-base text-gray-700">
+              <p className="text-center text-base text-muted-text-color">
                 Register and Get Started.
               </p>
             </div>
@@ -111,7 +110,7 @@ export default function Register() {
                   placeholder="Enter username"
                   value={username}
                   onChange={handleInputChanged}
-                  className={`w-full px-4 py-2 border border-gray-300 rounded-full focus:border-primary-color focus:ring-primary-color ${
+                  className={`w-full px-4 py-2 border border-muted-text-color rounded-lg focus:border-primary-color focus:ring-primary-color ${
                     errors.username ? "border-red-500" : ""
                   }`}
                 />
@@ -136,7 +135,7 @@ export default function Register() {
                   placeholder="Enter email"
                   value={email}
                   onChange={handleInputChanged}
-                  className={`w-full px-4 py-2 border border-gray-300 rounded-full focus:border-primary-color focus:ring-primary-color ${
+                  className={`w-full px-4 py-2 border border-muted-text-color rounded-lg focus:border-primary-color focus:ring-primary-color ${
                     errors.email ? "border-red-500" : ""
                   }`}
                 />
@@ -161,7 +160,7 @@ export default function Register() {
                   placeholder="Enter password"
                   value={password}
                   onChange={handleInputChanged}
-                  className={`w-full px-4 py-2 border border-gray-300 rounded-full focus:border-primary-color focus:ring-primary-color ${
+                  className={`w-full px-4 py-2 border border-muted-text-color rounded-lg focus:border-primary-color focus:ring-primary-color ${
                     errors.password ? "border-red-500" : ""
                   }`}
                 />
@@ -177,7 +176,7 @@ export default function Register() {
 
             <button
               type="submit"
-              className="w-full h-12 bg-primary-color text-white rounded-full hover:bg-secondary-color transition-colors duration-300"
+              className="w-full h-12 bg-primary-color text-white rounded-lg hover:bg-accent-color transition-colors duration-300"
             >
               Register
             </button>

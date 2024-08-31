@@ -40,22 +40,21 @@ export default function Login() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-100 p-4 lg:p-8">
-      {/* Main Content Wrapper */}
-          <span className=" py-2 border  text-sm text-center text-gray-600">
-            Prioritize your tasks; schedule them accordingly.
-          </span>
+    <div className="flex flex-col min-h-screen bg-lighter-shade-s-color p-4 lg:p-8">
+      <span className="py-2 text-sm text-center text-muted-text-color">
+        Prioritize your tasks; schedule them accordingly.
+      </span>
       <div className="flex flex-col justify-center items-center flex-1 max-w-5xl mx-auto">
-        <div className="flex-1 w-full max-w-md flex items-center justify-center">
+        <div className="flex-1 w-full max-w-lg flex items-center justify-center">
           <form
-            className="bg-white p-8 rounded-lg shadow-lg w-full flex flex-col gap-6"
+            className="p-8 md:p-10 lg:p-12  flex flex-col gap-6"
             onSubmit={handleSubmit(handleFormSubmit)}
           >
             <div>
               <p className="text-primary-color text-3xl font-bold text-center">
                 Welcome Back!
               </p>
-              <p className="text-center text-base text-gray-700">
+              <p className="text-center text-base text-muted-text-color">
                 Keep your credentials safe.
               </p>
             </div>
@@ -65,7 +64,7 @@ export default function Login() {
               type="email"
               name="email"
               label="Email Address"
-              className="w-full rounded-full border border-gray-300"
+              className="w-full rounded-lg border border-muted-text-color"
               register={register}
               error={errors.email ? errors.email.message : ""}
             />
@@ -75,18 +74,18 @@ export default function Login() {
               type="password"
               name="password"
               label="Password"
-              className="w-full rounded-full border border-gray-300"
+              className="w-full rounded-lg border border-muted-text-color"
               register={register}
               error={errors.password ? errors.password.message : ""}
             />
 
-            <span className="text-sm text-gray-500 hover:text-primary-color hover:underline cursor-pointer text-center">
+            <span className="text-sm text-muted-text-color hover:text-primary-color hover:underline cursor-pointer text-center">
               Forgot Password?
             </span>
 
             <button
               type="submit"
-              className="w-full h-12 bg-primary-color text-white rounded-full hover:bg-secondary-color transition-colors duration-300"
+              className="w-full h-12 bg-primary-color text-white rounded-lg hover:bg-accent-color transition-colors duration-300"
             >
               Submit
             </button>
