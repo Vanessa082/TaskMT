@@ -12,7 +12,7 @@ export default function ViewTaskModal() {
   return (
     <>
     <div className="fixed inset-0 z-10 bg-gray-800 bg-opacity-50"/>
-    <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 bg-background-color p-4">
+    <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 bg-background-color p-4 rounded-lg shadow-lg w-96">
       <h1>{task?.name} <span>{task?.status}</span> <span>{task?.priority}</span></h1>
       <p>{task?.description}</p>
 
