@@ -1,8 +1,11 @@
 import React from 'react'
 
-export default function Calendar  (){
+export default function Calendar() {
+  const CurrentDate = new Date
   return (
-    <div>Calendar</div>
+    <div>
+      <h1>Calender</h1>
+      
+    </div>
   )
 }
-
