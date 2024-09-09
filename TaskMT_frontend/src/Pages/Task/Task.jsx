@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';  
 import { FaTrash, FaEdit } from 'react-icons/fa';  
-import TaskNotification from '../Nofication/UseNotification';
+// import TaskNotification from '../Nofication/UseNotification';
 
 
 const Task = ({ project = { tasks: [] }, setProjects, projects }) => {  
