@@ -2,7 +2,7 @@ import clsx from "clsx";
 import React, { useEffect, useRef, useState } from "react";
 import { formatDate } from "../../../../utils/dateFormat";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEllipsisV } from "@fortawesome/free-solid-svg-icons";
+import { faEllipsisH, faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 import { API_BASE_URL } from "../../../../constants/constants";
 import { useDashboardContext } from "../../../../providers/context/dashboard-context";
 import { toast } from "sonner";
@@ -10,7 +10,7 @@ import { useModalContext } from "../../../../providers/context/modal-context";
 
 export default function TableRow({ task }) {
   const [openDropdown, setOpenDropdown] = useState(false);
-  const { tasks, loading: tasksLoading, setTasks, refetch: refetchTasks, projects } = useDashboardContext();
+  const { tasks, setTasks } = useDashboardContext();
   const { setTask, setTaskModalOpen, } = useModalContext();
   const dropdownRef = useRef();
 
@@ -68,55 +68,33 @@ export default function TableRow({ task }) {
     });
   };
 
-  const getProjectName = (projectId) => {
-    const project = projects.find((proj) => proj.id === projectId)
-    return project ? project.name : "--"
-  }
+  // const getProjectName = (projectId) => {
+  //   const project = projects.find((proj) => proj.id === projectId)
+  //   return project ? project.name : "--"
+  // }
 
   useEffect(() => {
     if (openDropdown && dropdownRef.current) dropdownRef.current?.focus();
   }, [openDropdown]);
 
   return (
-    <tr className="border-b border-gray-200">
-      <td className="py-1 text-left relative">
-        <div
-          onClick={toggleDropdown}
-          className="text-gray-500 hover:text-gray-700 focus:outline-none cursor-pointer"
-        >
-          <FontAwesomeIcon icon={faEllipsisV} />
-        </div>
-        {openDropdown && (
-          <div
-            ref={dropdownRef}
-            tabIndex={2}
-            onBlur={() => setOpenDropdown(false)}
-            className="absolute left-0 top-full -mt-1 w-32 bg-white border rounded shadow-lg z-10 outline-none"
-          >
-            <div className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 cursor-pointer">
-              View
-            </div>
-            <div className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 cursor-pointer" onClick={() => openModal(task)}>
-
-              Edit
-            </div>
-            <div
-              className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 cursor-pointer"
-              onClick={() => handleDelete(task.id)}
-            >
-              Delete
-            </div>
-          </div>
-        )}
+    <tr className="hover:bg-[var(--primary-color)] bg-[var(--lighter-shade-s-color)] rounded-lg mb-2 text-[var(--muted-text-color)]">
+      <td className="py-3 px-4 text-center">
+        <input
+          type="checkbox"
+          checked={task.status === 'Completed'}
+          onChange={() => handleTaskStatus(task.id, task.status)}
+        />
       </td>
-      <td className="px-2 py-2" tabIndex={3}>
+
+      <td className="" tabIndex={3}>
         {task.name}
       </td>
 
-      <td className="w-auto px-2 py-2">
+      <td className="">
         <span
           className={clsx(
-            "inline-flex items-center justify-center w-24 py-1 px-3 rounded-full text-xs font-semibold",
+            "inline-flex items-center justify-center w-24 py-1 px-2 rounded-full text-xs font-semibold",
             task.priority === "Low"
               ? "bg-yellow-100 text-yellow-500"
               : task.priority === "Medium"
@@ -131,13 +109,11 @@ export default function TableRow({ task }) {
           {task.priority.charAt(0).toUpperCase() + task.priority.slice(1)}
         </span>
       </td>
-      <td className="px-2 py-2 hidden md:table-cell text-xs">
-        {getProjectName(task.project_id)}
-      </td>
-      <td className="w-auto px-2 py-2">
+
+      <td className="">
         <span
           className={clsx(
-            "inline-flex items-center justify-center w-24 py-1 px-3 rounded-full text-xs font-semibold",
+            "inline-flex items-center justify-center w-24 py-1 px-2 rounded-full text-xs font-semibold",
             task.status === "Not Started"
               ? "bg-blue-100 text-blue-500"
               : task.status === "Pending"
@@ -153,17 +129,40 @@ export default function TableRow({ task }) {
         </span>
       </td>
 
-      <td className="px-2 py-2 hidden md:table-cell text-xs">
+      <td className="hidden md:table-cell text-xs">
         {formatDate(task.deadline)}
       </td>
 
-      <td className="py-3 px-6 text-center">
-        <input
-          type="checkbox"
-          checked={task.status === 'Completed'}
-          onChange={() => handleTaskStatus(task.id, task.status)}
-        />
+      <td className="py-1 text-left relative">
+        <div
+          onClick={toggleDropdown}
+          className="text-gray-500 hover:text-gray-700 focus:outline-none cursor-pointer"
+        >
+          <FontAwesomeIcon icon={faEllipsisH} />
+        </div>
+        {openDropdown && (
+          <div
+            ref={dropdownRef}
+            tabIndex={2}
+            onBlur={() => setOpenDropdown(false)}
+            className="absolute right-0 top-full -mt-1 w-32 bg-white border rounded shadow-lg z-10 outline-none"
+          >
+            <div className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 cursor-pointer">
+              View
+            </div>
+            <div className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 cursor-pointer" onClick={() => openModal(task)}>
+              Edit
+            </div>
+            <div
+              className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 cursor-pointer"
+              onClick={() => handleDelete(task.id)}
+            >
+              Delete
+            </div>
+          </div>
+        )}
       </td>
     </tr>
+
   );
 }
