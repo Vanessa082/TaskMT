@@ -2,7 +2,7 @@ import clsx from "clsx";
 import React, { useEffect, useRef, useState } from "react";
 import { formatDate } from "../../../../utils/dateFormat";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEllipsisH, faEllipsisV } from "@fortawesome/free-solid-svg-icons";
+import { faEllipsisH } from "@fortawesome/free-solid-svg-icons";
 import { API_BASE_URL } from "../../../../constants/constants";
 import { useDashboardContext } from "../../../../providers/context/dashboard-context";
 import { toast } from "sonner";
@@ -10,12 +10,17 @@ import { useModalContext } from "../../../../providers/context/modal-context";
 
 export default function TableRow({ task }) {
   const [openDropdown, setOpenDropdown] = useState(false);
-  const { tasks, setTasks } = useDashboardContext();
+  const {  setTasks, refetchTasks } = useDashboardContext();
   const { setTask, setTaskModalOpen, } = useModalContext();
   const dropdownRef = useRef();
 
-  const openModal = (task) => {
+  const openModal = () => {
     setTask(task);
+    setTaskModalOpen(true)
+  }
+
+  const viewOpenModal = () => {
+    setTask(task)
     setTaskModalOpen(true)
   }
 
@@ -25,20 +30,23 @@ export default function TableRow({ task }) {
     if (dropdownRef.current) dropdownRef.current?.focus();
   };
 
-  const handleTaskStatus = async (id, currentStatus) => {
-    const newStatus = currentStatus === 'Completed' ? 'Pending' : 'Completed';
+  const handleTaskStatus = async () => {
+    const newStatus = task.status === "Completed" ? "Pending" : "Completed";
 
     try {
-      await fetch(`${API_BASE_URL}/tasks/${id}`, {
-        method: 'PUT',
+      const response = await fetch(`${API_BASE_URL}/tasks/${task.id}`, {
+        method: "PUT",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           "Authorization": `Bearer ${localStorage.getItem("token")}`,
         },
         body: JSON.stringify({ status: newStatus }),
       });
+      if (response.ok) {
+        refetchTasks();
+      }
     } catch (error) {
-      console.error('Failed to update task status', error);
+      console.error("Failed to update task status", error);
     }
   };
 
@@ -61,17 +69,12 @@ export default function TableRow({ task }) {
               toast("Successfully deleted");
             }
           } catch (error) {
-            console.error('Error deleting task:', error);
+            console.error("Error deleting task:", error);
           }
         },
       },
     });
   };
-
-  // const getProjectName = (projectId) => {
-  //   const project = projects.find((proj) => proj.id === projectId)
-  //   return project ? project.name : "--"
-  // }
 
   useEffect(() => {
     if (openDropdown && dropdownRef.current) dropdownRef.current?.focus();
@@ -82,8 +85,8 @@ export default function TableRow({ task }) {
       <td className="py-3 px-4 text-center">
         <input
           type="checkbox"
-          checked={task.status === 'Completed'}
-          onChange={() => handleTaskStatus(task.id, task.status)}
+          checked={task.status === "Completed"}
+          onChange={handleTaskStatus}
         />
       </td>
 
@@ -147,10 +150,10 @@ export default function TableRow({ task }) {
             onBlur={() => setOpenDropdown(false)}
             className="absolute right-0 top-full -mt-1 w-32 bg-white border rounded shadow-lg z-10 outline-none"
           >
-            <div className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 cursor-pointer">
+            <div className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 cursor-pointer" onClick={() => viewOpenModal()}>
               View
             </div>
-            <div className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 cursor-pointer" onClick={() => openModal(task)}>
+            <div className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 cursor-pointer" onClick={() => openModal()}>
               Edit
             </div>
             <div
