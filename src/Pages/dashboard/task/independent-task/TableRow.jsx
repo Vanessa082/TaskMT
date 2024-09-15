@@ -11,7 +11,7 @@ import { useModalContext } from "../../../../providers/context/modal-context";
 export default function TableRow({ task }) {
   const [openDropdown, setOpenDropdown] = useState(false);
   const {  setTasks, refetchTasks } = useDashboardContext();
-  const { setTask, setTaskModalOpen, } = useModalContext();
+  const { setTask, setTaskModalOpen, setViewTaskModalOpen} = useModalContext();
   const dropdownRef = useRef();
 
   const openModal = () => {
@@ -21,7 +21,7 @@ export default function TableRow({ task }) {
 
   const viewOpenModal = () => {
     setTask(task)
-    setTaskModalOpen(true)
+    setViewTaskModalOpen(true)
   }
 
   const toggleDropdown = () => {
