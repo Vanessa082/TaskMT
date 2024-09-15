@@ -1,6 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import TaskCreationModal from "../../Pages/dashboard/task/add-task-modal";
 import ProjectDetailsModal from "../../Pages/dashboard/projects/project-details-modal";
+import ViewTaskModal from "../../Pages/dashboard/task/view-task";
 
 const ModalContext = createContext([]);
 
@@ -19,6 +20,7 @@ function ModalContextProvider({ children }) {
   });
 
   const [taskModalOpen, setTaskModalOpen] = useState(false);
+  const [taskViewModalOpen, setViewTaskModalOpen] = useState(false);
 
   const [project, setProject] = useState({
     name: "",
@@ -35,6 +37,9 @@ function ModalContextProvider({ children }) {
         taskModalOpen,
         setTaskModalOpen,
 
+        taskViewModalOpen,
+        setViewTaskModalOpen,
+
         task,
         setTask,
 
@@ -46,6 +51,7 @@ function ModalContextProvider({ children }) {
       }}
     >
       {taskModalOpen && <TaskCreationModal />}
+      {taskViewModalOpen && <ViewTaskModal />}
       {projectModalOpen && <ProjectDetailsModal />}
 
       {children}

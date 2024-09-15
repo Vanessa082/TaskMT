@@ -9,13 +9,12 @@ import { FaSpinner } from "react-icons/fa";
 const TableHeader = () => {
   return (
     <thead>
-      <tr className=" text-accent-color uppercase text-sm leading-normal">
-        <th className="px-4 py-2"></th>
-        <th className="px-4 py-2 text-left">Name</th>
-        <th className="px-4 py-2 text-left">Priority</th>
-        <th className="px-4 py-2 text-left hidden md:table-cell">Project</th>
-        <th className="px-4 py-2 text-left">Status</th>
-        <th className="px-4 py-2 text-left hidden md:table-cell">Deadline</th>
+      <tr className=" text-gray-500  uppercase text-sm leading-normal">
+        <th className="px-2 py-2"></th>
+        <th className="px-2 py-2 text-left">Name</th>
+        <th className="px-2 py-2 text-left">Priority</th>
+        <th className="px-2 py-2 text-left">Status</th>
+        <th className="px-2 py-2 text-left hidden md:table-cell">Deadline</th>
       </tr>
     </thead>
   );
@@ -31,10 +30,10 @@ export function TaskTable() {
 
 
   return (
-    <div className="bg-lighter-shade-s-color p-4 rounded-lg">
-      <div className="flex justify-between">
-        <div className="flex items-center gap-4">
-          <h2>Task List</h2>
+    <div className=" p-4 ">
+      <div className="flex justify-between p-3">
+        <div className="flex items-center gap-4 ">
+          <h2 className="text-xl font-bold text-accent-color">Task List</h2>
           {
             tasksLoading ? (
               <>
